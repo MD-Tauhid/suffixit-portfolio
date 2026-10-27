@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Chevron from "./Chevron";
+import Icon from "@/components/ui/Icon";
 import { mobileMenu, productMenu, serviceMenu, type Link } from "@/lib/content";
 
 function Dropdown({ items }: { items: Link[] }) {
@@ -10,7 +11,9 @@ function Dropdown({ items }: { items: Link[] }) {
     <div className="dd two">
       {items.map((item) => (
         <a key={item.label} href={item.href}>
-          <i aria-hidden="true">{item.icon}</i>
+          <i aria-hidden="true">
+            {item.icon ? <Icon name={item.icon} size={16} /> : null}
+          </i>
           {item.label}
         </a>
       ))}
@@ -60,7 +63,9 @@ export default function Header() {
               aria-controls="mn"
               onClick={() => setOpen((v) => !v)}
             >
-              <span aria-hidden="true">☰</span>
+              <span aria-hidden="true">
+                <Icon name={open ? "x" : "menu"} size={22} />
+              </span>
               <span className="sr-only">Menu</span>
             </button>
           </div>

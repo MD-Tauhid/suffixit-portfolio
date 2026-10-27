@@ -1,4 +1,5 @@
 import type { Card } from "@/lib/content";
+import Icon from "@/components/ui/Icon";
 
 /** Icon card used by Products, Industries and Services. `variant` picks the grid-specific details. */
 export default function CardItem({ card, variant }: { card: Card; variant: "product" | "industry" | "service" }) {
@@ -6,7 +7,9 @@ export default function CardItem({ card, variant }: { card: Card; variant: "prod
   return (
     <div className={`cd rv${variant === "industry" ? "" : " z"}${card.core ? " core" : ""}`}>
       {card.core && <span className="badge">CORE</span>}
-      <div className="ic" style={{ background: card.bg }} aria-hidden="true">{card.icon}</div>
+      <div className="ic" style={{ background: card.bg }} aria-hidden="true">
+        <Icon name={card.icon} size={24} />
+      </div>
       <h3>{card.title}</h3>
       <p>{card.text}</p>
       {card.tags && (

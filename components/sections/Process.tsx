@@ -1,5 +1,6 @@
 import { steps } from "@/lib/content";
 import SectionHeader from "./SectionHeader";
+import Icon from "@/components/ui/Icon";
 
 export default function Process() {
   return (
@@ -11,7 +12,9 @@ export default function Process() {
         <div className="steps">
           {steps.map((s) => (
             <div className="s rv" key={s.title}>
-              <span className="si" aria-hidden="true">{s.icon}</span>
+              <span className="si" aria-hidden="true">
+                <Icon name={s.icon} size={22} />
+              </span>
               <h3>{s.title}</h3>
               <ul>{s.items.map((i) => <li key={i}>{i}</li>)}</ul>
             </div>

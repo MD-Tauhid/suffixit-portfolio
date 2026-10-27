@@ -1,63 +1,118 @@
-import Logo from "./Logo";
-import { certifications, footerColumns, socials } from "@/lib/content";
+import Icon from "@/components/ui/Icon";
+import FooterBadges from "./FooterBadges";
+import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
 import { site } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="ft">
-      <div className="w">
-        <div className="cert rv">
-          <span className="ey">Recognition &amp; trust</span>
-          <h3>Certifications, Memberships &amp; Partnerships</h3>
-          <div className="cg">
-            {certifications.map((group) => (
-              <div key={group.heading}>
-                <h4>{group.heading}</h4>
-                <div className="bg3">
-                  {group.items.map(([icon, name, note]) => (
-                    <div className="bd2" key={name}>
-                      <i aria-hidden="true">{icon}</i>
-                      <div><b>{name}</b><small>{note}</small></div>
-                    </div>
-                  ))}
+    <footer className="ft-exact">
+      {/* Interactive cursor-following spotlight "SUFFIX IT" stroke watermark */}
+      <div className="ft-watermark-wrap" aria-hidden="true">
+        <TextHoverEffect text="SUFFIX IT" />
+      </div>
+
+      <div className="w ft-container">
+        <div className="ft-main-grid">
+          {/* Column 1: Brand Info */}
+          <div className="ft-col ft-col-brand">
+            <a href="#" className="ft-brand-header">
+              <img
+                src="/assets/img/Suffix-Logo-Dark.png"
+                alt="Suffix IT ultimate solutions"
+                width={185}
+                height={68}
+                className="ft-logo-dark"
+                style={{ objectFit: "contain", height: "auto", maxWidth: "185px" }}
+              />
+            </a>
+
+            <p className="ft-brand-text">
+              We maintain strategic partnerships with multiple organizations in Bangladesh and worldwide, working together to deliver high-quality solutions and long-term value.
+            </p>
+
+            <div className="ft-social-row">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ft-social-sq"
+                aria-label="Facebook"
+              >
+                <Icon name="facebook" size={17} />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ft-social-sq"
+                aria-label="LinkedIn"
+              >
+                <Icon name="linkedin" size={17} />
+              </a>
+            </div>
+          </div>
+
+          {/* Column 2: Contact Us */}
+          <div className="ft-col ft-col-contact">
+            <h4 className="ft-title">CONTACT US</h4>
+            <div className="ft-contact-list">
+              <div className="ft-contact-row">
+                <div className="ft-icon-box">
+                  <Icon name="map-pin" size={19} />
+                </div>
+                <div className="ft-contact-text">
+                  Cha-70,70/A, Rupayan Millennium Square (9A), Progoti Sharoni, North Badda, Gulshan, Dhaka-1212.
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="fg2">
-          <div>
-            <Logo />
-            <p className="fl" style={{ marginTop: 16, maxWidth: 300 }}>
-              ICT solution provider, website and software development firm serving clients in Bangladesh and around the world.
-            </p>
-            <div className="so">
-              {socials.map((s) => (
-                <a key={s.label} href={s.href}>
-                  <span aria-hidden="true">{s.glyph}</span>
-                  <span className="sr-only">{s.label}</span>
+
+              <div className="ft-contact-row">
+                <div className="ft-icon-box">
+                  <Icon name="mail" size={18} />
+                </div>
+                <a href={`mailto:${site.email}`} className="ft-contact-link">
+                  {site.email}
                 </a>
-              ))}
+              </div>
+
+              <div className="ft-contact-row">
+                <div className="ft-icon-box">
+                  <Icon name="phone" size={18} />
+                </div>
+                <a href={site.phoneHref} className="ft-contact-link">
+                  {site.phone}
+                </a>
+              </div>
             </div>
           </div>
-          {footerColumns.map((col) => (
-            <div key={col.title}>
-              <h4 className="t">{col.title}</h4>
-              {col.links.map((l) => (
-                <a className="fl" key={l.label} href={l.href}>{l.label}</a>
-              ))}
-            </div>
-          ))}
-          <div>
-            <h4 className="t">Reach us</h4>
-            <p className="fl">{site.address}</p>
-            <p className="fl">{site.phone}</p>
-            <p className="fl">{site.email}</p>
+
+          {/* Column 3: Quick Links */}
+          <div className="ft-col ft-col-links">
+            <h4 className="ft-title">QUICK LINKS</h4>
+            <ul className="ft-quick-links">
+              <li><a href="#why">About Us</a></li>
+              <li><a href="#contact">Career</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Certifications & Partners Badges */}
+          <div className="ft-col ft-col-badges">
+            <FooterBadges />
           </div>
         </div>
-        <div className="cp">
-          <span>© 2017–2026 Suffix IT Limited. All rights reserved.</span>
-          <a href="#">Back to top ↑</a>
+
+        {/* Bottom Bar: Copyright & Floating Circular Back to Top */}
+        <div className="ft-bottom-bar">
+          <p className="ft-copyright">
+            &copy; 2026 All Rights Reserved by{" "}
+            <a href="#" className="ft-cr-link">
+              Suffix IT Limited
+            </a>
+          </p>
+
+          <a href="#" className="ft-scroll-top" aria-label="Back to top">
+            <Icon name="arrow-up" size={20} />
+          </a>
         </div>
       </div>
     </footer>
