@@ -1,5 +1,6 @@
 import CodeTyper from "@/components/animations/CodeTyper";
 import HeroOrb from "./HeroOrb";
+import Icon from "@/components/ui/Icon";
 
 export default function Hero() {
   return (
@@ -17,7 +18,9 @@ export default function Hero() {
             <a className="btn g" href="#products">Explore solutions</a>
           </div>
           <div className="chips">
-            <span>⚙️ Custom software</span><span>📦 Ready products</span><span>☁️ Hosting &amp; support</span>
+            <span><Icon name="settings" size={14} /> Custom software</span>
+            <span><Icon name="layers" size={14} /> Ready products</span>
+            <span><Icon name="cloud" size={14} /> Hosting &amp; support</span>
           </div>
         </div>
         <div className="sc" aria-hidden="true">

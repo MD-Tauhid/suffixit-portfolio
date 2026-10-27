@@ -12,7 +12,7 @@ const solution = {
 await deploy(solution);
 // ✓ live in production`;
 
-/** Same tiny syntax highlighter as the original: comments, strings, keywords, the deploy() call. */
+/** Syntax highlighter with scoped class names to prevent any collision with layout classes. */
 const highlight = (text: string) =>
   text
     .replace(/&/g, "&amp;")
@@ -20,7 +20,13 @@ const highlight = (text: string) =>
     .replace(
       /(\/\/.*)|("[^"]*"?)|\b(const|await)\b|\b(deploy)\b/g,
       (_m, c?: string, q?: string, k?: string, f?: string) =>
-        c ? `<span class="c">${c}</span>` : q ? `<span class="s">${q}</span>` : k ? `<span class="k">${k}</span>` : `<span class="f">${f}</span>`,
+        c
+          ? `<span class="code-cmt">${c}</span>`
+          : q
+          ? `<span class="code-str">${q}</span>`
+          : k
+          ? `<span class="code-kw">${k}</span>`
+          : `<span class="code-fn">${f}</span>`,
     );
 
 /** Types the hero code, then holds, then restarts. Writes to the DOM directly (no React re-render per keystroke). */
