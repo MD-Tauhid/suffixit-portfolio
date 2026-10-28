@@ -1,25 +1,15 @@
-import { models } from "@/lib/content";
 import SectionHeader from "./SectionHeader";
+import ConnoisseurStackInteractor from "@/components/ui/connoisseur-stack-interactor";
 
 export default function Models() {
   return (
-    <section>
+    <section id="models" className="py-12 md:py-20 relative overflow-hidden">
       <div className="w">
         <SectionHeader eyebrow="Ways to work with us" text="Pick the engagement that matches your stage and budget.">
           Four models, <em>one</em> trusted partner
         </SectionHeader>
-        <div className="col">
-          {models.map((m) => (
-            <div className="cl rv" style={{ background: m.bg }} key={m.n}>
-              <div>
-                <b aria-hidden="true">{m.n}</b>
-                <h3>{m.title}</h3>
-                <p>{m.text}</p>
-              </div>
-              <a href="#contact">Explore now →</a>
-            </div>
-          ))}
-        </div>
+
+        <ConnoisseurStackInteractor />
       </div>
     </section>
   );
