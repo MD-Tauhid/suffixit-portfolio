@@ -1,7 +1,5 @@
-// Demo for GSAP SVG Animation Component
-import { Component } from "@/components/ui/connoisseur-stack-interactor";
+import MetroHero from "@/components/ui/scroll-locked-video-hero";
 
 export default function DemoOne() {
-  return <Component />;
+  return <MetroHero />;
 }
-
