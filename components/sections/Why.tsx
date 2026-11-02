@@ -5,7 +5,7 @@ export default function Why() {
   return (
     <section id="why">
       <div className="w wg">
-        <div className="rv">
+        <div className="rv-left">
           <span className="ey">Why Suffix IT</span>
           <h2>One partner for <em>software, hosting</em> and support.</h2>
           <p style={{ color: "var(--mute)", marginTop: 14, fontSize: 17 }}>
@@ -16,7 +16,7 @@ export default function Why() {
           </ul>
           <a className="btn p" href="#contact">Talk to an expert →</a>
         </div>
-        <div className="rv"><WhyIllustration /></div>
+        <div className="rv-right"><WhyIllustration /></div>
       </div>
     </section>
   );

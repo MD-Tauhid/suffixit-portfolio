@@ -10,7 +10,7 @@ export const serviceMenu: Link[] = [
   { icon: "cloud", label: "Domain & Cloud Hosting", href: "#services" },
   { icon: "database", label: "Storage & Backup", href: "#services" },
   { icon: "target", label: "ERP Consulting", href: "#services" },
-  { icon: "megaphone", label: "SEO & Social Media", href: "#services" },
+  { icon: "megaphone", label: "SEO", href: "#services" },
 ];
 
 export const productMenu: Link[] = [
@@ -83,7 +83,7 @@ export const services: Card[] = [
   { icon: "cloud", bg: "#fff0d3", title: "Domain, Hosting & Cloud", text: "Reliable domain, hosting and cloud services." },
   { icon: "database", bg: "#d6f5e8", title: "Storage & Backup", text: "Keep your data safe, backed up and recoverable." },
   { icon: "target", bg: "#ebe4ff", title: "ERP Consulting", text: "Expert guidance to choose, set up and grow your ERP." },
-  { icon: "megaphone", bg: "#ffeadf", title: "SEO & Social Media", text: "Be found online and grow your audience." },
+  { icon: "megaphone", bg: "#ffeadf", title: "SEO", text: "Be found online and grow your organic audience." },
   { icon: "handshake", bg: "#e2eefb", title: "BPO & Freelancing", text: "Skilled people for outsourced and flexible work." },
 ];
 
@@ -118,7 +118,7 @@ export const certifications = [
 
 export const footerColumns: { title: string; links: Link[] }[] = [
   { title: "Products", links: [{ label: "Field Force", href: "#fieldforce" }, { label: "Rupantar HCM", href: "#products" }, { label: "Rupantar ERP", href: "#products" }, { label: "E-commerce", href: "#products" }, { label: "Smart POS", href: "#products" }] },
-  { title: "Services", links: [{ label: "Custom Software", href: "#services" }, { label: "Mobile Apps", href: "#services" }, { label: "IoT Solutions", href: "#services" }, { label: "Hosting & Cloud", href: "#services" }, { label: "SEO & Social", href: "#services" }] },
+  { title: "Services", links: [{ label: "Custom Software", href: "#services" }, { label: "Mobile Apps", href: "#services" }, { label: "IoT Solutions", href: "#services" }, { label: "Hosting & Cloud", href: "#services" }, { label: "SEO", href: "#services" }] },
   { title: "Company", links: [{ label: "About Us", href: "#why" }, { label: "Clients", href: "#clients" }, { label: "How we work", href: "#process" }, { label: "FAQ", href: "#faq" }, { label: "Contact", href: "#contact" }] },
 ];
 

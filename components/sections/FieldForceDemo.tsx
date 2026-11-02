@@ -37,7 +37,7 @@ export default function FieldForceDemo() {
 
   return (
     <div className="ffl" ref={root}>
-      <div className="rv l">
+      <div className="rv-left">
         <div className="tabs" id="tabs" style={{ marginTop: 0 }}>
           {featureTabs.map(([title, text], i) => (
             <button type="button" key={title} className={`tb${i === active ? " on" : ""}`} aria-pressed={i === active} onClick={() => setActive(i)}>
@@ -49,7 +49,7 @@ export default function FieldForceDemo() {
         <a className="btn p" style={{ marginTop: 26 }} href="#contact">Request FFMS demo →</a>
       </div>
 
-      <div className="fxs rv rr" aria-hidden="true">
+      <div className="fxs rv-right" aria-hidden="true">
         <div className="fxw">
           <div className="bar"><i></i><i></i><i></i><span>ffms.suffixit.com</span></div>
           <div className="bd" id="dvs">

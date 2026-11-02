@@ -1,5 +1,13 @@
 @tailwind utilities;
 
+button {
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
 :root {
    --sky-400: #38bdf8;
    --sky-500: #0ea5e9;
@@ -1344,6 +1352,9 @@ footer a:hover {
    border-block: 1px solid var(--line);
 }
 
+/* ========================================================
+   TECH STACK MARQUEE PILLS (MODERN STACK SECTION)
+   ======================================================== */
 .tech-marquee-wrapper {
    display: flex;
    flex-direction: column;
@@ -1396,6 +1407,19 @@ footer a:hover {
    transition: all 0.3s;
 }
 
+.tech-marquee-icon svg {
+   width: 24px;
+   height: 24px;
+}
+
+.tech-marquee-icon img {
+   max-width: 30px;
+   max-height: 30px;
+   width: auto;
+   height: auto;
+   object-fit: contain;
+}
+
 .tech-marquee-pill:hover .tech-marquee-icon {
    background: #ffffff;
    border-color: var(--accent, var(--br));
@@ -1428,17 +1452,52 @@ footer a:hover {
    text-transform: uppercase;
 }
 
-.tech-marquee-icon img {
-   width: 28px;
-   height: 28px;
-   object-fit: contain;
-   filter: grayscale(0.85) contrast(0.95) opacity(0.82);
-   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+/* ========================================================
+   CLIENT LOGO MARQUEE BOXES (SCREENSHOT-MATCHED TILES)
+   ======================================================== */
+.client-marquee-box,
+.tech-marquee-box {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 175px;
+   height: 72px;
+   padding: 12px 24px;
+   margin: 0 6px;
+   background: #ffffff;
+   border: 1px solid #e2e8f0;
+   border-radius: 14px;
+   box-shadow: 0 2px 10px -2px rgba(15, 23, 42, 0.04);
+   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+   cursor: pointer;
+   user-select: none;
+   flex-shrink: 0;
 }
 
-.tech-marquee-pill:hover .tech-marquee-icon img {
+.client-marquee-box:hover,
+.tech-marquee-box:hover {
+   transform: translateY(-2px);
+   border-color: #cbd5e1;
+   box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+}
+
+.client-marquee-logo,
+.tech-marquee-logo {
+   max-width: 115px;
+   max-height: 40px;
+   width: auto;
+   height: auto;
+   object-fit: contain;
+   mix-blend-mode: multiply;
+   filter: grayscale(1) contrast(1.15) opacity(0.78);
+   transition: all 0.25s ease;
+}
+
+.client-marquee-box:hover .client-marquee-logo,
+.tech-marquee-box:hover .tech-marquee-logo {
+   mix-blend-mode: normal;
    filter: grayscale(0) contrast(1) opacity(1);
-   transform: scale(1.1);
+   transform: scale(1.06);
 }
 
 .steps .s ul {
@@ -4177,3 +4236,141 @@ section#hero {
 .bg-dark {
    background-color: #070b14 !important;
 }
+
+
+/* Authentic Suffix IT Footer Certification & Partner Grid */
+.cert-wrapper {
+   display: flex;
+   flex-direction: column;
+   gap: 22px;
+   width: 100%;
+   max-width: 320px;
+}
+
+.iso-grid {
+   display: grid;
+   align-items: center;
+   justify-items: center;
+   width: 100%;
+}
+
+.iso-grid.grid-3 {
+   grid-template-columns: repeat(3, 1fr);
+   column-gap: 16px;
+}
+
+.iso-grid.grid-2 {
+   grid-template-columns: repeat(2, 1fr);
+   column-gap: 20px;
+   width: 100%;
+   margin: 0;
+}
+
+.iso-item {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: transform .25s ease;
+   width: 100%;
+}
+
+.iso-item:hover {
+   transform: scale(1.06);
+}
+
+.iso-item img {
+   height: auto;
+   object-fit: contain;
+   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .25));
+   transition: filter .25s ease;
+}
+
+.iso-item:hover img {
+   filter: drop-shadow(0 4px 14px rgba(0, 114, 188, .4));
+}
+
+/* ========================================================
+   SUFFIX IT PREMIUM CINEMATIC SCROLL REVEAL SUITE
+   Supports multi-directional kinetic entrance:
+   - .rv / .rv-up: Ascends from below with blur dissipation
+   - .rv-left: Glides smoothly from left
+   - .rv-right: Glides smoothly from right
+   - .rv-zoom: Expands with 3D scale perspective
+   - .rv-cards-split: Alternates cards from left & right
+   ======================================================== */
+
+.rv,
+.rv-up {
+   opacity: 0;
+   transform: translateY(64px);
+   filter: blur(10px);
+   transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+               transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+               filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+   will-change: opacity, transform, filter;
+}
+
+.rv.in,
+.rv-up.in {
+   opacity: 1;
+   transform: translateY(0);
+   filter: blur(0px);
+}
+
+.rv-left {
+   opacity: 0;
+   transform: translateX(-76px);
+   filter: blur(10px);
+   transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+               transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+               filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+   will-change: opacity, transform, filter;
+}
+
+.rv-left.in {
+   opacity: 1;
+   transform: translateX(0);
+   filter: blur(0px);
+}
+
+.rv-right {
+   opacity: 0;
+   transform: translateX(76px);
+   filter: blur(10px);
+   transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+               transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+               filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+   will-change: opacity, transform, filter;
+}
+
+.rv-right.in {
+   opacity: 1;
+   transform: translateX(0);
+   filter: blur(0px);
+}
+
+.rv-zoom {
+   opacity: 0;
+   transform: scale(0.92) translateY(38px);
+   filter: blur(10px);
+   transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+               transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+               filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+   will-change: opacity, transform, filter;
+}
+
+.rv-zoom.in {
+   opacity: 1;
+   transform: scale(1) translateY(0);
+   filter: blur(0px);
+}
+
+/* Stagger delay helpers for grid children */
+.stagger-1 { transition-delay: 100ms !important; }
+.stagger-2 { transition-delay: 200ms !important; }
+.stagger-3 { transition-delay: 300ms !important; }
+.stagger-4 { transition-delay: 400ms !important; }
+.stagger-5 { transition-delay: 500ms !important; }
+.stagger-6 { transition-delay: 600ms !important; }
+.stagger-7 { transition-delay: 700ms !important; }
+.stagger-8 { transition-delay: 800ms !important; }

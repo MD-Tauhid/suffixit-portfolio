@@ -16,7 +16,6 @@ import Tech from "@/components/sections/Tech";
 import Process from "@/components/sections/Process";
 import Faq from "@/components/sections/Faq";
 import Contact from "@/components/sections/Contact";
-import Certifications from "@/components/sections/Certifications";
 
 export default function HomePage() {
   return (
@@ -28,17 +27,16 @@ export default function HomePage() {
         <Hero />
         <Stats />
         <Clients />
-        <Why />
+        {/* <Why /> - Commented out as requested */}
+        <Process />
         <FieldForce />
         <Products />
         <Industries />
         <Services />
         <Models />
         <Tech />
-        <Process />
         <Faq />
         <Contact />
-        <Certifications />
       </main>
       <Footer />
       <a className="btn p fab" href="#contact">Get Free Consultancy</a>

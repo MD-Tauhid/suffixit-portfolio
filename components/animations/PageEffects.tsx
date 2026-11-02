@@ -3,19 +3,19 @@
 import { useEffect } from "react";
 
 /**
- * Page-wide behaviours ported from the original main.js. It renders nothing and only attaches
- * listeners to elements that were already server-rendered, so the page content stays static HTML.
- *  1. Hero glow follows the pointer (--mx / --my).
- *  2. Card spotlight follows the pointer (--x / --y), via one delegated listener.
- *  3. Scroll reveal for `.rv` elements, with the original staggered delay.
- *  4. Count-up numbers for `[data-c]` inside revealed elements.
+ * Enhanced Page-wide kinetic scroll effects engine.
+ * Observes all `.rv`, `.rv-up`, `.rv-left`, `.rv-right`, `.rv-zoom` elements.
+ * Features:
+ * - Directional entrances: Left, Right, Ascending, 3D Scaling with blur dissipation.
+ * - Dynamic split-entrance for card grids (alternates left & right).
+ * - Multi-counter easeOut animation.
  */
 export default function PageEffects() {
   useEffect(() => {
     const cleanups: Array<() => void> = [];
     const frames = new Set<number>();
 
-    // 1. hero glow
+    // 1. Hero Glow Tracker
     const hero = document.getElementById("hero");
     if (hero) {
       const onMove = (e: PointerEvent) => {
@@ -27,7 +27,7 @@ export default function PageEffects() {
       cleanups.push(() => hero.removeEventListener("pointermove", onMove));
     }
 
-    // 2. card spotlight
+    // 2. Card Spotlight Hover
     const onCardMove = (e: PointerEvent) => {
       const card = (e.target as Element | null)?.closest<HTMLElement>(".cd");
       if (!card) return;
@@ -38,7 +38,7 @@ export default function PageEffects() {
     document.addEventListener("pointermove", onCardMove, { passive: true });
     cleanups.push(() => document.removeEventListener("pointermove", onCardMove));
 
-    // 4. counters (easeOutCubic over 1.4s, exactly as before)
+    // 3. Counter Animation
     const countUp = (el: HTMLElement) => {
       const to = Number(el.dataset.c);
       const suffix = el.dataset.n ?? "";
@@ -51,22 +51,29 @@ export default function PageEffects() {
       frames.add(requestAnimationFrame(tick));
     };
 
-    // 3. reveal on scroll
+    // 4. Kinetic Scroll Observer
+    const selector = ".rv, .rv-up, .rv-left, .rv-right, .rv-zoom";
     const io = new IntersectionObserver(
-      (entries) =>
+      (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const el = entry.target as HTMLElement;
           el.classList.add("in");
           el.querySelectorAll<HTMLElement>("[data-c]").forEach(countUp);
           io.unobserve(el);
-        }),
-      { threshold: 0.15 },
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -90px 0px",
+      }
     );
-    document.querySelectorAll<HTMLElement>(".rv").forEach((el, i) => {
-      el.style.transitionDelay = (i % 4) * 70 + "ms";
+
+    const elements = document.querySelectorAll<HTMLElement>(selector);
+    elements.forEach((el) => {
       io.observe(el);
     });
+
     cleanups.push(() => io.disconnect());
 
     return () => {

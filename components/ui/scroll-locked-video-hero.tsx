@@ -32,13 +32,13 @@ export interface ChapterData {
   badge: string;
 }
 
-const VIDEO_DURATION = 12.041667;
+const VIDEO_DURATION = 10.041667;
 
 const CHAPTERS: ChapterData[] = [
-  { id: 0, startTime: 0.0, endTime: 3.5, label: "01 Overview", badge: "Technology Partner" },
-  { id: 1, startTime: 3.5, endTime: 7.0, label: "02 Enterprise ERP", badge: "Core Architecture" },
-  { id: 2, startTime: 7.0, endTime: 10.2, label: "03 Field & Mobile", badge: "Live Telemetry" },
-  { id: 3, startTime: 10.2, endTime: 12.05, label: "04 Launch Suite", badge: "Enterprise Scale" },
+  { id: 0, startTime: 0.0, endTime: 2.5, label: "01 Overview", badge: "Technology Partner" },
+  { id: 1, startTime: 2.5, endTime: 5.2, label: "02 Enterprise ERP", badge: "Core Architecture" },
+  { id: 2, startTime: 5.2, endTime: 7.8, label: "03 Field & Mobile", badge: "Live Telemetry" },
+  { id: 3, startTime: 7.8, endTime: 10.05, label: "04 Launch Suite", badge: "Enterprise Scale" },
 ];
 
 export interface MetroHeroProps {
@@ -49,8 +49,8 @@ export interface MetroHeroProps {
   style?: React.CSSProperties;
 }
 
-const DEFAULT_VIDEO = "/assets/video/hero-video.mp4";
-const DEFAULT_REVERSE_VIDEO = "/assets/video/hero-video-reverse.mp4";
+const DEFAULT_VIDEO = "/assets/video/hero-video (2).mp4";
+const DEFAULT_REVERSE_VIDEO = "/assets/video/hero-video-reverse (2).mp4";
 const DEFAULT_POSTER = "/assets/video/hero-poster.jpg";
 const SANS = "var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)";
 
@@ -97,7 +97,7 @@ export default function MetroHero({
   const activeChapter = CHAPTERS.findIndex(
     (ch) => currentTime >= ch.startTime && currentTime < ch.endTime
   );
-  const currentChapterIndex = activeChapter === -1 ? (currentTime >= 10.2 ? 3 : 0) : activeChapter;
+  const currentChapterIndex = activeChapter === -1 ? (currentTime >= 7.8 ? 3 : 0) : activeChapter;
 
   // Release page lock so normal document scrolling can occur
   const releaseLock = useCallback(() => {
@@ -946,6 +946,12 @@ export default function MetroHero({
       >
         Skip intro ↓
       </button>
+
+      {/* Bottom-Right Enterprise Badge */}
+      <div className="hidden md:flex absolute bottom-5 right-6 z-30 items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#dce9f6] shadow-sm text-[11px] font-semibold text-[#515978]">
+        <span className="w-2 h-2 rounded-full bg-[#0072bc]" />
+        <span>Suffix IT · Enterprise Digital Solutions</span>
+      </div>
     </div>
   );
 }
