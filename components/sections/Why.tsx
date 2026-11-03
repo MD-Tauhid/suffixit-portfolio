@@ -3,8 +3,8 @@ import WhyIllustration from "./WhyIllustration";
 
 export default function Why() {
   return (
-    <section id="why">
-      <div className="w wg">
+    <section id="why" className="py-14 md:py-20 lg:py-24 relative overflow-x-hidden">
+      <div className="w max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 wg">
         <div className="rv-left">
           <span className="ey">Why Suffix IT</span>
           <h2>One partner for <em>software, hosting</em> and support.</h2>

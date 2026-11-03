@@ -1,11 +1,11 @@
 @tailwind utilities;
 
 button {
-  background-color: transparent;
-  border-style: none;
-  padding: 0;
-  color: inherit;
-  font: inherit;
+   background-color: transparent;
+   border-style: none;
+   padding: 0;
+   color: inherit;
+   font: inherit;
 }
 
 :root {
@@ -57,14 +57,14 @@ a {
 }
 
 .w {
-   max-width: 1380px;
+   max-width: 1240px;
    margin: auto;
    padding: 0 24px;
 }
 
 @media(min-width: 1536px) {
    .w {
-      max-width: 1480px;
+      max-width: 1280px;
       padding: 0 32px;
    }
 }
@@ -1214,7 +1214,7 @@ footer a:hover {
    border: 1px solid var(--line);
    border-radius: 26px;
    box-shadow: 0 30px 50px -34px rgba(70, 40, 40, .3);
-   margin: 6px 0 46px
+   margin: 40px 0 40px
 }
 
 .strip div {
@@ -2188,6 +2188,29 @@ h1 em {
    min-width: 540px
 }
 
+.dd.mega-menu {
+   left: 50% !important;
+   transform: translateX(-40%) translateY(10px) !important;
+   min-width: unset !important;
+   background: transparent !important;
+   border: none !important;
+   border-radius: 0 !important;
+   padding: 0 !important;
+   box-shadow: none !important;
+}
+
+.nv li:hover>.dd.mega-menu,
+.nv li:focus-within>.dd.mega-menu {
+   opacity: 1 !important;
+   visibility: visible !important;
+   transform: translateX(-40%) translateY(0) !important;
+}
+
+.dd.mega-menu a {
+   white-space: normal !important;
+   background: transparent;
+}
+
 .hb {
    display: none;
    width: 44px;
@@ -2251,7 +2274,7 @@ h1 em {
    ========================================================================== */
 .clients-section {
    position: relative;
-   padding: 85px 0 80px;
+   padding: 45px 0 40px;
    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 50%, #f4f8fd 100%);
    border-block: 1px solid var(--line);
    overflow: hidden;
@@ -4305,8 +4328,8 @@ section#hero {
    transform: translateY(64px);
    filter: blur(10px);
    transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-               transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-               filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
    will-change: opacity, transform, filter;
 }
 
@@ -4322,8 +4345,8 @@ section#hero {
    transform: translateX(-76px);
    filter: blur(10px);
    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-               transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-               filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
    will-change: opacity, transform, filter;
 }
 
@@ -4338,8 +4361,8 @@ section#hero {
    transform: translateX(76px);
    filter: blur(10px);
    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-               transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-               filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.4s cubic-bezier(0.22, 1, 0.36, 1);
    will-change: opacity, transform, filter;
 }
 
@@ -4354,8 +4377,8 @@ section#hero {
    transform: scale(0.92) translateY(38px);
    filter: blur(10px);
    transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-               transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
-               filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 1.35s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.35s cubic-bezier(0.22, 1, 0.36, 1);
    will-change: opacity, transform, filter;
 }
 
@@ -4366,11 +4389,99 @@ section#hero {
 }
 
 /* Stagger delay helpers for grid children */
-.stagger-1 { transition-delay: 100ms !important; }
-.stagger-2 { transition-delay: 200ms !important; }
-.stagger-3 { transition-delay: 300ms !important; }
-.stagger-4 { transition-delay: 400ms !important; }
-.stagger-5 { transition-delay: 500ms !important; }
-.stagger-6 { transition-delay: 600ms !important; }
-.stagger-7 { transition-delay: 700ms !important; }
-.stagger-8 { transition-delay: 800ms !important; }
+.stagger-1 {
+   transition-delay: 100ms !important;
+}
+
+.stagger-2 {
+   transition-delay: 200ms !important;
+}
+
+.stagger-3 {
+   transition-delay: 300ms !important;
+}
+
+.stagger-4 {
+   transition-delay: 400ms !important;
+}
+
+.stagger-5 {
+   transition-delay: 500ms !important;
+}
+
+.stagger-6 {
+   transition-delay: 600ms !important;
+}
+
+.stagger-7 {
+   transition-delay: 700ms !important;
+}
+
+.stagger-8 {
+   transition-delay: 800ms !important;
+}
+
+/* Contact Page Modern Ambient Animations */
+@keyframes floatSlow {
+
+   0%,
+   100% {
+      transform: translateY(0px) rotate(0deg);
+   }
+
+   50% {
+      transform: translateY(-14px) rotate(2deg);
+   }
+}
+
+@keyframes floatReverse {
+
+   0%,
+   100% {
+      transform: translateY(0px) rotate(0deg);
+   }
+
+   50% {
+      transform: translateY(14px) rotate(-2deg);
+   }
+}
+
+@keyframes orbitSpin {
+   from {
+      transform: rotate(0deg);
+   }
+
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+@keyframes pulseGlow {
+
+   0%,
+   100% {
+      opacity: 0.35;
+      transform: scale(1);
+   }
+
+   50% {
+      opacity: 0.65;
+      transform: scale(1.08);
+   }
+}
+
+.animate-float-slow {
+   animation: floatSlow 7s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+   animation: floatReverse 8s ease-in-out infinite;
+}
+
+.animate-orbit-spin {
+   animation: orbitSpin 36s linear infinite;
+}
+
+.animate-pulse-glow {
+   animation: pulseGlow 6s ease-in-out infinite;
+}

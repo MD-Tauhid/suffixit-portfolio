@@ -1,42 +1,57 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   pauseOnHover?: boolean;
-  direction?: "left" | "right";
+  direction?: "left" | "right" | "up" | "down";
+  vertical?: boolean;
   speed?: number;
+  reverse?: boolean;
+  repeat?: number;
 }
 
 export function Marquee({
   children,
   pauseOnHover = false,
   direction = "left",
+  vertical = false,
   speed = 30,
+  reverse = false,
+  repeat = 4,
   className,
   ...props
 }: MarqueeProps) {
+  const isVertical = vertical || direction === "up" || direction === "down";
+  const isReverse = reverse || direction === "right" || direction === "down";
+
   return (
     <div
       className={cn(
-        "w-full overflow-hidden z-10",
+        "group flex overflow-hidden p-2 select-none",
+        isVertical ? "flex-col" : "flex-row",
         className
       )}
+      style={{ "--duration": `${speed}s` } as React.CSSProperties}
       {...props}
     >
-      <div className="relative flex w-full overflow-hidden py-3">
+      {Array.from({ length: repeat }).map((_, i) => (
         <div
+          key={i}
           className={cn(
-            "flex w-max animate-marquee",
-            pauseOnHover && "hover:[animation-play-state:paused]",
-            direction === "right" && "animate-marquee-reverse"
+            "flex shrink-0 justify-around gap-4",
+            isVertical
+              ? "flex-col mb-4 animate-marquee-vertical"
+              : "flex-row mr-4 animate-marquee",
+            isReverse && (isVertical ? "animate-marquee-vertical-reverse" : "animate-marquee-reverse"),
+            pauseOnHover && "group-hover:[animation-play-state:paused]"
           )}
-          style={{ "--duration": `${speed}s` } as React.CSSProperties}
         >
           {children}
-          {children}
         </div>
-      </div>
+      ))}
     </div>
   );
 }
+
+export default Marquee;

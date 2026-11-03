@@ -123,11 +123,11 @@ const allServices: CardItem[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 md:py-28 relative bg-[#f7fafe] overflow-hidden">
+    <section id="services" className="py-2 md:py-20 lg:py-24 relative bg-[#f7fafe] overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[950px] h-[550px] bg-gradient-to-tr from-[#0072bc]/5 via-[#7c3aed]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="w max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
           <SectionHeader

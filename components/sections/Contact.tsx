@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { site } from "@/lib/site";
+import SalesTeamLeadership from "./SalesTeamLeadership";
 import {
   MapPin,
   Phone,
@@ -74,8 +75,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-12 sm:py-16 lg:py-20">
-      <div className="w">
+    <section id="contact" className="relative py-3 md:py-20 lg:py-5 overflow-x-hidden">
+      <div className="w max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Single Seamless Unified Container with Interactive Spotlight Border Glow */}
         <div
           ref={containerRef}
@@ -535,16 +536,14 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Bottom Trust SLA Note */}
-                <div className="mt-5 border-t border-slate-100 pt-3 text-center">
-                  <span className="text-[12px] font-medium text-slate-500">
-                    ⚡ Replies within 2 hours during Bangladesh business hours (GMT+6)
-                  </span>
-                </div>
+
               </div>
             </div>
           </div>
         </div>
+
+        {/* Speak Directly With Our Sales & Architecture Leadership */}
+        <SalesTeamLeadership />
       </div>
     </section>
   );

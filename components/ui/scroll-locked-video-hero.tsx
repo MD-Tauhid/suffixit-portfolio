@@ -32,26 +32,27 @@ export interface ChapterData {
   badge: string;
 }
 
-const VIDEO_DURATION = 10.041667;
+const VIDEO_DURATION = 2.066667;
 
 const CHAPTERS: ChapterData[] = [
-  { id: 0, startTime: 0.0, endTime: 2.5, label: "01 Overview", badge: "Technology Partner" },
-  { id: 1, startTime: 2.5, endTime: 5.2, label: "02 Enterprise ERP", badge: "Core Architecture" },
-  { id: 2, startTime: 5.2, endTime: 7.8, label: "03 Field & Mobile", badge: "Live Telemetry" },
-  { id: 3, startTime: 7.8, endTime: 10.05, label: "04 Launch Suite", badge: "Enterprise Scale" },
+  { id: 0, startTime: 0.0, endTime: 0.51, label: "01 Overview", badge: "Technology Partner" },
+  { id: 1, startTime: 0.51, endTime: 1.03, label: "02 Enterprise ERP", badge: "Core Architecture" },
+  { id: 2, startTime: 1.03, endTime: 1.55, label: "03 Field & Mobile", badge: "Live Telemetry" },
+  { id: 3, startTime: 1.55, endTime: 2.07, label: "04 Launch Suite", badge: "Enterprise Scale" },
 ];
 
 export interface MetroHeroProps {
   videoSrc?: string;
   reverseVideoSrc?: string;
   poster?: string;
+  scrubDistance?: number;
   className?: string;
   style?: React.CSSProperties;
 }
 
-const DEFAULT_VIDEO = "/assets/video/hero-video (2).mp4";
-const DEFAULT_REVERSE_VIDEO = "/assets/video/hero-video-reverse (2).mp4";
-const DEFAULT_POSTER = "/assets/video/hero-poster.jpg";
+const DEFAULT_VIDEO = "/assets/video/hero-video (4).mp4";
+const DEFAULT_REVERSE_VIDEO = "/assets/video/hero-video-reverse (4).mp4";
+const DEFAULT_POSTER = "/assets/video/hero-poster (4).jpg";
 const SANS = "var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)";
 
 export type SpeedMode = "normal" | "fast" | "more-fast";
@@ -60,6 +61,7 @@ export default function MetroHero({
   videoSrc = DEFAULT_VIDEO,
   reverseVideoSrc = DEFAULT_REVERSE_VIDEO,
   poster = DEFAULT_POSTER,
+  scrubDistance = 1150,
   className,
   style,
 }: MetroHeroProps) {
@@ -75,6 +77,8 @@ export default function MetroHero({
 
   // Mutable refs for zero-latency event loop
   const currentTimeRef = useRef(0.01);
+  const targetProgressRef = useRef(0);
+  const currentProgressRef = useRef(0);
   const activeSideRef = useRef<"fwd" | "rev">("fwd");
   const isPlayingRef = useRef(false);
   const isLockedRef = useRef(true);
@@ -97,7 +101,7 @@ export default function MetroHero({
   const activeChapter = CHAPTERS.findIndex(
     (ch) => currentTime >= ch.startTime && currentTime < ch.endTime
   );
-  const currentChapterIndex = activeChapter === -1 ? (currentTime >= 7.8 ? 3 : 0) : activeChapter;
+  const currentChapterIndex = activeChapter === -1 ? (currentTime >= 1.55 ? 3 : 0) : activeChapter;
 
   // Release page lock so normal document scrolling can occur
   const releaseLock = useCallback(() => {
@@ -153,12 +157,14 @@ export default function MetroHero({
       const vRev = videoRevRef.current;
 
       // ─────────────────────────────────────────────────────────
-      // SMOOTH LERP INTERPOLATION FOR PLAYBACK SPEED
-      // Smoothly glides between 1.0x <-> 1.3x <-> 1.6x without robotic jumps
+      // SMOOTH LERP INTERPOLATION (0.26 SMOOTHING FACTOR)
+      // Rapid, snappy response to scroll input (Task 2)
       // ─────────────────────────────────────────────────────────
-      const lerpFactor = 0.08;
+      const lerpFactor = 0.26;
       currentPlaybackSpeedRef.current +=
         (targetSpeedRef.current - currentPlaybackSpeedRef.current) * lerpFactor;
+      currentProgressRef.current +=
+        (targetProgressRef.current - currentProgressRef.current) * lerpFactor;
 
       const smoothSpeed = Math.min(1.6, Math.max(1.0, currentPlaybackSpeedRef.current));
 
@@ -186,6 +192,7 @@ export default function MetroHero({
       }
 
       currentTimeRef.current = calculatedFwdTime;
+      targetProgressRef.current = calculatedFwdTime / VIDEO_DURATION;
       setCurrentTime(calculatedFwdTime);
 
       // Handle programmatic target seek (if user clicked a chapter button)
@@ -198,8 +205,8 @@ export default function MetroHero({
         }
       }
 
-      // Check boundary limits
-      if (calculatedFwdTime >= VIDEO_DURATION - 0.1) {
+      // Check boundary limits: Strictly release lock ONLY when video physically reaches the end
+      if (calculatedFwdTime >= VIDEO_DURATION - 0.08 || (vFwd && vFwd.ended)) {
         if (vFwd && !vFwd.paused) vFwd.pause();
         if (vRev && !vRev.paused) vRev.pause();
         isPlayingRef.current = false;
@@ -258,7 +265,7 @@ export default function MetroHero({
     const vRev = videoRevRef.current;
     if (!vFwd) return;
 
-    if (currentTimeRef.current >= VIDEO_DURATION - 0.15) {
+    if (currentTimeRef.current >= VIDEO_DURATION - 0.08) {
       releaseLock();
       return;
     }
@@ -333,7 +340,7 @@ export default function MetroHero({
   const handleScrollDrive = useCallback(
     (direction: "down" | "up", absDelta: number) => {
       // 1. End of video check
-      if (direction === "down" && currentTimeRef.current >= VIDEO_DURATION - 0.2) {
+      if (direction === "down" && currentTimeRef.current >= VIDEO_DURATION - 0.08) {
         releaseLock();
         return;
       }
@@ -433,6 +440,14 @@ export default function MetroHero({
 
     vFwd.addEventListener("loadedmetadata", initTime);
     vFwd.addEventListener("loadeddata", initTime);
+    const onVideoEnded = () => {
+      currentTimeRef.current = VIDEO_DURATION;
+      setCurrentTime(VIDEO_DURATION);
+      isPlayingRef.current = false;
+      setIsPlaying(false);
+      releaseLock();
+    };
+    vFwd.addEventListener("ended", onVideoEnded);
     if (vRev) {
       vRev.addEventListener("loadedmetadata", initTime);
     }
@@ -450,29 +465,37 @@ export default function MetroHero({
       engageLock();
     }
 
-    // Mouse wheel listener with velocity detection
+    // Mouse wheel listener: strictly lock inside hero until the video physically completes
     const onWheel = (e: WheelEvent) => {
       const absDelta = Math.abs(e.deltaY);
+      const deltaY = e.deltaY;
+      const isVideoEnded =
+        currentTimeRef.current >= VIDEO_DURATION - 0.08 ||
+        (videoFwdRef.current?.ended ?? false);
 
-      // Case 1: Video is at the end and user scrolls DOWN -> Release lock
-      if (currentTimeRef.current >= VIDEO_DURATION - 0.25 && e.deltaY > 0) {
+      // CRITICAL: ONLY release lock and allow scrolling to next section when video is completely finished
+      if (isVideoEnded && deltaY > 0) {
         releaseLock();
         return;
       }
 
-      // Case 2: Page is scrolled down and user scrolls back to the very top:
+      // If user is outside hero and scrolls back to very top (window.scrollY <= 5), re-engage lock for backward scrubbing
       if (!isLockedRef.current) {
-        if (window.scrollY <= 5 && e.deltaY < -5) {
+        if (window.scrollY <= 5 && deltaY < 0) {
           engageLock();
+          if (videoFwdRef.current) {
+            videoFwdRef.current.currentTime = Math.max(0.01, VIDEO_DURATION - 0.15);
+            currentTimeRef.current = videoFwdRef.current.currentTime;
+          }
           handleScrollDrive("up", absDelta);
           e.preventDefault();
         }
         return;
       }
 
-      // Case 3: Pinned inside Hero: drive video continuously with speed detection
-      if (absDelta > 2) {
-        handleScrollDrive(e.deltaY > 0 ? "down" : "up", absDelta);
+      // Strictly kept pinned inside Hero until video reaches the end
+      if (absDelta > 1) {
+        handleScrollDrive(deltaY > 0 ? "down" : "up", absDelta);
         e.preventDefault();
       }
     };
@@ -490,22 +513,31 @@ export default function MetroHero({
       const stepDelta = Math.abs(touchLastY - currentY);
       touchLastY = currentY;
       const totalDelta = touchStartY - currentY;
+      const deltaY = totalDelta;
+      const isVideoEnded =
+        currentTimeRef.current >= VIDEO_DURATION - 0.08 ||
+        (videoFwdRef.current?.ended ?? false);
 
-      if (currentTimeRef.current >= VIDEO_DURATION - 0.25 && totalDelta > 10) {
+      // ONLY release lock when video has completely reached the end
+      if (isVideoEnded && deltaY > 0) {
         releaseLock();
         return;
       }
 
       if (!isLockedRef.current) {
-        if (window.scrollY <= 5 && totalDelta < -15) {
+        if (window.scrollY <= 5 && deltaY < -10) {
           engageLock();
+          if (videoFwdRef.current) {
+            videoFwdRef.current.currentTime = Math.max(0.01, VIDEO_DURATION - 0.15);
+            currentTimeRef.current = videoFwdRef.current.currentTime;
+          }
           handleScrollDrive("up", stepDelta * 2);
           if (e.cancelable) e.preventDefault();
         }
         return;
       }
 
-      if (Math.abs(totalDelta) > 6) {
+      if (Math.abs(totalDelta) > 4) {
         touchStartY = currentY;
         handleScrollDrive(totalDelta > 0 ? "down" : "up", stepDelta * 2);
         if (e.cancelable) e.preventDefault();
@@ -562,6 +594,7 @@ export default function MetroHero({
       }
       vFwd.removeEventListener("loadedmetadata", initTime);
       vFwd.removeEventListener("loadeddata", initTime);
+      vFwd.removeEventListener("ended", onVideoEnded);
       if (vRev) {
         vRev.removeEventListener("loadedmetadata", initTime);
       }

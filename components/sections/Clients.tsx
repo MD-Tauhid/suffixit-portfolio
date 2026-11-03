@@ -7,7 +7,7 @@ import { clientRow1, clientRow2, ClientItem } from "@/lib/clients";
 function ClientCard({ client }: { client: ClientItem }) {
   return (
     <div
-      className="tech-marquee-box group"
+      className="tech-marquee-box group relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(0,104,181,0.04)] transition-all duration-300 hover:border-[#0068B5]/60 hover:shadow-[0_0_25px_-2px_rgba(0,104,181,0.28),inset_0_0_12px_rgba(0,104,181,0.08)] hover:-translate-y-0.5"
       title={client.name}
     >
       <Image
@@ -15,7 +15,7 @@ function ClientCard({ client }: { client: ClientItem }) {
         alt={client.alt}
         width={140}
         height={60}
-        className="tech-marquee-logo"
+        className="tech-marquee-logo transition-transform duration-300 group-hover:scale-105"
       />
     </div>
   );

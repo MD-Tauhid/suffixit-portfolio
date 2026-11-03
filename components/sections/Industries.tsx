@@ -78,11 +78,11 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section id="industries" className="py-20 md:py-28 relative bg-[#f8fbfe] overflow-hidden">
+    <section id="industries" className="py-2 md:py-10 lg:py-14 relative bg-[#f8fbfe] overflow-hidden">
       {/* Ambient soft background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-gradient-to-tr from-[#0072bc]/5 to-[#7c3aed]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w relative z-10 px-4 sm:px-6 lg:px-8">
+      <div className="w max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-14 text-center max-w-3xl mx-auto">
           <SectionHeader
@@ -105,7 +105,7 @@ export default function Industries() {
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-8"
           style={{
-            rowGap: "clamp(64px, 6.5vw, 92px)",
+            rowGap: "clamp(64px, 6.5vw, 30px)",
             columnGap: "clamp(24px, 2.8vw, 42px)",
           }}
         >

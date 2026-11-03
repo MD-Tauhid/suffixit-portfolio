@@ -85,7 +85,7 @@ export const ExpandingCards = React.forwardRef<
           <li
             key={item.id}
             className={cn(
-              "group relative cursor-pointer overflow-hidden rounded-2xl border border-white/20 bg-[#0b1329] text-card-foreground shadow-lg transition-all duration-500",
+              "group relative cursor-pointer overflow-hidden rounded-2xl border border-white/20 bg-[#070e1c] text-card-foreground shadow-lg transition-all duration-500",
               "md:min-w-[58px] lg:min-w-[68px]",
               "min-h-0 min-w-0 select-none",
               isActive
@@ -114,9 +114,9 @@ export const ExpandingCards = React.forwardRef<
             {/* 1. Base Dark Wash */}
             <div
               className={cn(
-                "absolute inset-0 transition-opacity duration-500",
+                "absolute inset-0 transition-opacity duration-500 pointer-events-none",
                 isActive
-                  ? "bg-gradient-to-t from-black/95 via-black/60 to-black/30"
+                  ? "bg-gradient-to-t from-black/85 via-black/40 to-transparent"
                   : "bg-black/65 group-hover:bg-black/50"
               )}
             />
@@ -124,15 +124,7 @@ export const ExpandingCards = React.forwardRef<
             {/* 2. Side vignette for active card readability */}
             <div
               className={cn(
-                "absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent transition-opacity duration-500 pointer-events-none",
-                isActive ? "opacity-100" : "opacity-0"
-              )}
-            />
-
-            {/* 3. Subtle Brand Accent Tint on Active Card */}
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-tr from-[#0072bc]/30 via-transparent to-transparent pointer-events-none transition-opacity duration-500",
+                "absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent transition-opacity duration-500 pointer-events-none",
                 isActive ? "opacity-100" : "opacity-0"
               )}
             />
@@ -192,50 +184,62 @@ export const ExpandingCards = React.forwardRef<
             </div>
 
             {/* =========================================================
-                ACTIVE EXPANDED CONTENT ARTICLE (High-Contrast & Ultra-Legible)
+                ACTIVE EXPANDED CONTENT ARTICLE (High-Legibility Glassmorphism Panel)
                ========================================================= */}
             <article
               className={cn(
-                "absolute inset-0 flex flex-col justify-end gap-3 p-5 sm:p-7 lg:p-8 transition-all duration-500",
+                "absolute inset-0 flex flex-col justify-end p-3 sm:p-5 lg:p-6 transition-all duration-500 z-20",
                 isActive
                   ? "opacity-100 pointer-events-auto translate-y-0"
                   : "opacity-0 pointer-events-none translate-y-4"
               )}
             >
-              {/* Active Icon & Category Badge */}
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center shadow-lg shrink-0">
-                  {item.icon}
+              {/* Refined Glassmorphism Panel with High-Contrast Opacity */}
+              <div
+                className="mt-auto w-full rounded-2xl p-5 sm:p-6 transition-all duration-300 flex flex-col gap-3"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(8, 14, 28, 0.88) 0%, rgba(4, 9, 20, 0.96) 100%)",
+                  backdropFilter: "blur(22px)",
+                  WebkitBackdropFilter: "blur(22px)",
+                  border: "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow:
+                    "0 20px 50px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.22)",
+                }}
+              >
+                {/* Active Icon & Category Badge */}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-center shadow-md shrink-0">
+                    {item.icon}
+                  </div>
+                  {item.badge && (
+                    <span className="text-[11px] sm:text-xs font-bold px-3 py-1 rounded-full bg-[#0072bc] text-white border border-[#38bdf8]/40 shadow-sm tracking-wide">
+                      {item.badge}
+                    </span>
+                  )}
                 </div>
-                {item.badge && (
-                  <span className="text-[11px] sm:text-xs font-extrabold px-3 py-1 rounded-full bg-[#0072bc] text-white border border-[#38bdf8]/40 shadow-md tracking-wide">
-                    {item.badge}
-                  </span>
-                )}
-              </div>
 
-              {/* Main Title */}
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-                {item.title}
-              </h3>
+                {/* Main Title */}
+                <h3 className="text-white font-extrabold text-2xl lg:text-3xl tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  {item.title}
+                </h3>
 
-              {/* Description Card (Frosted Glass Plate for 100% Crisp Legibility) */}
-              <div className="max-w-lg p-3.5 sm:p-4 rounded-xl bg-black/40 backdrop-blur-md border border-white/15 shadow-inner">
-                <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-normal drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                {/* Description - Ultra Crisp & Readable */}
+                <p className="text-slate-100 text-xs sm:text-sm leading-relaxed font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] line-clamp-3">
                   {item.description}
                 </p>
-              </div>
 
-              {/* Action Button */}
-              <div className="pt-1 sm:pt-2">
-                <a
-                  href={item.linkHref || "#contact"}
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold px-5 py-2.5 rounded-xl bg-white text-[#17162a] hover:bg-[#0072bc] hover:text-white transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95"
-                >
-                  <span>{item.ctaText || "Explore Service"}</span>
-                  <span>→</span>
-                </a>
+                {/* Action Button */}
+                <div className="pt-1">
+                  <a
+                    href={item.linkHref || "#contact"}
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 rounded-xl bg-white text-slate-950 hover:bg-[#0072bc] hover:text-white transition-all shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+                  >
+                    <span>{item.ctaText || "Explore Service"}</span>
+                    <span>→</span>
+                  </a>
+                </div>
               </div>
             </article>
           </li>

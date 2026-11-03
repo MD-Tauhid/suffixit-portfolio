@@ -521,7 +521,7 @@ export default function Products() {
       style={{ height: outerHeight }}
     >
       {/* Pinned Viewport Container (Sticky top-0 h-screen) */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-5 sm:py-6 lg:py-7">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-5 sm:py-4 lg:py-4">
         {/* Ambient background glows */}
         <div className="absolute top-1/4 left-1/3 w-[800px] h-[400px] bg-gradient-to-tr from-[#0072bc]/5 via-[#7c3aed]/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
         <div className="absolute bottom-10 right-1/4 w-[600px] h-[350px] bg-gradient-to-tl from-[#059669]/5 via-[#38bdf8]/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
@@ -562,11 +562,10 @@ export default function Products() {
                       setActiveFilter(tab.id as FilterCategory);
                       scrollToCard(0);
                     }}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${
-                      activeFilter === tab.id
-                        ? "bg-[#0072bc] text-white shadow-sm"
-                        : "text-[#515978] hover:text-[#0072bc] hover:bg-[#f0f6fd]"
-                    }`}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${activeFilter === tab.id
+                      ? "bg-[#0072bc] text-white shadow-sm"
+                      : "text-[#515978] hover:text-[#0072bc] hover:bg-[#f0f6fd]"
+                      }`}
                   >
                     {tab.label}
                   </button>
@@ -616,11 +615,10 @@ export default function Products() {
               return (
                 <div
                   key={prod.id}
-                  className={`w-[320px] sm:w-[370px] md:w-[410px] shrink-0 rounded-3xl p-6 sm:p-7 border bg-white flex flex-col justify-between transition-all duration-300 ${
-                    isCurrent
-                      ? "shadow-[0_20px_50px_rgba(0,114,188,0.12)] border-[#0072bc]/40 scale-[1.01]"
-                      : "shadow-[0_8px_30px_rgba(0,0,0,0.04)] border-[#e2eef9] hover:shadow-xl hover:border-[#0072bc]/30"
-                  }`}
+                  className={`w-[320px] sm:w-[370px] md:w-[410px] shrink-0 rounded-3xl p-6 sm:p-7 border bg-white flex flex-col justify-between transition-all duration-300 ${isCurrent
+                    ? "shadow-[0_20px_50px_rgba(0,114,188,0.12)] border-[#0072bc]/40 scale-[1.01]"
+                    : "shadow-[0_8px_30px_rgba(0,0,0,0.04)] border-[#e2eef9] hover:shadow-xl hover:border-[#0072bc]/30"
+                    }`}
                   style={{
                     minHeight: "470px",
                   }}
