@@ -224,7 +224,7 @@ export default function Tech() {
         </SectionHeader>
       </div>
 
-      <div className="tech-marquee-wrapper rv">
+      <div className="tech-marquee-wrapper rv-zoom">
         {/* Row 1: Frontend, Mobile & Cloud */}
         <Marquee speed={36} pauseOnHover direction="left" className="tech-marquee-lane">
           {row1.map((item, idx) => (

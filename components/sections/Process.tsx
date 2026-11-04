@@ -108,8 +108,8 @@ const processCards: ProjectData[] = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-10 md:py-14 lg:py-16 relative overflow-visible">
-      <div className="w max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+    <section id="process" className="py-2 md:py-14 lg:py-16 relative overflow-visible">
+      <div className="w max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 ">
         <SectionHeader eyebrow="How we work">
           From idea to <em>launch</em>, step by step
         </SectionHeader>

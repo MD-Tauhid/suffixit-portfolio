@@ -103,16 +103,18 @@ export default function Industries() {
             - Tailored gradient palettes for each industry
            ======================================================== */}
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-8 rv-stagger"
           style={{
             rowGap: "clamp(64px, 6.5vw, 30px)",
             columnGap: "clamp(24px, 2.8vw, 42px)",
           }}
         >
-          {industries.map((item) => (
+          {industries.map((item, index) => (
             <div
               key={item.title}
-              className="group relative w-full min-h-[390px] transition-all duration-500"
+              className={`group relative w-full min-h-[390px] transition-all duration-500 ${
+                index % 2 === 0 ? "rv-left" : "rv-right"
+              } stagger-${(index % 4) + 1}`}
             >
               {/* Skewed gradient panel 1 (Sharp Base) */}
               <span

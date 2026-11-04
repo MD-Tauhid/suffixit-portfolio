@@ -51,27 +51,66 @@ export default function PageEffects() {
       frames.add(requestAnimationFrame(tick));
     };
 
-    // 4. Kinetic Scroll Observer
-    const selector = ".rv, .rv-up, .rv-left, .rv-right, .rv-zoom";
+    // 4. Section Container Kinetic Scroll Observer
+    // REVEAL RULE: The reveal effect triggers ONLY when the top border of the section container reaches the center of the display (50% viewport).
+    const revealSelector = ".rv, .rv-up, .rv-left, .rv-right, .rv-zoom, .rv-flip, .rv-stagger";
+
+    const triggerSection = (container: HTMLElement) => {
+      container.classList.add("in");
+      container
+        .querySelectorAll<HTMLElement>(revealSelector)
+        .forEach((child) => {
+          child.classList.add("in");
+        });
+      container.querySelectorAll<HTMLElement>("[data-c]").forEach(countUp);
+    };
+
+    // Find all major section containers across the website
+    const allSections = document.querySelectorAll<HTMLElement>(
+      "section, #hero, .st, main > div, footer, [id='why'], [id='contact']"
+    );
+
+    // rootMargin: "0px 0px -50% 0px" defines the bottom of the intersection root at exactly 50% of the display.
+    // threshold: 0 triggers immediately when the top border of the section container crosses into the center line.
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          el.classList.add("in");
-          el.querySelectorAll<HTMLElement>("[data-c]").forEach(countUp);
-          io.unobserve(el);
+          const container = entry.target as HTMLElement;
+          triggerSection(container);
+          io.unobserve(container);
         });
       },
       {
-        threshold: 0.15,
-        rootMargin: "0px 0px -90px 0px",
+        threshold: 0,
+        rootMargin: "0px 0px -50% 0px",
       }
     );
 
-    const elements = document.querySelectorAll<HTMLElement>(selector);
-    elements.forEach((el) => {
-      io.observe(el);
+    // Observe each section container
+    allSections.forEach((sec) => {
+      // Check if top border is already at or above center on initial load
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.5) {
+        triggerSection(sec);
+      } else {
+        io.observe(sec);
+      }
+    });
+
+    // Also observe any orphan reveal elements not wrapped in a standard section
+    document.querySelectorAll<HTMLElement>(revealSelector).forEach((el) => {
+      const parentSec = el.closest<HTMLElement>(
+        "section, #hero, .st, main > div, footer"
+      );
+      if (!parentSec) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.5) {
+          el.classList.add("in");
+        } else {
+          io.observe(el);
+        }
+      }
     });
 
     cleanups.push(() => io.disconnect());

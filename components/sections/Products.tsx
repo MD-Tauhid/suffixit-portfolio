@@ -532,7 +532,7 @@ export default function Products() {
         <div className="w-full px-4 sm:px-8 lg:px-12 shrink-0">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 max-w-7xl mx-auto border-b border-[#e5eef8] pb-4">
             {/* Left Header */}
-            <div>
+            <div className="rv-left">
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="ey inline-block text-[11px] font-extrabold tracking-wider text-[#0072bc] uppercase bg-[#0072bc]/10 px-2.5 py-0.5 rounded-full border border-[#0072bc]/20">
                   OUR PRODUCTS
@@ -547,7 +547,7 @@ export default function Products() {
             </div>
 
             {/* Right Category Filter Pills & Arrows */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 rv-right">
               <div className="flex items-center gap-1.5 p-1 bg-white rounded-full border border-[#dce9f6] shadow-sm">
                 {[
                   { id: "all", label: "All (9)" },
@@ -600,7 +600,7 @@ export default function Products() {
         {/* ========================================================
             MIDDLE: HORIZONTAL SCROLL SHOWCASE TRACK
            ======================================================== */}
-        <div className="w-full overflow-hidden my-auto py-2">
+        <div className="w-full overflow-hidden my-auto py-2 rv-zoom">
           <div
             ref={trackRef}
             className="flex items-stretch gap-6 pl-4 sm:pl-8 lg:pl-16 pr-12 sm:pr-20 will-change-transform"
@@ -716,7 +716,7 @@ export default function Products() {
         {/* ========================================================
             BOTTOM BAR: INTERACTIVE TIMELINE SCRUBBER & SCROLL HINT
            ======================================================== */}
-        <div className="w-full px-4 sm:px-8 lg:px-12 shrink-0">
+        <div className="w-full px-4 sm:px-8 lg:px-12 shrink-0 rv-up">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#e5eef8]">
             {/* Progress Bar & Indicators */}
             <div className="flex items-center gap-3 w-full sm:w-auto">

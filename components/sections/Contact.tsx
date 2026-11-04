@@ -95,7 +95,7 @@ export default function Contact() {
             setIsHovered(false);
             setMousePos(null);
           }}
-          className="relative overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] bg-[#F8FAFC] border border-slate-200/90 shadow-[0_24px_70px_-15px_rgba(15,23,42,0.06)] p-7 sm:p-10 lg:p-16 transition-all duration-300"
+          className="relative overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] bg-[#F8FAFC] border border-slate-200/90 shadow-[0_24px_70px_-15px_rgba(15,23,42,0.06)] p-7 sm:p-10 lg:p-16 transition-all duration-300 rv-zoom"
         >
           {/* Interactive Cursor Spotlight Border Glow (Matches Footer SUFFIX IT Stroke Glow) */}
           {mousePos && (
@@ -250,7 +250,7 @@ export default function Contact() {
           {/* 2-Column Responsive Layout */}
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left">
+            <div className="lg:col-span-7 flex flex-col items-start text-left rv-left">
               {/* Eyebrow Badge */}
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-200/90 bg-sky-50/90 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#0068B5] shadow-xs backdrop-blur-sm mb-5">
                 <Sparkles className="h-3.5 w-3.5 text-[#0068B5] animate-pulse" />
@@ -314,7 +314,7 @@ export default function Contact() {
             </div>
 
             {/* Right Interactive Contact Dock */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 rv-right">
               <div
                 className="relative overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300"
                 style={{

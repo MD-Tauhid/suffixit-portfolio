@@ -12,8 +12,10 @@ import Services from "@/components/sections/Services";
 import FieldForce from "@/components/sections/FieldForce";
 import Process from "@/components/sections/Process";
 import Models from "@/components/sections/Models";
-import Why from "@/components/sections/Why";
-import Testimonials3DSection from "@/components/ui/3d-testimonials";
+// import Why from "@/components/sections/Why";
+import Tech from "@/components/sections/Tech";
+// import Testimonials3DSection from "@/components/ui/3d-testimonials";
+import { StaggerTestimonialsSection } from "@/components/ui/stagger-testimonials";
 import Contact from "@/components/sections/Contact";
 
 export default function HomePage() {
@@ -36,7 +38,6 @@ export default function HomePage() {
         {/* 4. Solutions for Every Industry Section */}
         <Industries />
 
-
         {/* 5. Field Force Section */}
         <FieldForce />
 
@@ -49,13 +50,18 @@ export default function HomePage() {
         {/* 8. Services Section */}
         <Services />
 
+        {/* 9. Technology We Use (Modern Stack Dual Marquee) */}
+        <Tech />
 
         {/* <Why /> - Commented out as requested */}
 
-        {/* 9. 3D Customer Testimonials Section */}
-        <Testimonials3DSection />
+        {/* Previous 3D Customer Testimonials Section - Commented out as requested */}
+        {/* <Testimonials3DSection /> */}
 
-        {/* 10. Contact Section (With Direct Leadership Sales Team) */}
+        {/* 10. Stagger Testimonials Interactive Carousel Section */}
+        <StaggerTestimonialsSection />
+
+        {/* 11. Contact Section (With Direct Leadership Sales Team) */}
         <Contact />
       </main>
       <Footer />

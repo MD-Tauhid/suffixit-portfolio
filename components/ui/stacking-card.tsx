@@ -2,6 +2,7 @@
 import { ReactLenis } from 'lenis/react';
 import { useTransform, motion, useScroll, MotionValue } from 'motion/react';
 import { useRef, forwardRef } from 'react';
+import { cn } from '@/lib/utils';
 
 export interface ProjectItem {
   title: string;
@@ -34,6 +35,7 @@ interface CardProps {
   progress: MotionValue<number>;
   range: [number, number];
   targetScale: number;
+  isLast?: boolean;
 }
 
 export const Card = ({
@@ -50,6 +52,7 @@ export const Card = ({
   progress,
   range,
   targetScale,
+  isLast = false,
 }: CardProps) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -65,7 +68,8 @@ export const Card = ({
   return (
     <div
       ref={container}
-      className='min-h-screen flex items-start justify-center sticky'
+      className={`flex items-start justify-center sticky ${isLast ? 'min-h-0 h-auto pb-[20px]' : 'min-h-screen'
+        }`}
       style={{
         top: `calc(70px + ${i * 18}px)`,
       }}
@@ -242,6 +246,7 @@ const Component = forwardRef<HTMLElement, ComponentRootProps>(({ projects }, _re
             <Card
               key={`p_${i}`}
               i={i}
+              isLast={i === projects.length - 1}
               url={project.link}
               title={project.title}
               subtitle={project.subtitle}

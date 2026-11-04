@@ -20,6 +20,8 @@ import {
   Building2,
   Award,
   Globe2,
+  ChevronDown,
+  Lock,
 } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
@@ -101,13 +103,13 @@ export default function ContactPage() {
         );
       }
 
-      // 3. Main Heading reveal with subtle de-blur
+      // 3. Main Heading reveal with crisp kinetic slide-up (Zero text blur)
       if (headingRef.current) {
         tl.fromTo(
           headingRef.current,
-          { y: 35, opacity: 0, filter: "blur(8px)" },
-          { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.85 },
-          0.2
+          { y: 38, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.75, ease: "power3.out" },
+          0.15
         );
       }
 
@@ -115,56 +117,56 @@ export default function ContactPage() {
       if (subtitleRef.current) {
         tl.fromTo(
           subtitleRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.65 },
-          0.35
+          { y: 22, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+          0.25
         );
       }
 
       // 5. SLA items stagger
       tl.fromTo(
         ".sla-item",
-        { x: -25, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.55, stagger: 0.08 },
-        0.45
+        { x: -30, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" },
+        0.35
       );
 
       // 6. Lead Architect Card Glide
       if (architectCardRef.current) {
         tl.fromTo(
           architectCardRef.current,
-          { x: -35, y: 20, opacity: 0, scale: 0.95 },
-          { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" },
-          0.55
+          { x: -45, opacity: 0, scale: 0.96 },
+          { x: 0, opacity: 1, scale: 1, duration: 0.75, ease: "power3.out" },
+          0.45
         );
       }
 
-      // 7. Lead Architect Image Reveal (Zoom-out + De-blur)
+      // 7. Lead Architect Image Reveal (Zoom-out)
       if (architectImgRef.current) {
         tl.fromTo(
           architectImgRef.current,
-          { scale: 1.35, filter: "blur(10px)", opacity: 0.3 },
-          { scale: 1, filter: "blur(0px)", opacity: 1, duration: 1.0, ease: "power2.out" },
-          0.65
+          { scale: 1.3, opacity: 0.7 },
+          { scale: 1, opacity: 1, duration: 0.85, ease: "power2.out" },
+          0.5
         );
       }
 
-      // 8. Right Form Card (Spring entry from right/bottom)
+      // 8. Right Form Card (Smooth glide entry from right)
       if (formCardRef.current) {
         tl.fromTo(
           formCardRef.current,
-          { x: 40, y: 30, opacity: 0, scale: 0.96 },
-          { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.95, ease: "power3.out" },
-          0.25
+          { x: 45, opacity: 0, scale: 0.96 },
+          { x: 0, opacity: 1, scale: 1, duration: 0.85, ease: "power3.out" },
+          0.2
         );
       }
 
       // 9. Form Input Elements Cascade
       tl.fromTo(
         ".form-element",
-        { y: 15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.05 },
-        0.55
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, stagger: 0.05, ease: "power2.out" },
+        0.4
       );
 
       // 10. Office Showcase & Map Card
@@ -328,14 +330,17 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right Column: Clean White Glass Card Form with Entrance Animation */}
+            {/* Right Column: High-End Enterprise Form Card */}
             <div className="lg:col-span-7">
               <div
                 ref={formCardRef}
-                className="rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(0,104,181,0.09)] p-6 sm:p-10 text-left transition-all hover:border-slate-300 relative overflow-hidden"
+                className="rounded-[30px] sm:rounded-[36px] bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(0,104,181,0.12),0_4px_16px_rgba(15,23,42,0.04)] p-7 sm:p-10 text-left transition-all duration-300 hover:border-slate-300 relative overflow-hidden"
               >
-                {/* Decorative Subtle Corner Accent Glow */}
-                <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-sky-400/10 via-transparent to-transparent rounded-tr-3xl" />
+                {/* Top Luxury Gradient Accent Bar */}
+                <div className="absolute top-0 inset-x-0 h-[3.5px] bg-gradient-to-r from-[#0068B5] via-[#38BDF8] to-[#0068B5]" />
+
+                {/* Subtle Ambient Background Corner Light */}
+                <div className="pointer-events-none absolute -top-24 -right-24 w-60 h-60 bg-gradient-to-bl from-sky-400/15 via-transparent to-transparent rounded-full blur-2xl" />
 
                 {formSubmitted ? (
                   <div className="py-12 text-center space-y-4">
@@ -358,39 +363,46 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="form-element">
-                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-                        Project Inquiry &amp; Consultation
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                        Fill in your details below and we will prepare a tailored demonstration.
-                      </p>
+                    {/* Form Header with SLA Badge */}
+                    <div className="form-element flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                          Project Inquiry &amp; Consultation
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                          Fill in your details below and we will prepare a tailored demonstration.
+                        </p>
+                      </div>
+                      <span className="self-start sm:self-center inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-[11px] font-bold text-emerald-700 tracking-wide shrink-0">
+                        <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        &lt; 2h Response SLA
+                      </span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Full Name */}
                       <div className="form-element">
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                          Full Name *
+                        <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
+                          Full Name <span className="text-[#0068B5] font-black">*</span>
                         </label>
                         <input
                           type="text"
                           required
                           placeholder="e.g. Rafiqul Islam"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all"
+                          className="w-full h-12 rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 text-sm font-medium text-slate-900 placeholder:text-slate-400 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200"
                         />
                       </div>
 
-                      {/* Email */}
+                      {/* Work Email */}
                       <div className="form-element">
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                          Work Email *
+                        <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
+                          Work Email <span className="text-[#0068B5] font-black">*</span>
                         </label>
                         <input
                           type="email"
                           required
                           placeholder="name@company.com"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all"
+                          className="w-full h-12 rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 text-sm font-medium text-slate-900 placeholder:text-slate-400 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200"
                         />
                       </div>
                     </div>
@@ -398,75 +410,97 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Mobile / WhatsApp */}
                       <div className="form-element">
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                          Mobile / WhatsApp *
+                        <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
+                          Mobile / WhatsApp <span className="text-[#0068B5] font-black">*</span>
                         </label>
                         <input
                           type="tel"
                           required
                           placeholder="+880 1700 000000"
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all"
+                          className="w-full h-12 rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 text-sm font-medium text-slate-900 placeholder:text-slate-400 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200"
                         />
                       </div>
 
                       {/* Project Type */}
                       <div className="form-element">
-                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                          Project Type *
+                        <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
+                          Project Type <span className="text-[#0068B5] font-black">*</span>
                         </label>
-                        <select
-                          required
-                          className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm text-slate-900 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all"
-                        >
-                          <option value="ERP">Enterprise ERP &amp; Rupantar HCM</option>
-                          <option value="FieldForce">Field Force Management (FFMS)</option>
-                          <option value="CustomSoftware">Custom Software &amp; Web Platform</option>
-                          <option value="MobileApp">Mobile App (iOS / Android)</option>
-                          <option value="Consultation">Architecture &amp; Cloud Consultation</option>
-                        </select>
+                        <div className="relative group">
+                          <select
+                            required
+                            className="w-full h-12 rounded-xl border border-slate-200 bg-[#F8FAFC] pl-4 pr-10 text-sm font-medium text-slate-900 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200 appearance-none cursor-pointer"
+                          >
+                            <option value="ERP">Enterprise ERP &amp; Rupantar HCM</option>
+                            <option value="FieldForce">Field Force Management (FFMS)</option>
+                            <option value="CustomSoftware">Custom Software &amp; Web Platform</option>
+                            <option value="MobileApp">Mobile App (iOS / Android)</option>
+                            <option value="Consultation">Architecture &amp; Cloud Consultation</option>
+                          </select>
+                          <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-[#0068B5] group-focus-within:rotate-180 transition-all duration-200" />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Project Budget */}
+                    {/* Estimated Budget */}
                     <div className="form-element">
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
                         Estimated Budget
                       </label>
-                      <select
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm text-slate-900 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all"
-                      >
-                        <option value="under5k">BDT 100K – 500K (Standard License / Ready App)</option>
-                        <option value="5k-15k">BDT 500K – 1.5M (Mid Enterprise / Custom Module)</option>
-                        <option value="15k-50k">BDT 1.5M – 5M+ (Large Scale Multi-Branch ERP)</option>
-                        <option value="retainer">Monthly Dedicated Engineering Team</option>
-                      </select>
+                      <div className="relative group">
+                        <select
+                          className="w-full h-12 rounded-xl border border-slate-200 bg-[#F8FAFC] pl-4 pr-10 text-sm font-medium text-slate-900 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200 appearance-none cursor-pointer"
+                        >
+                          <option value="under5k">BDT 100K – 500K (Standard License / Ready App)</option>
+                          <option value="5k-15k">BDT 500K – 1.5M (Mid Enterprise / Custom Module)</option>
+                          <option value="15k-50k">BDT 1.5M – 5M+ (Large Scale Multi-Branch ERP)</option>
+                          <option value="retainer">Monthly Dedicated Engineering Team</option>
+                        </select>
+                        <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-[#0068B5] group-focus-within:rotate-180 transition-all duration-200" />
+                      </div>
                     </div>
 
                     {/* Project Details */}
                     <div className="form-element">
-                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Project Details &amp; Operational Needs *
+                      <label className="block text-xs font-bold text-slate-700 tracking-wide uppercase mb-1.5">
+                        Project Details &amp; Operational Needs <span className="text-[#0068B5] font-black">*</span>
                       </label>
                       <textarea
                         required
                         rows={4}
                         placeholder="Tell us about your organization, current workflow bottlenecks, user count, and target go-live date..."
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50/60 p-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0068B5] focus:bg-white focus:ring-4 focus:ring-[#0068B5]/10 focus:outline-none transition-all resize-none"
+                        className="w-full rounded-2xl border border-slate-200 bg-[#F8FAFC] p-4 text-sm font-sans font-medium text-slate-900 placeholder:text-slate-400 hover:border-slate-300 hover:bg-slate-50 focus:bg-white focus:border-[#0068B5] focus:ring-4 focus:ring-[#0068B5]/12 focus:shadow-[0_0_0_1px_#0068B5] focus:outline-none transition-all duration-200 resize-none leading-relaxed"
                       />
                     </div>
 
-                    {/* Submit Button */}
-                    <div className="form-element pt-1">
+                    {/* Submit Button & Security Micro-bar */}
+                    <div className="form-element pt-2 space-y-3">
                       <button
                         type="submit"
-                        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-sm sm:text-base font-bold text-white shadow-lg shadow-[#0068B5]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#0068B5]/35 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                        className="group w-full h-[52px] inline-flex items-center justify-center gap-2.5 rounded-xl px-6 text-sm sm:text-base font-bold text-white shadow-lg shadow-[#0068B5]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#0068B5]/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                         style={{
-                          background: "linear-gradient(135deg, #0068B5 0%, #0284c7 100%)",
+                          background: "linear-gradient(135deg, #0068B5 0%, #005FA3 50%, #004477 100%)",
                         }}
                       >
-                        <span>Send Message</span>
-                        <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        <span>Send Project Inquiry</span>
+                        <ArrowRight className="size-4.5 transition-transform duration-200 group-hover:translate-x-1" />
                       </button>
+
+                      {/* Micro Security & Trust Assurance */}
+                      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 pt-1 text-[11px] font-medium text-slate-500">
+                        <span className="inline-flex items-center gap-1">
+                          <ShieldCheck className="size-3.5 text-emerald-600" />
+                          Strict NDA Protected
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Lock className="size-3 text-[#0068B5]" />
+                          100% Confidential
+                        </span>
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="size-3.5 text-sky-600" />
+                          24h Technical Scoping SLA
+                        </span>
+                      </div>
                     </div>
                   </form>
                 )}

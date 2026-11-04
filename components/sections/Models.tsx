@@ -142,27 +142,27 @@ export default function Models() {
         return;
       }
 
-      // Initial state for desktop circular portal reveal
-      gsap.set(portalRef.current, { clipPath: "circle(10% at 50% 92%)" });
-      gsap.set(contentRef.current, { scale: 0.95 });
+      // Initial state for desktop circular portal reveal from exact center (50% 50%)
+      gsap.set(portalRef.current, { clipPath: "circle(0% at 50% 50%)" });
+      gsap.set(contentRef.current, { scale: 0.94 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: trackRef.current,
-          start: "top top",
+          start: "top 60%", // Triggers as soon as the section's center enters the viewport/display
           end: "bottom bottom",
-          scrub: 0.4,
+          scrub: 0.3,
           pin: false, // Prevents scroll sticking & DOM wrapper bugs
         },
       });
 
-      // Step 1 (0% to 45%): Expand portal to 45%
+      // Step 1: Expand portal outwards from exact center as it scrolls into display
       tl.to(portalRef.current, {
-        clipPath: "circle(45% at 50% 52%)",
-        ease: "power1.inOut",
+        clipPath: "circle(50% at 50% 50%)",
+        ease: "power1.out",
         duration: 0.45,
       })
-        // Step 2 (45% to 100%): Full circular burst to 150% and scale to 1
+        // Step 2: Full circular burst to 150% and scale to 1 from center
         .to(
           portalRef.current,
           {
@@ -190,12 +190,12 @@ export default function Models() {
   }, []);
 
   return (
-    <section id="models" ref={trackRef} className="relative w-full md:h-[175vh] p-0 bg-[#6584a3]">
+    <section id="models" ref={trackRef} className="relative w-full md:h-[175vh] p-0 bg-[#03152E]">
       {/* Sticky Viewport Stage (Native CSS sticky - No GSAP pin) */}
       <div
         className="relative md:sticky md:top-0 h-auto md:h-dvh w-full overflow-hidden flex items-center justify-center py-2 md:py-0"
         style={{
-          background: "radial-gradient(circle at 50% 80%, #0068B5 0%, #03152E 100%)",
+          background: "radial-gradient(circle at 50% 50%, #0068B5 0%, #03152E 100%)",
         }}
       >
         {/* Circular Reveal Layer */}
@@ -211,7 +211,7 @@ export default function Models() {
             {/* Compact Section Header */}
             <div className="mb-6 lg:mb-7 text-center shrink-0">
               <span className="text-xs font-bold tracking-[0.16em] text-[#0068B5] uppercase mb-1.5 block">
-                WAYS TO WORK WITH US
+                WHY WORK WITH SUFFIX IT
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl leading-tight font-black text-slate-900 tracking-tight">
                 Four models, <span className="font-serif italic font-normal text-[#0068B5]">one</span> trusted partner

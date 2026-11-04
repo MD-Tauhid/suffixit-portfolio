@@ -3,75 +3,81 @@ import React from "react";
 interface BadgeItem {
   src: string;
   alt: string;
-  targetWidth: number;
+  width: number;
+  height: number;
   className?: string;
 }
 
 // ─────────────────────────────────────────────────────────────
 // Suffix IT — Footer Accreditations & Strategic Partners
-// ─────────────────────────────────────────────────────────────
-// The user requirement:
-// 1. Uniform Width: All logos in each group have the same width.
-// 2. Natural Height: "height ja hobe hok width er ratio onujaiyi" -> height: auto.
-// 3. Balanced Positioning: Perfectly centered in responsive 3-2-3 grid columns.
+// Perfectly balanced optical scale across all rows
 // ─────────────────────────────────────────────────────────────
 
-// Group 1: International ISO Standards (3 badges) - Same Width: 76px
+// Group 1: International ISO Standards (3 badges) - Identical 82px x 82px
 const isoRow: BadgeItem[] = [
   {
     src: "/assets/img/iso-9001.png",
     alt: "ISO 9001:2015",
-    targetWidth: 76,
+    width: 70,
+    height: 70,
     className: "img-cer1",
   },
   {
     src: "/assets/img/iso-27001.png",
     alt: "ISO 27001:2022",
-    targetWidth: 76,
+    width: 70,
+    height: 70,
     className: "img-cer2",
   },
   {
     src: "/assets/img/iso-20000.png",
     alt: "ISO 20000-1:2018",
-    targetWidth: 76,
+    width: 65,
+    height: 70,
     className: "img-iso20000",
   },
 ];
 
-// Group 2: Industry Associations (2 badges) - Same Width: 130px
+// Group 2: Industry Associations (2 badges) - Uniform 38px height
 const assocRow: BadgeItem[] = [
   {
     src: "/assets/img/basis.png",
     alt: "BASIS - Bangladesh Association of Software and Information Services",
-    targetWidth: 130,
+    width: 100,
+    height: 38,
     className: "img-basis",
   },
   {
     src: "/assets/img/bacco.png",
     alt: "BACCO - Bangladesh Association of Contact Center & Outsourcing",
-    targetWidth: 130,
+    width: 140,
+    height: 50,
     className: "img-bacco",
   },
 ];
 
-// Group 3: Cybersecurity & Technology Partners (3 badges) - Same Width: 86px
+// Group 3: Cybersecurity & Technology Partners (3 badges)
+// Normalized for optical balance so Cisco, Fortinet, and Sophos all look equally prominent
 const partnerRow: BadgeItem[] = [
   {
     src: "/assets/img/cisco.png",
     alt: "Cisco",
-    targetWidth: 86,
+    width: 99,
+    height: 50,
     className: "img-cisco",
   },
   {
     src: "/assets/img/fortinet.png",
     alt: "Fortinet",
-    targetWidth: 80,
+    width: 99,
+    height: 60,
     className: "img-fort",
   },
   {
     src: "/assets/img/sophos.png",
     alt: "Sophos",
-    targetWidth: 88,
+    width: 148,
+    height: 24,
     className: "img-sophos",
   },
 ];
@@ -79,17 +85,17 @@ const partnerRow: BadgeItem[] = [
 export default function FooterBadges() {
   return (
     <div className="cert-wrapper">
-      {/* Row 1: ISO Standards (3 items - Identical 76px Width) */}
+      {/* Row 1: ISO Standards (3 items - Identical 82px) */}
       <div className="iso-grid grid-3">
         {isoRow.map((item) => (
-          <div key={item.alt} className="iso-item">
+          <div key={item.alt} className="iso-item" style={{ height: "84px" }}>
             <img
               src={item.src}
               alt={item.alt}
               className={`ft-badge-img ${item.className || ""}`}
               style={{
-                width: `${item.targetWidth}px`,
-                height: "auto",
+                width: `${item.width}px`,
+                height: `${item.height}px`,
                 maxWidth: "100%",
                 objectFit: "contain",
                 display: "block",
@@ -99,17 +105,17 @@ export default function FooterBadges() {
         ))}
       </div>
 
-      {/* Row 2: BASIS & BACCO (2 items - Identical 130px Width) */}
+      {/* Row 2: BASIS & BACCO (2 items - Uniform 38px height) */}
       <div className="iso-grid grid-2">
         {assocRow.map((item) => (
-          <div key={item.alt} className="iso-item">
+          <div key={item.alt} className="iso-item" style={{ height: "46px" }}>
             <img
               src={item.src}
               alt={item.alt}
               className={`ft-badge-img ${item.className || ""}`}
               style={{
-                width: `${item.targetWidth}px`,
-                height: "auto",
+                width: `${item.width}px`,
+                height: `${item.height}px`,
                 maxWidth: "100%",
                 objectFit: "contain",
                 display: "block",
@@ -119,17 +125,22 @@ export default function FooterBadges() {
         ))}
       </div>
 
-      {/* Row 3: Cisco, Fortinet, Sophos (3 items - Balanced ~86px Width) */}
-      <div className="iso-grid grid-3">
+      {/* Row 3: Cisco, Fortinet, Sophos (3 items - Equal optical visual mass) */}
+      <div
+        className="iso-grid grid-3 mt-2"
+        style={{
+          gridTemplateColumns: "1fr 0.85fr 1.45fr",
+        }}
+      >
         {partnerRow.map((item) => (
-          <div key={item.alt} className="iso-item">
+          <div key={item.alt} className="iso-item" style={{ height: "50px" }}>
             <img
               src={item.src}
               alt={item.alt}
               className={`ft-badge-img ${item.className || ""}`}
               style={{
-                width: `${item.targetWidth}px`,
-                height: "auto",
+                width: `${item.width}px`,
+                height: `${item.height}px`,
                 maxWidth: "100%",
                 objectFit: "contain",
                 display: "block",

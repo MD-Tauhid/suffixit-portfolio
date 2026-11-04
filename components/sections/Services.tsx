@@ -26,7 +26,7 @@ const allServices: CardItem[] = [
     badge: "Enterprise Architecture",
     description:
       "Bespoke business platforms, web applications, and scalable core engines engineered around your organization's precise operating workflows.",
-    imgSrc: "/assets/colapsing-card/Laptop_displaying_holographic_co_20261027094509.jpg",
+    imgSrc: "/assets/services/custom-software.jpg",
     icon: <Code2 size={22} />,
     linkHref: "#contact",
     ctaText: "Request Architecture Demo",
@@ -37,7 +37,7 @@ const allServices: CardItem[] = [
     badge: "iOS & Android",
     description:
       "High-performance native and Flutter mobile apps with offline-first local SQLite sync, push notifications, and biometric authentication.",
-    imgSrc: "/assets/colapsing-card/Smartphones_displaying_mobile_ap_20261027094721.jpg",
+    imgSrc: "/assets/services/mobile-apps.jpg",
     icon: <Smartphone size={22} />,
     linkHref: "#contact",
     ctaText: "Build Mobile App",
@@ -48,7 +48,7 @@ const allServices: CardItem[] = [
     badge: "High-Conversion",
     description:
       "Blazing-fast digital storefronts, member portals, and headless commerce platforms with automated checkout and real-time inventory.",
-    imgSrc: "/assets/models/products.jpg",
+    imgSrc: "/assets/services/web-ecommerce.jpg",
     icon: <Globe size={22} />,
     linkHref: "#contact",
     ctaText: "Launch Digital Portal",
@@ -59,7 +59,7 @@ const allServices: CardItem[] = [
     badge: "Smart Telemetry",
     description:
       "Connected hardware sensors, GPS vehicle tracking telematics, and real-time operational telemetry streams directly into live dashboards.",
-    imgSrc: "/assets/colapsing-card/Smartphone_with_GPS_radar_map_20261027094412.jpg",
+    imgSrc: "/assets/services/iot-solutions.jpg",
     icon: <Cpu size={22} />,
     linkHref: "#contact",
     ctaText: "Connect Hardware",
@@ -70,7 +70,7 @@ const allServices: CardItem[] = [
     badge: "99.9% Uptime SLA",
     description:
       "Reliable enterprise domain registration, high-speed managed cloud hosting, automated SSL, AWS cloud infrastructure, and 24/7 server monitoring.",
-    imgSrc: "/assets/models/hosting.jpg",
+    imgSrc: "/assets/services/cloud-hosting.jpg",
     icon: <CloudCog size={22} />,
     linkHref: "#contact",
     ctaText: "Deploy Cloud Hosting",
@@ -81,7 +81,7 @@ const allServices: CardItem[] = [
     badge: "Disaster Recovery",
     description:
       "Keep enterprise databases safe, encrypted, and backed up with automated daily snapshots and rapid point-in-time recovery protocols.",
-    imgSrc: "/assets/colapsing-card/Glass_cloud_over_database_disks_20261027094458.jpg",
+    imgSrc: "/assets/services/storage-backup.jpg",
     icon: <Database size={22} />,
     linkHref: "#contact",
     ctaText: "Secure Enterprise Data",
@@ -92,7 +92,7 @@ const allServices: CardItem[] = [
     badge: "Digital Transformation",
     description:
       "Expert guidance to select, configure, and scale ERP and HCM suites across your entire supply chain, accounting, and multi-branch operations.",
-    imgSrc: "/assets/colapsing-card/ERP_dashboard_floating_in_studio_20261027094445.jpg",
+    imgSrc: "/assets/services/erp-consulting.jpg",
     icon: <Layers size={22} />,
     linkHref: "#contact",
     ctaText: "Consult Our Experts",
@@ -103,7 +103,7 @@ const allServices: CardItem[] = [
     badge: "Organic Growth",
     description:
       "Data-driven technical SEO, search engine ranking, and conversion rate optimization that elevate your digital visibility.",
-    imgSrc: "/assets/colapsing-card/ERP_dashboard_showing_financial__20261027094741.jpg",
+    imgSrc: "/assets/services/seo.jpg",
     icon: <Megaphone size={22} />,
     linkHref: "#contact",
     ctaText: "Boost Search Ranking",
@@ -114,7 +114,7 @@ const allServices: CardItem[] = [
     badge: "Dedicated Tech Talent",
     description:
       "Extend your workforce with dedicated Suffix developers, QA specialists, and support engineers working seamlessly as part of your team.",
-    imgSrc: "/assets/colapsing-card/Enterprise_workforce_network_sal_20261027094812.jpg",
+    imgSrc: "/assets/services/bpo-staffing.jpg",
     icon: <Handshake size={22} />,
     linkHref: "#contact",
     ctaText: "Hire Dedicated Talent",
@@ -144,8 +144,8 @@ export default function Services() {
         </div>
 
         {/* Bottom Trust & Assurance Badges */}
-        <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 rv-up gap-4 p-5 rounded-2xl bg-white border border-[#dce8f5] shadow-[0_8px_25px_rgba(0,114,188,0.06)]">
-          <div className="flex items-center gap-3">
+        <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 rv-up rv-stagger gap-4 p-5 rounded-2xl bg-white border border-[#dce8f5] shadow-[0_8px_25px_rgba(0,114,188,0.06)]">
+          <div className="flex items-center gap-3 rv-up stagger-1">
             <div className="w-10 h-10 rounded-xl bg-[#0072bc]/10 text-[#0072bc] flex items-center justify-center shrink-0">
               <ShieldCheck size={20} />
             </div>
@@ -155,7 +155,7 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 rv-up stagger-2">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center shrink-0">
               <Clock size={20} />
             </div>
@@ -165,7 +165,7 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 rv-up stagger-3">
             <div className="w-10 h-10 rounded-xl bg-[#7c3aed]/10 text-[#7c3aed] flex items-center justify-center shrink-0">
               <Award size={20} />
             </div>
@@ -175,7 +175,7 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 rv-up stagger-4">
             <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center shrink-0">
               <Sparkles size={20} />
             </div>

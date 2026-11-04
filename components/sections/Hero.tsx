@@ -4,10 +4,10 @@ export default function Hero() {
   return (
     <section id="hero" className="relative w-full overflow-hidden p-0 m-0" style={{ padding: 0, margin: 0 }}>
       <MetroHero
-        videoSrc="/assets/video/hero-video (4).mp4"
-        reverseVideoSrc="/assets/video/hero-video-reverse (4).mp4"
-        poster="/assets/video/hero-poster (4).jpg"
-        scrubDistance={1150}
+        videoSrc="/assets/video/hero4.mp4"
+        reverseVideoSrc="/assets/video/hero4-reverse.mp4"
+        poster="/assets/video/hero4-poster.jpg"
+        scrubDistance={1400}
       />
     </section>
   );

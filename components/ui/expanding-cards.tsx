@@ -105,8 +105,8 @@ export const ExpandingCards = React.forwardRef<
               className={cn(
                 "absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out",
                 isActive
-                  ? "scale-105 filter-none brightness-90"
-                  : "scale-115 grayscale contrast-125 brightness-45 group-hover:brightness-60"
+                  ? "scale-105 filter-none brightness-95"
+                  : "scale-110 brightness-75 group-hover:brightness-90 group-hover:scale-105"
               )}
             />
 
@@ -116,15 +116,15 @@ export const ExpandingCards = React.forwardRef<
               className={cn(
                 "absolute inset-0 transition-opacity duration-500 pointer-events-none",
                 isActive
-                  ? "bg-gradient-to-t from-black/85 via-black/40 to-transparent"
-                  : "bg-black/65 group-hover:bg-black/50"
+                  ? "bg-gradient-to-t from-black/55 via-black/18 to-transparent"
+                  : "bg-gradient-to-b from-black/55 via-black/35 to-black/60 group-hover:from-black/40 group-hover:to-black/50"
               )}
             />
 
             {/* 2. Side vignette for active card readability */}
             <div
               className={cn(
-                "absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent transition-opacity duration-500 pointer-events-none",
+                "absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent transition-opacity duration-500 pointer-events-none",
                 isActive ? "opacity-100" : "opacity-0"
               )}
             />
@@ -196,17 +196,20 @@ export const ExpandingCards = React.forwardRef<
             >
               {/* Refined Glassmorphism Panel with High-Contrast Opacity */}
               <div
-                className="mt-auto w-full rounded-2xl p-5 sm:p-6 transition-all duration-300 flex flex-col gap-3"
+                className="mt-auto w-full rounded-2xl p-5 sm:p-6 transition-all duration-300 flex flex-col gap-3 relative overflow-hidden"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(8, 14, 28, 0.88) 0%, rgba(4, 9, 20, 0.96) 100%)",
-                  backdropFilter: "blur(22px)",
-                  WebkitBackdropFilter: "blur(22px)",
-                  border: "1px solid rgba(255, 255, 255, 0.18)",
+                    "linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(10, 20, 38, 0.47) 45%, rgba(6, 12, 26, 0.67) 100%)",
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                  border: "1px solid rgba(255, 255, 255, 0.26)",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.45)",
                   boxShadow:
-                    "0 20px 50px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.22)",
+                    "0 25px 50px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 1px 0 rgba(255, 255, 255, 0.1)",
                 }}
               >
+                {/* Top frosted glass rim highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
                 {/* Active Icon & Category Badge */}
                 <div className="flex items-center gap-2.5">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-center shadow-md shrink-0">

@@ -7,7 +7,8 @@ import { clientRow1, clientRow2, ClientItem } from "@/lib/clients";
 function ClientCard({ client }: { client: ClientItem }) {
   return (
     <div
-      className="tech-marquee-box group relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_2px_10px_rgba(0,104,181,0.04)] transition-all duration-300 hover:border-[#0068B5]/60 hover:shadow-[0_0_25px_-2px_rgba(0,104,181,0.28),inset_0_0_12px_rgba(0,104,181,0.08)] hover:-translate-y-0.5"
+      className="client-marquee-box group"
+      style={{ "--accent": client.color || "#0068B5" } as React.CSSProperties}
       title={client.name}
     >
       <Image
@@ -15,7 +16,7 @@ function ClientCard({ client }: { client: ClientItem }) {
         alt={client.alt}
         width={140}
         height={60}
-        className="tech-marquee-logo transition-transform duration-300 group-hover:scale-105"
+        className="client-marquee-logo"
       />
     </div>
   );
@@ -35,27 +36,27 @@ export default function Clients() {
           Trusted by <em>leading organizations</em> across Bangladesh
         </SectionHeader>
 
-        {/* High-credibility Trust Stats Badges */}
-        <div className="client-trust-badges rv">
-          <div className="trust-pill">
+        {/* High-credibility Trust Stats Badges with dynamic directional entrance */}
+        <div className="client-trust-badges rv-stagger">
+          <div className="trust-pill rv-left stagger-1">
             <span className="trust-pill-icon">
               <Icon name="landmark" size={14} />
             </span>
             <span><strong>10+</strong> Government &amp; Public Entities</span>
           </div>
-          <div className="trust-pill">
+          <div className="trust-pill rv-left stagger-2">
             <span className="trust-pill-icon">
               <Icon name="building-2" size={14} />
             </span>
             <span><strong>40+</strong> Industrial &amp; Corporate Giants</span>
           </div>
-          <div className="trust-pill">
+          <div className="trust-pill rv-right stagger-3">
             <span className="trust-pill-icon">
               <Icon name="shield-check" size={14} />
             </span>
             <span><strong>100%</strong> Enterprise Reliability</span>
           </div>
-          <div className="trust-pill">
+          <div className="trust-pill rv-right stagger-4">
             <span className="trust-pill-icon">
               <Icon name="handshake" size={14} />
             </span>
@@ -65,7 +66,7 @@ export default function Clients() {
       </div>
 
       {/* Dual-Direction Infinite Logo Marquee matching screenshot */}
-      <div className="tech-marquee-wrapper rv" aria-label="Logos of organizations that use Suffix IT software">
+      <div className="tech-marquee-wrapper rv-zoom" aria-label="Logos of organizations that use Suffix IT software">
         {/* Row 1 - Left to Right flow */}
         <Marquee speed={32} pauseOnHover direction="left" className="tech-marquee-lane">
           {clientRow1.map((client, idx) => (

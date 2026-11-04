@@ -1,7 +1,9 @@
-import { whyPoints } from "@/lib/content";
-import WhyIllustration from "./WhyIllustration";
+// import { whyPoints } from "@/lib/content";
+// import WhyIllustration from "./WhyIllustration";
 
 export default function Why() {
+  return null;
+  /*
   return (
     <section id="why" className="py-14 md:py-20 lg:py-24 relative overflow-x-hidden">
       <div className="w max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 wg">
@@ -20,4 +22,5 @@ export default function Why() {
       </div>
     </section>
   );
+  */
 }
