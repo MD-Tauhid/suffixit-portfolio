@@ -30,7 +30,7 @@ const executives: ExecutiveContact[] = [
     phone: site.phone,
     phoneHref: site.phoneHref,
     email: "sales@suffixit.com",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80",
+    image: "/assets/images/executive-tanvir.jpg",
     availability: "Available for Scoping Calls",
   },
   {
@@ -40,7 +40,7 @@ const executives: ExecutiveContact[] = [
     phone: site.phone,
     phoneHref: site.phoneHref,
     email: "info@suffixit.com",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
+    image: "/assets/images/executive-rafsanul.jpg",
     availability: "Architecture & Tech Consult",
   },
 ];

@@ -306,7 +306,7 @@ export default function ContactPage() {
                   className="relative size-14 sm:size-16 rounded-full overflow-hidden shrink-0 ring-4 ring-[#0068B5]/20 group-hover:ring-[#0068B5]/40 transition-all shadow-xs"
                 >
                   <Image
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&auto=format&fit=crop&q=80"
+                    src="/assets/images/executive-tanvir.jpg"
                     alt="Lead Architect"
                     fill
                     unoptimized
