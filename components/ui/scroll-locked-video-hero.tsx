@@ -261,12 +261,12 @@ export default function MetroHero({
       try {
         const revTarget = Math.max(0.001, Math.min(VIDEO_DURATION, VIDEO_DURATION - current));
         vRev.currentTime = revTarget;
-      } catch {}
+      } catch { }
     } else if (activeSideRef.current === "rev" && vFwd) {
       try {
         const fwdTarget = Math.max(0.001, Math.min(VIDEO_DURATION, current));
         vFwd.currentTime = fwdTarget;
-      } catch {}
+      } catch { }
     }
   }, []);
 
@@ -291,12 +291,12 @@ export default function MetroHero({
       if (vFwd && !vFwd.paused) {
         try {
           vFwd.playbackRate = smoothSpeed;
-        } catch {}
+        } catch { }
       }
       if (vRev && !vRev.paused) {
         try {
           vRev.playbackRate = smoothSpeed;
-        } catch {}
+        } catch { }
       }
 
       // Calculate forward normalized timestamp
@@ -377,7 +377,7 @@ export default function MetroHero({
         if (Math.abs(vFwd.currentTime - targetFwd) > 0.06) {
           try {
             vFwd.currentTime = targetFwd;
-          } catch {}
+          } catch { }
 
           const onFwdSeeked = () => {
             vFwd.removeEventListener("seeked", onFwdSeeked);
@@ -386,7 +386,7 @@ export default function MetroHero({
             vFwd.muted = true;
             vFwd.playbackRate = speed;
             const p = vFwd.play();
-            if (p !== undefined) p.catch(() => {});
+            if (p !== undefined) p.catch(() => { });
             isPlayingRef.current = true;
             setIsPlaying(true);
             startRafTracker();
@@ -403,7 +403,7 @@ export default function MetroHero({
       vFwd.playbackRate = speed;
       if (vFwd.paused) {
         const p = vFwd.play();
-        if (p !== undefined) p.catch(() => {});
+        if (p !== undefined) p.catch(() => { });
       }
 
       isPlayingRef.current = true;
@@ -437,7 +437,7 @@ export default function MetroHero({
           if (Math.abs(vRev.currentTime - targetRev) > 0.06) {
             try {
               vRev.currentTime = targetRev;
-            } catch {}
+            } catch { }
 
             const onRevSeeked = () => {
               vRev.removeEventListener("seeked", onRevSeeked);
@@ -446,7 +446,7 @@ export default function MetroHero({
               vRev.muted = true;
               vRev.playbackRate = speed;
               const p = vRev.play();
-              if (p !== undefined) p.catch(() => {});
+              if (p !== undefined) p.catch(() => { });
               isPlayingRef.current = true;
               setIsPlaying(true);
               startRafTracker();
@@ -463,7 +463,7 @@ export default function MetroHero({
         vRev.playbackRate = speed;
         if (vRev.paused) {
           const p = vRev.play();
-          if (p !== undefined) p.catch(() => {});
+          if (p !== undefined) p.catch(() => { });
         }
 
         isPlayingRef.current = true;
@@ -476,7 +476,7 @@ export default function MetroHero({
             vFwd.currentTime = Math.max(0.001, vFwd.currentTime - 0.12);
             currentTimeRef.current = vFwd.currentTime;
             setCurrentTime(vFwd.currentTime);
-          } catch {}
+          } catch { }
         }
       }
     },
@@ -639,13 +639,13 @@ export default function MetroHero({
       if (vFwd.currentTime === 0) {
         try {
           vFwd.currentTime = 0.001;
-        } catch {}
+        } catch { }
       }
       if (vRev && vRev.currentTime === 0) {
         try {
           // Pre-seek reverse video to match frame 0 (Foundation Pedestal)
           vRev.currentTime = VIDEO_DURATION - 0.001;
-        } catch {}
+        } catch { }
       }
     };
 
@@ -661,7 +661,7 @@ export default function MetroHero({
     } else {
       try {
         vFwd.currentTime = 0.001;
-      } catch {}
+      } catch { }
     }
 
     // Lock page on initial load if at top of page
@@ -844,9 +844,8 @@ export default function MetroHero({
 
       {/* Tech Grid Backdrop Pattern for Initial Hero Stage */}
       <div
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
-          heroStage === "hero-intro" ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${heroStage === "hero-intro" ? "opacity-100" : "opacity-0"
+          }`}
         style={{
           backgroundImage: "radial-gradient(rgba(0, 114, 188, 0.12) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
@@ -860,33 +859,31 @@ export default function MetroHero({
           - Dissolves when switching to active video stage
          ──────────────────────────────────────────────────────── */}
       <div
-        className={`absolute pointer-events-none z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          heroStage === "video" ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`absolute pointer-events-none z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${heroStage === "video" ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
         style={
           heroStage === "hero-intro"
             ? {
-                // Initial Hero state: compact, balanced right position with ambient float
-                top: PROCESSOR_CONFIG.heroTop,
-                left: PROCESSOR_CONFIG.heroLeft,
-                transform: `translate(-50%, -50%) scale(${PROCESSOR_CONFIG.heroScale || 0.68})`,
-              }
+              // Initial Hero state: compact, balanced right position with ambient float
+              top: PROCESSOR_CONFIG.heroTop,
+              left: PROCESSOR_CONFIG.heroLeft,
+              transform: `translate(-50%, -50%) scale(${PROCESSOR_CONFIG.heroScale || 0.68})`,
+            }
             : {
-                // Docked state: centered on top of the 3-tiered pedestal
-                top: PROCESSOR_CONFIG.top,
-                left: PROCESSOR_CONFIG.left,
-                transform: `translate(-50%, -50%) translate(${PROCESSOR_CONFIG.offsetX}, ${PROCESSOR_CONFIG.offsetY}) scale(${PROCESSOR_CONFIG.scale || 1.0})`,
-              }
+              // Docked state: centered on top of the 3-tiered pedestal
+              top: PROCESSOR_CONFIG.top,
+              left: PROCESSOR_CONFIG.left,
+              transform: `translate(-50%, -50%) translate(${PROCESSOR_CONFIG.offsetX}, ${PROCESSOR_CONFIG.offsetY}) scale(${PROCESSOR_CONFIG.scale || 1.0})`,
+            }
         }
       >
         <div
-          className={`relative transition-transform duration-500 ${
-            heroStage === "hero-intro"
+          className={`relative transition-transform duration-500 ${heroStage === "hero-intro"
               ? "animate-processor-float-hero"
               : heroStage === "docked"
-              ? "animate-processor-float-docked"
-              : ""
-          }`}
+                ? "animate-processor-float-docked"
+                : ""
+            }`}
         >
           {/* Ambient Sapphire Glow */}
           <div className="absolute -inset-10 bg-gradient-to-tr from-[#0072bc]/35 via-[#38bdf8]/25 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -916,11 +913,10 @@ export default function MetroHero({
 
           {/* Floating Telemetry Enterprise Widgets (Visible in Intro Hero) */}
           <div
-            className={`transition-all duration-500 ${
-              heroStage === "hero-intro"
+            className={`transition-all duration-500 ${heroStage === "hero-intro"
                 ? "opacity-100 scale-100"
                 : "opacity-0 scale-90 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Top-Left Telemetry Card */}
             <div className="hidden lg:flex absolute -top-8 -left-20 items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_12px_32px_rgba(0,114,188,0.14)]">
@@ -964,11 +960,10 @@ export default function MetroHero({
           STAGE 0: WORLD-CLASS ENTERPRISE HERO CONTENT
          ──────────────────────────────────────────────────────── */}
       <div
-        className={`absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto transition-all duration-600 ease-out pointer-events-none ${
-          heroStage === "hero-intro"
+        className={`absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-12 lg:px-20 max-w-7xl mx-auto transition-all duration-600 ease-out pointer-events-none ${heroStage === "hero-intro"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-8 pointer-events-none"
-        }`}
+          }`}
       >
         <div className="max-w-xl lg:max-w-2xl text-left pointer-events-auto">
           {/* Executive Pill */}
@@ -1032,9 +1027,8 @@ export default function MetroHero({
           - Smoothly reveals when transitioning to docked/video
          ──────────────────────────────────────────────────────── */}
       <div
-        className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ease-out ${
-          heroStage === "hero-intro" ? "opacity-0 z-0" : "opacity-100 z-5"
-        }`}
+        className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ease-out ${heroStage === "hero-intro" ? "opacity-0 z-0" : "opacity-100 z-5"
+          }`}
       >
         {/* Forward Video */}
         <video
@@ -1044,9 +1038,8 @@ export default function MetroHero({
           muted
           playsInline
           preload="auto"
-          className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
-            activeSide === "fwd" ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${activeSide === "fwd" ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
           style={{
             transform: "translate3d(0, 0, 0)",
             willChange: "transform, opacity",
@@ -1061,9 +1054,8 @@ export default function MetroHero({
           muted
           playsInline
           preload="auto"
-          className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
-            activeSide === "rev" ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${activeSide === "rev" ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
           style={{
             transform: "translate3d(0, 0, 0)",
             willChange: "transform, opacity",
@@ -1142,11 +1134,10 @@ export default function MetroHero({
         <>
           {/* CARD 1: TIMESTAMP 1 (0.0s / Docked Pedestal Stage) - Slides in from outside LEFT */}
           <div
-            className={`absolute top-4 sm:top-12 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-lg z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
-              heroStage === "docked" || currentMilestone === 0
+            className={`absolute top-4 sm:top-12 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-lg z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${heroStage === "docked" || currentMilestone === 0
                 ? "opacity-100 translate-x-0 scale-100 pointer-events-auto"
                 : "opacity-0 -translate-x-[calc(100%+160px)] scale-95 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Liquid Glass Card */}
             <div
@@ -1160,8 +1151,8 @@ export default function MetroHero({
               <div
                 className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none"
                 style={{
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
                   filter: "url(#glass-distortion)",
                   isolation: "isolate",
                 }}
@@ -1170,7 +1161,7 @@ export default function MetroHero({
               {/* Glass Layer 2: Translucent Tint (28% white) */}
               <div
                 className="absolute inset-0 z-10 rounded-3xl pointer-events-none"
-                style={{ background: "rgba(255, 255, 255, 0.28)" }}
+                style={{ background: "rgba(255, 255, 255, 0.58)" }}
               />
 
               {/* Glass Layer 3: Dual Inset Specular Beveled Glass Rim */}
@@ -1218,16 +1209,15 @@ export default function MetroHero({
                   </button>
                   <div className="flex items-center gap-2 text-[11px] text-[#334155] font-bold">
                     <span
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        isPlaying ? "bg-[#0072bc] animate-ping" : "bg-emerald-500"
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-colors ${isPlaying ? "bg-[#0072bc] animate-ping" : "bg-emerald-500"
+                        }`}
                     />
                     <span>
                       {isPlaying
                         ? `Playing (${speedMode === "more-fast" ? "4.0x Turbo" : speedMode === "fast" ? "3.0x Fast" : "2.0x"})`
                         : heroStage === "docked"
-                        ? "Scroll down to start video walkthrough ↓"
-                        : "Scroll down to advance ↓"}
+                          ? "Scroll down to start video walkthrough ↓"
+                          : "Scroll down to advance ↓"}
                     </span>
                   </div>
                 </div>
@@ -1237,11 +1227,10 @@ export default function MetroHero({
 
           {/* CARD 2: TIMESTAMP 2 (2.0s) - Slides in from outside RIGHT */}
           <div
-            className={`absolute top-4 sm:top-12 right-4 sm:right-10 lg:right-16 left-4 sm:left-auto max-w-md z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
-              heroStage === "video" && currentMilestone === 1
+            className={`absolute top-4 sm:top-12 right-4 sm:right-10 lg:right-16 left-4 sm:left-auto max-w-md z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${heroStage === "video" && currentMilestone === 1
                 ? "opacity-100 translate-x-0 scale-100 pointer-events-auto"
                 : "opacity-0 translate-x-[calc(100%+160px)] scale-95 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Liquid Glass Card */}
             <div
@@ -1255,8 +1244,8 @@ export default function MetroHero({
               <div
                 className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none"
                 style={{
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
                   filter: "url(#glass-distortion)",
                   isolation: "isolate",
                 }}
@@ -1265,7 +1254,7 @@ export default function MetroHero({
               {/* Glass Layer 2: Translucent Tint */}
               <div
                 className="absolute inset-0 z-10 rounded-3xl pointer-events-none"
-                style={{ background: "rgba(255, 255, 255, 0.28)" }}
+                style={{ background: "rgba(255, 255, 255, 0.58)" }}
               />
 
               {/* Glass Layer 3: Dual Inset Specular Beveled Glass Rim */}
@@ -1335,11 +1324,10 @@ export default function MetroHero({
 
           {/* CARD 3: TIMESTAMP 3 (4.8s) - Slides in from outside BOTTOM-LEFT */}
           <div
-            className={`absolute bottom-16 sm:bottom-20 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-md z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
-              heroStage === "video" && currentMilestone === 2
+            className={`absolute bottom-16 sm:bottom-20 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-md z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${heroStage === "video" && currentMilestone === 2
                 ? "opacity-100 translate-x-0 translate-y-0 scale-100 pointer-events-auto"
                 : "opacity-0 -translate-x-[calc(100%+120px)] translate-y-[calc(100%+120px)] scale-95 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Liquid Glass Card */}
             <div
@@ -1353,8 +1341,8 @@ export default function MetroHero({
               <div
                 className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none"
                 style={{
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
                   filter: "url(#glass-distortion)",
                   isolation: "isolate",
                 }}
@@ -1363,7 +1351,7 @@ export default function MetroHero({
               {/* Glass Layer 2: Translucent Tint */}
               <div
                 className="absolute inset-0 z-10 rounded-3xl pointer-events-none"
-                style={{ background: "rgba(255, 255, 255, 0.28)" }}
+                style={{ background: "rgba(255, 255, 255, 0.58)" }}
               />
 
               {/* Glass Layer 3: Dual Inset Specular Beveled Glass Rim */}
@@ -1433,11 +1421,10 @@ export default function MetroHero({
 
           {/* CARD 4: TIMESTAMP 4 (7.4s) - Slides in from outside TOP */}
           <div
-            className={`absolute top-4 sm:top-10 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-lg z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
-              heroStage === "video" && currentMilestone === 3
+            className={`absolute top-4 sm:top-10 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-lg z-20 transition-all duration-[850ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${heroStage === "video" && currentMilestone === 3
                 ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
                 : "opacity-0 -translate-y-[calc(100%+160px)] scale-95 pointer-events-none"
-            }`}
+              }`}
           >
             {/* Liquid Glass Card */}
             <div
@@ -1451,8 +1438,8 @@ export default function MetroHero({
               <div
                 className="absolute inset-0 z-0 overflow-hidden rounded-3xl pointer-events-none"
                 style={{
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
                   filter: "url(#glass-distortion)",
                   isolation: "isolate",
                 }}
@@ -1461,7 +1448,7 @@ export default function MetroHero({
               {/* Glass Layer 2: Translucent Tint */}
               <div
                 className="absolute inset-0 z-10 rounded-3xl pointer-events-none"
-                style={{ background: "rgba(255, 255, 255, 0.28)" }}
+                style={{ background: "rgba(255, 255, 255, 0.58)" }}
               />
 
               {/* Glass Layer 3: Dual Inset Specular Beveled Glass Rim */}
@@ -1551,20 +1538,18 @@ export default function MetroHero({
                   key={ch.id}
                   type="button"
                   onClick={() => navigateToChapter(ch.id)}
-                  className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                    (heroStage === "docked" && ch.id === 0) ||
-                    (heroStage === "video" && currentMilestone === ch.id)
+                  className={`group flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${(heroStage === "docked" && ch.id === 0) ||
+                      (heroStage === "video" && currentMilestone === ch.id)
                       ? "bg-[#0072bc] text-white shadow-md shadow-[#0072bc]/25 scale-105"
                       : "text-[#515978] hover:text-[#0072bc] hover:bg-white/70"
-                  }`}
+                    }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                      (heroStage === "docked" && ch.id === 0) ||
-                      (heroStage === "video" && currentMilestone === ch.id)
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${(heroStage === "docked" && ch.id === 0) ||
+                        (heroStage === "video" && currentMilestone === ch.id)
                         ? "bg-white"
                         : "bg-[#9db1c7] group-hover:bg-[#0072bc]"
-                    }`}
+                      }`}
                   />
                   <span className="hidden sm:inline">{ch.label}</span>
                   <span className="sm:hidden">{ch.id + 1}</span>
