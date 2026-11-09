@@ -1,4 +1,5 @@
 import Icon from "@/components/ui/Icon";
+import Link from "next/link";
 import FooterBadges from "./FooterBadges";
 import { TextHoverEffect } from "@/components/ui/TextHoverEffect";
 import { site } from "@/lib/site";
@@ -15,7 +16,7 @@ export default function Footer() {
         <div className="ft-main-grid">
           {/* Column 1: Brand Info */}
           <div className="ft-col ft-col-brand">
-            <a href="#" className="ft-brand-header">
+            <Link href="/" className="ft-brand-header">
               <img
                 src="/assets/img/Suffix-Logo-Dark.png"
                 alt="Suffix IT ultimate solutions"
@@ -24,7 +25,7 @@ export default function Footer() {
                 className="ft-logo-dark"
                 style={{ objectFit: "contain", height: "auto", maxWidth: "185px" }}
               />
-            </a>
+            </Link>
 
             <p className="ft-brand-text">
               We maintain strategic partnerships with multiple organizations in Bangladesh and worldwide, working together to deliver high-quality solutions and long-term value.
@@ -89,9 +90,9 @@ export default function Footer() {
           <div className="ft-col ft-col-links">
             <h4 className="ft-title">QUICK LINKS</h4>
             <ul className="ft-quick-links">
-              <li><a href="#why">About Us</a></li>
-              <li><a href="#contact">Career</a></li>
-              <li><a href="#contact">Contact Us</a></li>
+              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/about#careers">Career</Link></li>
+              <li><Link href="/contact">Contact Us</Link></li>
             </ul>
           </div>
 

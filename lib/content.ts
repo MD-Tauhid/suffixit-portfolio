@@ -27,13 +27,13 @@ export const productMenu: Link[] = [
 ];
 
 export const mobileMenu: Link[] = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#why" },
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
-  { label: "Field Force", href: "#fieldforce" },
-  { label: "Clients", href: "#clients" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/#services" },
+  { label: "Products", href: "/#products" },
+  { label: "Field Force", href: "/#fieldforce" },
+  { label: "Clients", href: "/#clients" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const stats = [
@@ -119,7 +119,7 @@ export const certifications = [
 export const footerColumns: { title: string; links: Link[] }[] = [
   { title: "Products", links: [{ label: "Field Force", href: "#fieldforce" }, { label: "Rupantar HCM", href: "#products" }, { label: "Rupantar ERP", href: "#products" }, { label: "E-commerce", href: "#products" }, { label: "Smart POS", href: "#products" }] },
   { title: "Services", links: [{ label: "Custom Software", href: "#services" }, { label: "Mobile Apps", href: "#services" }, { label: "IoT Solutions", href: "#services" }, { label: "Hosting & Cloud", href: "#services" }, { label: "SEO", href: "#services" }] },
-  { title: "Company", links: [{ label: "About Us", href: "#why" }, { label: "Clients", href: "#clients" }, { label: "How we work", href: "#process" }, { label: "FAQ", href: "#faq" }, { label: "Contact", href: "#contact" }] },
+  { title: "Company", links: [{ label: "About Us", href: "/about" }, { label: "Clients", href: "#clients" }, { label: "How we work", href: "#process" }, { label: "FAQ", href: "#faq" }, { label: "Contact", href: "#contact" }] },
 ];
 
 export const socials = [

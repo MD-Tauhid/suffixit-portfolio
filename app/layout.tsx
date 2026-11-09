@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { site, siteUrl } from "@/lib/site";
+import RouteScrollReset from "@/components/animations/RouteScrollReset";
 
 // Self-hosted copies of the original Google Fonts (Plus Jakarta Sans 400-800, Instrument Serif italic).
 const jakarta = localFont({
@@ -52,7 +53,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${jakarta.variable} ${serif.variable}`}>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning><RouteScrollReset />{children}</body>
     </html>
   );
 }
