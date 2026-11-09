@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import PageEffects from "@/components/animations/PageEffects";
 import JsonLd from "@/components/layout/JsonLd";
-import Hero from "@/components/sections/Hero";
+import Hero, { VideoHero } from "@/components/sections/Hero";
 import Stats from "@/components/sections/Stats";
 import Clients from "@/components/sections/Clients";
 import Products from "@/components/sections/Products";
@@ -25,8 +25,12 @@ export default function HomePage() {
       <ScrollProgress />
       <Header />
       <main id="main">
-        {/* 1. Hero Section */}
+        {/* 1. Hero Section:
+            - Classic 4th-commit Hero active rakhle: <Hero />
+            - Video Hero active korte chaile: <Hero /> comment kore <VideoHero /> un-comment korun
+        */}
         <Hero />
+        {/* <VideoHero /> */}
         <Stats />
 
         {/* 2. Client Logos Section */}
