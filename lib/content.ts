@@ -29,8 +29,8 @@ export const productMenu: Link[] = [
 export const mobileMenu: Link[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Services", href: "/#services" },
-  { label: "Products", href: "/#products" },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
   { label: "Field Force", href: "/#fieldforce" },
   { label: "Clients", href: "/#clients" },
   { label: "Contact", href: "/contact" },

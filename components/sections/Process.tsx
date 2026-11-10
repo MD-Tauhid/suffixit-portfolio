@@ -1,5 +1,6 @@
 'use client';
 
+import { servicePalette } from "@/lib/service-palette";
 import SectionHeader from "./SectionHeader";
 import StackingCard, { ProjectData } from "@/components/ui/stacking-card";
 
@@ -26,7 +27,7 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "SRS Specification · Tech Architecture · Sprint Roadmap",
     link: "/assets/process/understand.jpg",
-    color: "#e8f3fc",
+    color: servicePalette.blue,
     accentColor: "#0072bc",
   },
   {
@@ -51,7 +52,7 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Figma Prototype · Component Library · UX Validation Report",
     link: "/assets/process/design.jpg",
-    color: "#ede8fa",
+    color: servicePalette.lavender,
     accentColor: "#7c3aed",
   },
   {
@@ -76,7 +77,7 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Production Codebase · Test Coverage Reports · Staging Environment",
     link: "/assets/process/build.jpg",
-    color: "#def2eb",
+    color: servicePalette.mint,
     accentColor: "#0d9488",
   },
   {
@@ -101,7 +102,7 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Live Production Release · User & Admin Manuals · Ongoing SLA Support",
     link: "/assets/process/launch.jpg",
-    color: "#def0fb",
+    color: servicePalette.sky,
     accentColor: "#0284c7",
   },
 ];

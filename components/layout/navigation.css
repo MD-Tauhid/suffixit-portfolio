@@ -1,0 +1,4 @@
+.site-header a:focus-visible { outline: 2px solid var(--br); outline-offset: 3px; }
+.site-nav-panel { animation: site-nav-enter 200ms cubic-bezier(.23,1,.32,1); }
+@keyframes site-nav-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .site-nav-panel { animation: none; } }

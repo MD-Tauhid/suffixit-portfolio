@@ -1,0 +1,17 @@
+/* Surface colours come exclusively from Home's How we work palette. */
+.service-page h1, .service-page h2, .service-page h3 { margin-bottom: 0; }
+.service-page details > summary { list-style: none; }
+.service-page details > summary::-webkit-details-marker { display: none; }
+.service-page details[open] > summary svg { transform: rotate(45deg); }
+.service-page a:focus-visible, .service-page summary:focus-visible { outline: 2px solid var(--br); outline-offset: 5px; }
+.service-accordion[data-state="open"] { animation: service-expand 240ms cubic-bezier(.23,1,.32,1); }
+.service-accordion[data-state="closed"] { animation: service-collapse 200ms cubic-bezier(.23,1,.32,1); }
+@keyframes service-expand { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes service-collapse { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+.service-preview-enter { animation: service-preview-in 350ms cubic-bezier(.23,1,.32,1); }
+@keyframes service-preview-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .service-preview-enter { animation: none; }
+  .service-accordion { animation: none !important; }
+  .service-page [data-service-process] { position: relative; top: auto !important; }
+}
