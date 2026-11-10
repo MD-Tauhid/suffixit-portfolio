@@ -1,0 +1,522 @@
+# About page content sources
+
+Collected 9 November 2026 with the connected REA browser scenario provider. The public site was rendered in a temporary headless Chrome session; no forms were submitted. REA was already connected and operational; no MCP configuration or engine installation was needed.
+
+## Editorial policy
+
+Copy is adapted from the company’s published information. Creative headings are editorial copy, not additional factual claims. Images under `public/assets/about/` are local Unsplash stock photography, explicitly marked as illustrative previews, not Suffix IT office/team photographs. Replace the `about.images` entries in `lib/about.ts` with supplied photographs later. Team illustrations are anonymous placeholders, not employee portraits.
+
+Temporary photography sources (downloaded locally, not runtime dependencies):
+- workspace: https://images.unsplash.com/photo-1521737711867-e3b97375f902
+- collaboration: https://images.unsplash.com/photo-1522071820081-009f0129c71c
+- culture: https://images.unsplash.com/photo-1517245386807-bb43f82c33c4
+- design: https://images.unsplash.com/photo-1552664730-d307ca884978
+
+- Home: https://www.suffixit.com/ — software work since 2017; client-focused approach; skilled engineers; timely, within-budget delivery; 24/7 support; software/product/service offerings; ISO 9001, ISO 27001, ISO 20000, BASIS and BACCO badges.
+- About: https://www.suffixit.com/about — history, services, global outlook, mission and vision.
+- Career: https://www.suffixit.com/career — external careers destination. A role was listed when captured, but no job or opening count is hardcoded here because availability may change.
+
+Individual employee names, departmental headcounts, awards, revenue, retention and growth percentages were not available in these pages and have not been invented. The requested awards section is represented as Recognition & standards using the badges actually displayed on the site. Badge presence is evidence of the published claim, not independent certification validation. Staff profiles await user-supplied details; the people section currently presents disciplines supported by the published service offerings.
+
+## Captured evidence
+
+### https://www.suffixit.com/
+
+Evidence ID: ev_949a173b197bb64ba4cb2c5353f48be0d25cbc48d7971b63d028c381fdddcba9
+
+```text
+- document:
+  - navigation:
+    - link "logo":
+      - /url: /
+      - img "logo"
+    - list:
+      - listitem:
+        - link "Home":
+          - /url: /
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "Products":
+          - /url: /!
+      - listitem:
+        - link "IoT":
+          - /url: /!
+      - listitem:
+        - link "Services":
+          - /url: /!
+      - listitem:
+        - link "Career":
+          - /url: /career
+    - button "Contact"
+  - heading "We care about the IT Solution you need" [level=1]
+  - paragraph: Suffix IT provides best and prominent Software & Hardware solutions to ensure your business
+  - link "Let's Explore":
+    - /url: "#WhyChooseUs"
+    - button "Let's Explore"
+  - button "demo":
+    - img "demo"
+  - img "hero hero-it-solution"
+  - img "dot"
+  - img "dot"
+  - img "filedManagement"
+  - heading "Why Choose Us" [level=5]
+  - heading "We are working with 9+ years experience" [level=2]
+  - paragraph: We consist of a great team of professional and highly skilled engineers with excellent technical knowledge and experience for developing quality software.
+  - img "pie"
+  - text: Client Focused
+  - img "team"
+  - text: Next Gen Technology Provider
+  - list:
+    - listitem:  24/7 support service
+    - listitem:  On-time Delivery
+    - listitem:  Within Budget
+  - list:
+    - listitem:  Creating ideas with passion
+    - listitem:  Assure best quality
+    - listitem:  Solution for revolution
+  - link "Learn More ":
+    - /url: "#our-company"
+    - button "Learn More "
+  - heading "Our Company" [level=1]:
+    - strong: Our Company
+  - paragraph: At Suffix IT, we develop innovative and creative products and services that provide total communication and information solutions. Satisfied clients around the globe bear testimony to the quality of our work.
+  - img "payroll"
+  - paragraph: Team Of Highly Experienced Professionals
+  - img "payroll"
+  - paragraph: Working In Software Industry Since 2017
+  - img "payroll"
+  - paragraph: We Dream Big and Win Together
+  - heading "We are working with Field Force Management" [level=1]
+  - list:
+    - text: 
+    - listitem: Invoice and Payment
+    - text: 
+    - listitem: Live Tracking
+    - text: 
+    - listitem: Task Management
+    - text: 
+    - listitem: Attendance Management
+  - list:
+    - text: 
+    - listitem: Expense Management
+    - text: 
+    - listitem: Chat and Collaboration
+    - text: 
+    - listitem: Offline data synchronization
+  - link "View More Details":
+    - /url: /product/field-force-management
+    - button "View More Details"
+  - img "filedManagement"
+  - heading "Our Call Center Service" [level=1]:
+    - strong: Our Call Center Service
+  - paragraph: We never say no to anything! We are here for all your needs. All you have to do is tell.
+  - img
+  - heading "Inbound Call" [level=2]
+  - paragraph: Dedicated and hardworking agents who are working tirelessly to answer all queries about your company.
+  - img
+  - heading "Outbound Call" [level=2]
+  - paragraph: Let customers know about your products/services via our charming agents.
+  - img
+  - heading "Live Chat Support" [level=2]
+  - paragraph: Group of smart and charismatic agents are always online to provide live chat services.
+  - link "More Info ":
+    - /url: http://suffixcallcenter.com/
+  - heading "Our Services" [level=1]:
+    - strong: Our Services
+  - paragraph: As a leader in technology exploring, Suffix IT is committed to exporting quality software worldwide..
+  - text: 
+  - paragraph: Domain & Hosting
+  - paragraph: Database backup and storage provides centrally controlled protection, security of enterprise and reduces the possibility...
+  - link:
+    - /url: /service/domain-hosting
+  - text: 
+  - paragraph: ERP Consulting
+  - paragraph: We provide IT consulting services which includes project management. Rupantor’s General...
+  - link:
+    - /url: /service/erp-consulting
+  - text: 
+  - paragraph: Web & E-Commerce
+  - paragraph: We have helped corporations within and across the boundaries by launching successfully e-business solutions...
+  - link:
+    - /url: /service/web-ecommerce
+  - text: 
+  - paragraph: Custom Applications
+  - paragraph: We work with clients to assess their unique needs in a discovery phase, define a realistic project scope...
+  - link:
+    - /url: /service/custom-applications
+  - text: 
+  - paragraph: Video Conferencing
+  - paragraph: The Suffix Video Conferencing Platform allows students to share their audio, images, chat...
+  - link:
+    - /url: /service/video-conferencing
+  - text: 
+  - paragraph: Mobile Apps
+  - paragraph: Get an enterprise digital assistant equipped with a long array of screen sizes, user- friendly interface...
+  - link:
+    - /url: /service/mobile-apps
+  - text: 
+  - paragraph: Hospital Management
+  - paragraph: Suffix Hospital Management System has a user interface that is very easy and quick to use, and that suits...
+  - link:
+    - /url: /service/hospital-management
+  - text: 
+  - paragraph: Learning Management
+  - paragraph: It's time to make a decision and find out what sort of LMS would be the best choice for you...
+  - link:
+    - /url: /service/learning-management
+  - text: 
+  - paragraph: Storage & Backup
+  - paragraph: Database backup and storage provides centrally controlled protection, security of enterprise and...
+  - link:
+    - /url: /service/storage-backup
+  - heading "Our Products" [level=1]:
+    - strong: Our Products
+  - paragraph: We offer a diverse spectrum of products for your specific company requirements. We implement rigorous quality testing as a technologically process-driven firm to assure seamless, round-the-clock, and global performance. We are very much enthusiastic about developing innovative software solutions merging with the current technological advancement.
+  - link "Payroll System Suffix Payroll will help you to automate and streamline all of your HR services":
+    - /url: /product/payroll-system
+    - heading "Payroll System" [level=2]
+    - paragraph: Suffix Payroll will help you to automate and streamline all of your HR services
+  - link "Interconnect Billing It will allow business optimization and help in achieving increased operational efficiency and network profitability":
+    - /url: /product/interconnect-billing
+    - heading "Interconnect Billing" [level=2]
+    - paragraph: It will allow business optimization and help in achieving increased operational efficiency and network profitability
+  - link "E-Commerce We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.":
+    - /url: /product/e-commerce
+    - heading "E-Commerce" [level=2]
+    - paragraph: We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.
+  - link "Rupantor ERP Rupantor ERP will integrate all of the processes needed to run your business.":
+    - /url: /product/rupantor-erp
+    - heading "Rupantor ERP" [level=2]
+    - paragraph: Rupantor ERP will integrate all of the processes needed to run your business.
+  - link "Provident Fund An advanced way to handle your employee’s funding management with our PF Software.":
+    - /url: /product/provident-fund
+    - heading "Provident Fund" [level=2]
+    - paragraph: An advanced way to handle your employee’s funding management with our PF Software.
+  - link "Hotel Booking System We provide the cloud based most user friendly and cost effective hotel booking management system.":
+    - /url: /product/hotel-booking-system
+    - heading "Hotel Booking System" [level=2]
+    - paragraph: We provide the cloud based most user friendly and cost effective hotel booking management system.
+  - link "Rupantor Inventory Our Inventory Management system will manage your cash flow, reduce cost and maximize profits":
+    - /url: /product/rupantor-inventory
+    - heading "Rupantor Inventory" [level=2]
+    - paragraph: Our Inventory Management system will manage your cash flow, reduce cost and maximize profits
+  - link "Field Force Management With Suffix Field force you can move a lot faster and keep adapting to your customers needs.":
+    - /url: /product/field-force-management
+    - heading "Field Force Management" [level=2]
+    - paragraph: With Suffix Field force you can move a lot faster and keep adapting to your customers needs.
+  - link "Payroll System Suffix Payroll will help you to automate and streamline all of your HR services":
+    - /url: /product/payroll-system
+    - heading "Payroll System" [level=2]
+    - paragraph: Suffix Payroll will help you to automate and streamline all of your HR services
+  - link "Interconnect Billing It will allow business optimization and help in achieving increased operational efficiency and network profitability":
+    - /url: /product/interconnect-billing
+    - heading "Interconnect Billing" [level=2]
+    - paragraph: It will allow business optimization and help in achieving increased operational efficiency and network profitability
+  - link "E-Commerce We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.":
+    - /url: /product/e-commerce
+    - heading "E-Commerce" [level=2]
+    - paragraph: We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.
+  - link "Rupantor ERP Rupantor ERP will integrate all of the processes needed to run your business.":
+    - /url: /product/rupantor-erp
+    - heading "Rupantor ERP" [level=2]
+    - paragraph: Rupantor ERP will integrate all of the processes needed to run your business.
+  - link "Provident Fund An advanced way to handle your employee’s funding management with our PF Software.":
+    - /url: /product/provident-fund
+    - heading "Provident Fund" [level=2]
+    - paragraph: An advanced way to handle your employee’s funding management with our PF Software.
+  - link "Hotel Booking System We provide the cloud based most user friendly and cost effective hotel booking management system.":
+    - /url: /product/hotel-booking-system
+    - heading "Hotel Booking System" [level=2]
+    - paragraph: We provide the cloud based most user friendly and cost effective hotel booking management system.
+  - link "Rupantor Inventory Our Inventory Management system will manage your cash flow, reduce cost and maximize profits":
+    - /url: /product/rupantor-inventory
+    - heading "Rupantor Inventory" [level=2]
+    - paragraph: Our Inventory Management system will manage your cash flow, reduce cost and maximize profits
+  - link "Field Force Management With Suffix Field force you can move a lot faster and keep adapting to your customers needs.":
+    - /url: /product/field-force-management
+    - heading "Field Force Management" [level=2]
+    - paragraph: With Suffix Field force you can move a lot faster and keep adapting to your customers needs.
+  - link "Payroll System Suffix Payroll will help you to automate and streamline all of your HR services":
+    - /url: /product/payroll-system
+    - heading "Payroll System" [level=2]
+    - paragraph: Suffix Payroll will help you to automate and streamline all of your HR services
+  - link "Interconnect Billing It will allow business optimization and help in achieving increased operational efficiency and network profitability":
+    - /url: /product/interconnect-billing
+    - heading "Interconnect Billing" [level=2]
+    - paragraph: It will allow business optimization and help in achieving increased operational efficiency and network profitability
+  - link "E-Commerce We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.":
+    - /url: /product/e-commerce
+    - heading "E-Commerce" [level=2]
+    - paragraph: We offer full-cycle retail and e-commerce app solutions to both B2B and B2C customers, based on their specific requirements.
+  - link "Rupantor ERP Rupantor ERP will integrate all of the processes needed to run your business.":
+    - /url: /product/rupantor-erp
+    - heading "Rupantor ERP" [level=2]
+    - paragraph: Rupantor ERP will integrate all of the processes needed to run your business.
+  - link "Provident Fund An advanced way to handle your employee’s funding management with our PF Software.":
+    - /url: /product/provident-fund
+    - heading "Provident Fund" [level=2]
+    - paragraph: An advanced way to handle your employee’s funding management with our PF Software.
+  - link "Hotel Booking System We provide the cloud based most user friendly and cost effective hotel booking management system.":
+    - /url: /product/hotel-booking-system
+    - heading "Hotel Booking System" [level=2]
+    - paragraph: We provide the cloud based most user friendly and cost effective hotel booking management system.
+  - link "Rupantor Inventory Our Inventory Management system will manage your cash flow, reduce cost and maximize profits":
+    - /url: /product/rupantor-inventory
+    - heading "Rupantor Inventory" [level=2]
+    - paragraph: Our Inventory Management system will manage your cash flow, reduce cost and maximize profits
+  - link "Field Force Management With Suffix Field force you can move a lot faster and keep adapting to your customers needs.":
+    - /url: /product/field-force-management
+    - heading "Field Force Management" [level=2]
+    - paragraph: With Suffix Field force you can move a lot faster and keep adapting to your customers needs.
+  - heading "What They Said!" [level=1]:
+    - strong: What They Said!
+  - paragraph: Customer satisfaction is our top priority. Client’s positive feedback inspire and motivate our team and business
+  - heading [level=2]
+  - heading "\"Awesome Design\"" [level=1]
+  - heading "\"SuffixIT brings all together software platform.It measures, analyzes and improves customer satisfaction.leading company for Customer Support & Service Software." [level=3]
+  - img "rafique"
+  - heading "Kazi Anowarul Rafique" [level=4]
+  - heading "Head of Operations New Generation Telecom Ltd." [level=5]
+  - heading [level=2]
+  - heading "\"Great Flexibility\"" [level=1]
+  - heading "\"SuffixIT Essentials makes it easy for small businesses and startups build stronger customer relationships with an all-in-one sales and support solution that is easy to use" [level=3]
+  - img "rana"
+  - heading "Md. Ashif Imran Rana" [level=4]
+  - heading "Chief Technical Officer Mother Telecommunication" [level=5]
+  - heading [level=2]
+  - heading "\"Super Support!\"" [level=1]
+  - heading "\"SuffixIT- A reliable Part has with great satisfaction been working with Suffixit since 2015. Suffix is always delivering honest,rock-solid work of good quality.\" Regards" [level=3]
+  - img "Moyeen"
+  - heading "Md. Ahsanul Moyeen" [level=4]
+  - heading "Senior Manager CrossWorld Telecom Ltd." [level=5]
+  - heading [level=2]
+  - heading "\"Awesome Design\"" [level=1]
+  - heading "\"SuffixIT brings all together software platform.It measures, analyzes and improves customer satisfaction.leading company for Customer Support & Service Software." [level=3]
+  - img "rafique"
+  - heading "Kazi Anowarul Rafique" [level=4]
+  - heading "Head of Operations New Generation Telecom Ltd." [level=5]
+  - heading [level=2]
+  - heading "\"Great Flexibility\"" [level=1]
+  - heading "\"SuffixIT Essentials makes it easy for small businesses and startups build stronger customer relationships with an all-in-one sales and support solution that is easy to use" [level=3]
+  - img "rana"
+  - heading "Md. Ashif Imran Rana" [level=4]
+  - heading "Chief Technical Officer Mother Telecommunication" [level=5]
+  - heading [level=2]
+  - heading "\"Super Support!\"" [level=1]
+  - heading "\"SuffixIT- A reliable Part has with great satisfaction been working with Suffixit since 2015. Suffix is always delivering honest,rock-solid work of good quality.\" Regards" [level=3]
+  - img "Moyeen"
+  - heading "Md. Ahsanul Moyeen" [level=4]
+  - heading "Senior Manager CrossWorld Telecom Ltd." [level=5]
+  - heading [level=2]
+  - heading "\"Awesome Design\"" [level=1]
+  - heading "\"SuffixIT brings all together software platform.It measures, analyzes and improves customer satisfaction.leading company for Customer Support & Service Software." [level=3]
+  - img "rafique"
+  - heading "Kazi Anowarul Rafique" [level=4]
+  - heading "Head of Operations New Generation Telecom Ltd." [level=5]
+  - heading "Our Happy Clients" [level=1]:
+    - strong: Our Happy Clients
+  - paragraph: We Work Only For The Best.
+  - img "logo-0"
+  - img "logo-1"
+  - img "logo-2"
+  - img "logo-3"
+  - img "logo-4"
+  - img "logo-5"
+  - img "logo-6"
+  - img "logo-7"
+  - img "logo-8"
+  - img "logo-9"
+  - img "logo-10"
+  - img "logo-11"
+  - img "logo-12"
+  - img "logo-13"
+  - img "logo-14"
+  - img "logo-15"
+  - img "logo-16"
+  - img "logo-17"
+  - img "logo-18"
+  - img "logo-19"
+  - img "logo-20"
+  - contentinfo:
+    - img "site logo"
+    - paragraph: We maintain strategic partnerships with multiple organizations in Bangladesh and worldwide, working together to deliver high-quality solutions and long-term value.
+    - link "":
+      - /url: https://www.facebook.com/suffixworld/
+    - link "":
+      - /url: https://www.linkedin.com/company/suffix-it-limited/mycompany/
+    - heading "CONTACT US" [level=3]
+    - text: 
+    - paragraph: Cha-70,70/A, Rupayan Millennium Square (9A), Progoti Sharoni, North Badda, Gulshan, Dhaka-1212.
+    - text: 
+    - paragraph: info@suffixit.com
+    - text: 
+    - paragraph: +88 01958 424000
+    - heading "QUICK LINKS" [level=3]
+    - navigation:
+      - link "About Us":
+        - /url: /About
+      - link "Career":
+        - /url: /Career
+      - link "Contact Us":
+        - /url: /Contact
+    - img "ISO 9001"
+    - img "ISO 27001"
+    - img "ISO 20000"
+    - img "Basis"
+    - img "Bacco"
+    - img "Cisco"
+    - img "Fortinet"
+    - img "Sophos"
+    - paragraph: © 2026 All Rights Reserved by Suffix IT Limited
+```
+
+### https://www.suffixit.com/about
+
+Evidence ID: ev_3515bd4ff7bec87cc90ae93e1c381377368b84d1f6074cd0abb9cdc9ad9ebf87
+
+```text
+- document:
+  - navigation:
+    - link "logo":
+      - /url: /
+      - img "logo"
+    - list:
+      - listitem:
+        - link "Home":
+          - /url: /
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "Products":
+          - /url: /!
+      - listitem:
+        - link "IoT":
+          - /url: /!
+      - listitem:
+        - link "Services":
+          - /url: /!
+      - listitem:
+        - link "Career":
+          - /url: /career
+    - button "Contact"
+  - heading "About Us" [level=1]
+  - paragraph
+  - link:
+    - /url: /about#whoWeAre
+  - img
+  - heading "Our History" [level=3]
+  - heading "Who we are?" [level=2]
+  - paragraph: At Suffix IT, we develop innovative and creative products and services that provide total communication and information solutions. Among a plethora of services, web design and development, tailor made applications, ERPs, CRMs, e-commerce solutions, business-to-business applications, business-to-client applications, managed hosting and internet portal management are few that we offer. Satisfied clients around the globe bear testimony to the quality of our work. As a leader in technology exploring, Suffix IT is committed to exporting quality software worldwide.
+  - heading "Vision" [level=4]
+  - paragraph: Our goal is to become a well-known global ICT solution provider that meets societal needs and contributes favorably to humanity's interests.
+  - heading "Mission" [level=4]
+  - paragraph: To use our enthusiasm for technology to bring success and happiness to our clients and staff thus also providing high-growth possibilities for rewarding employment and thereby serve humanity.
+  - img "about"
+  - contentinfo:
+    - img "site logo"
+    - paragraph: We maintain strategic partnerships with multiple organizations in Bangladesh and worldwide, working together to deliver high-quality solutions and long-term value.
+    - link "":
+      - /url: https://www.facebook.com/suffixworld/
+    - link "":
+      - /url: https://www.linkedin.com/company/suffix-it-limited/mycompany/
+    - heading "CONTACT US" [level=3]
+    - text: 
+    - paragraph: Cha-70,70/A, Rupayan Millennium Square (9A), Progoti Sharoni, North Badda, Gulshan, Dhaka-1212.
+    - text: 
+    - paragraph: info@suffixit.com
+    - text: 
+    - paragraph: +88 01958 424000
+    - heading "QUICK LINKS" [level=3]
+    - navigation:
+      - link "About Us":
+        - /url: /About
+      - link "Career":
+        - /url: /Career
+      - link "Contact Us":
+        - /url: /Contact
+    - img "ISO 9001"
+    - img "ISO 27001"
+    - img "ISO 20000"
+    - img "Basis"
+    - img "Bacco"
+    - img "Cisco"
+    - img "Fortinet"
+    - img "Sophos"
+    - paragraph: © 2026 All Rights Reserved by Suffix IT Limited
+```
+
+### https://www.suffixit.com/career
+
+Evidence ID: ev_718e0d0bb275136f8a0441eb14963eb117654b480f576313fefdbd64d06de337
+
+```text
+- document:
+  - navigation:
+    - link "logo":
+      - /url: /
+      - img "logo"
+    - list:
+      - listitem:
+        - link "Home":
+          - /url: /
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "Products":
+          - /url: /!
+      - listitem:
+        - link "IoT":
+          - /url: /!
+      - listitem:
+        - link "Services":
+          - /url: /!
+      - listitem:
+        - link "Career":
+          - /url: /career
+    - button "Contact"
+  - heading "Career" [level=2]
+  - img "mpckup"
+  - heading "Find a job" [level=2]
+  - heading "Choose from the list of most popular categories." [level=3]
+  - link "saspik job Head of Business Development 1 open position Full Time Dhaka":
+    - /url: /career-detail/5
+    - img "saspik job"
+    - heading "Head of Business Development" [level=4]
+    - paragraph: 1 open position
+    - text: Full Time Dhaka
+  - contentinfo:
+    - img "site logo"
+    - paragraph: We maintain strategic partnerships with multiple organizations in Bangladesh and worldwide, working together to deliver high-quality solutions and long-term value.
+    - link "":
+      - /url: https://www.facebook.com/suffixworld/
+    - link "":
+      - /url: https://www.linkedin.com/company/suffix-it-limited/mycompany/
+    - heading "CONTACT US" [level=3]
+    - text: 
+    - paragraph: Cha-70,70/A, Rupayan Millennium Square (9A), Progoti Sharoni, North Badda, Gulshan, Dhaka-1212.
+    - text: 
+    - paragraph: info@suffixit.com
+    - text: 
+    - paragraph: +88 01958 424000
+    - heading "QUICK LINKS" [level=3]
+    - navigation:
+      - link "About Us":
+        - /url: /About
+      - link "Career":
+        - /url: /Career
+      - link "Contact Us":
+        - /url: /Contact
+    - img "ISO 9001"
+    - img "ISO 27001"
+    - img "ISO 20000"
+    - img "Basis"
+    - img "Bacco"
+    - img "Cisco"
+    - img "Fortinet"
+    - img "Sophos"
+    - paragraph: © 2026 All Rights Reserved by Suffix IT Limited
+```

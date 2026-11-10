@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Logo from "./Logo";
 import Chevron from "./Chevron";
 import Icon from "@/components/ui/Icon";
@@ -69,7 +70,7 @@ function MegaMenu({ label, columns }: { label: string; columns: MegaMenuItem[][]
               {col.map((item) => (
                 <a
                   key={item.title}
-                  href={item.href}
+                  href={`/${item.href}`}
                   className="group flex items-start gap-3.5 py-3 rounded-xl transition-colors hover:bg-slate-50/80 px-2.5 border-b border-slate-100 last:border-b-0 cursor-pointer"
                 >
                   {/* Left Icon */}
@@ -115,22 +116,22 @@ export default function Header() {
           <Logo priority />
           <nav aria-label="Primary">
             <ul className="nv">
-              <li><a href="/">Home</a></li>
-              <li><a href="/#why">About Us</a></li>
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/about">About Us</Link></li>
               <li className="group/nav relative">
-                <a href="/#services">Services <Chevron /></a>
+                <Link href="/#services">Services <Chevron /></Link>
                 <MegaMenu label="SERVICES & SOLUTIONS" columns={servicesMegaColumns} />
               </li>
               <li className="group/nav relative">
-                <a href="/#products">Products <Chevron /></a>
+                <Link href="/#products">Products <Chevron /></Link>
                 <MegaMenu label="READY-MADE SOFTWARE PRODUCTS" columns={productsMegaColumns} />
               </li>
-              <li><a href="/#clients">Clients</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><Link href="/#clients">Clients</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
           </nav>
           <div style={{ display: "flex", gap: 10 }}>
-            <a className="btn p hd-cta" href="/contact">Contact Us</a>
+            <Link className="btn p hd-cta" href="/contact">Contact Us</Link>
             <button
               type="button"
               className="hb"
@@ -149,7 +150,7 @@ export default function Header() {
       </header>
       <div className={`mnav${open ? " open" : ""}`} id="mn" role="navigation" aria-label="Mobile">
         {mobileMenu.map((l) => (
-          <a key={l.label} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+          <Link key={l.label} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
         ))}
       </div>
     </>
