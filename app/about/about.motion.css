@@ -1,0 +1,9 @@
+/* The page is styled with Tailwind. Only Radix's measured-height keyframes live here. */
+@keyframes about-accordion-open {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes about-accordion-close {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}

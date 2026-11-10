@@ -29,8 +29,8 @@ export default function HomePage() {
             - Classic 4th-commit Hero active rakhle: <Hero />
             - Video Hero active korte chaile: <Hero /> comment kore <VideoHero /> un-comment korun
         */}
-        <Hero />
-        {/* <VideoHero /> */}
+        {/* <Hero /> */}
+        <VideoHero />
         <Stats />
 
         {/* 2. Client Logos Section */}
