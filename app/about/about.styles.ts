@@ -11,7 +11,7 @@ const aboutStyles = {
   page: "overflow-clip bg-white text-[var(--ink)] [--about-navy:#062b43] [--about-blue:var(--br)] [--about-ease:cubic-bezier(0.23,1,0.32,1)] [&_section]:scroll-mt-5 [&_section]:py-[68px] md:[&_section]:scroll-mt-5 md:[&_section]:py-[110px] [&_em]:font-normal [&_em]:text-[var(--br)] [&_em]:[font-family:var(--font-serif),Georgia,serif] [&_h3]:font-semibold [&_h3]:tracking-[-.45px] [&_a:focus-visible]:outline [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-[5px] [&_a:focus-visible]:outline-[var(--br)] [&_button:focus-visible]:outline [&_button:focus-visible]:outline-2 [&_button:focus-visible]:outline-offset-[5px] [&_button:focus-visible]:outline-[var(--br)] motion-reduce:[&_*]:!animate-none motion-reduce:[&_*]:!transition-none",
   sectionTop: "mb-[30px] flex items-center justify-between md:mb-11",
   smallNote: "hidden text-xs text-[#63788b] md:block",
-  hero: "!pb-0 !pt-[30px] bg-[#e8f3fc] md:!pt-[38px]",
+  hero: "relative isolate overflow-hidden !pb-0 !pt-[30px] bg-[#e8f3fc] md:!pt-[38px]",
   heroTop: "flex items-center justify-between pb-[30px] md:pb-11",
   location: "hidden items-center gap-[9px] text-[11px] text-[#5b7083] md:inline-flex",
   heroHeading: "flex items-end justify-between gap-7 [&_h1]:m-0 [&_h1]:text-[clamp(42px,9vw,66px)] [&_h1]:font-[650] [&_h1]:leading-[1.04] [&_h1]:tracking-[-2.5px] [&_h1_em]:text-[1.16em] [&_h1_em]:tracking-[-1.5px] md:[&_h1]:text-[7.8vw] md:[&_h1]:tracking-[-4px] md:[&_h1_em]:tracking-[-3.5px] xl:[&_h1]:text-[clamp(60px,7.5vw,112px)] xl:[&_h1]:tracking-[-5.5px] max-[390px]:[&_h1]:text-[9.2vw]",

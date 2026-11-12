@@ -1,5 +1,4 @@
 'use client';
-import { ReactLenis } from 'lenis/react';
 import { useTransform, motion, useScroll, MotionValue } from 'motion/react';
 import { useRef, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
@@ -238,32 +237,30 @@ const Component = forwardRef<HTMLElement, ComponentRootProps>(({ projects }, _re
   });
 
   return (
-    <ReactLenis root>
-      <div ref={container} className='relative w-full'>
-        {projects.map((project, i) => {
-          const targetScale = 1 - (projects.length - i) * 0.05;
-          return (
-            <Card
-              key={`p_${i}`}
-              i={i}
-              isLast={i === projects.length - 1}
-              url={project.link}
-              title={project.title}
-              subtitle={project.subtitle}
-              color={project.color}
-              accentColor={project.accentColor}
-              description={project.description}
-              items={project.items}
-              deliverable={project.deliverable}
-              stepNumber={project.stepNumber}
-              progress={scrollYProgress}
-              range={[i * (1 / projects.length), 1]}
-              targetScale={targetScale}
-            />
-          );
-        })}
-      </div>
-    </ReactLenis>
+    <div ref={container} className='relative w-full'>
+      {projects.map((project, i) => {
+        const targetScale = 1 - (projects.length - i) * 0.05;
+        return (
+          <Card
+            key={`p_${i}`}
+            i={i}
+            isLast={i === projects.length - 1}
+            url={project.link}
+            title={project.title}
+            subtitle={project.subtitle}
+            color={project.color}
+            accentColor={project.accentColor}
+            description={project.description}
+            items={project.items}
+            deliverable={project.deliverable}
+            stepNumber={project.stepNumber}
+            progress={scrollYProgress}
+            range={[i * (1 / projects.length), 1]}
+            targetScale={targetScale}
+          />
+        );
+      })}
+    </div>
   );
 });
 

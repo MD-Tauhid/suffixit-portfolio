@@ -59,7 +59,6 @@ button {
 }
 
 html {
-   scroll-behavior: smooth;
    scroll-padding-top: 80px
 }
 
@@ -69,7 +68,7 @@ body {
    color: var(--ink);
    line-height: 1.6;
    -webkit-font-smoothing: antialiased;
-   overflow-x: hidden
+   overflow-x: clip;
 }
 
 a {
@@ -646,7 +645,7 @@ h1 em {
 
 /* sections */
 section {
-   padding: 92px 0;
+   padding: 0px 0;
    position: relative
 }
 
@@ -4353,7 +4352,7 @@ section#hero {
    opacity: 0;
    transform: translateY(38px);
    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-               opacity 0.25s ease-out;
+      opacity 0.25s ease-out;
    will-change: transform, opacity;
 }
 
@@ -4367,7 +4366,7 @@ section#hero {
    opacity: 0;
    transform: translateX(-48px);
    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-               opacity 0.25s ease-out;
+      opacity 0.25s ease-out;
    will-change: transform, opacity;
 }
 
@@ -4380,7 +4379,7 @@ section#hero {
    opacity: 0;
    transform: translateX(48px);
    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-               opacity 0.25s ease-out;
+      opacity 0.25s ease-out;
    will-change: transform, opacity;
 }
 
@@ -4393,7 +4392,7 @@ section#hero {
    opacity: 0;
    transform: scale(0.95) translateY(24px);
    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-               opacity 0.25s ease-out;
+      opacity 0.25s ease-out;
    will-change: transform, opacity;
 }
 
@@ -4406,7 +4405,7 @@ section#hero {
    opacity: 0;
    transform: perspective(800px) rotateX(10deg) translateY(28px);
    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-               opacity 0.25s ease-out;
+      opacity 0.25s ease-out;
    will-change: transform, opacity;
 }
 
@@ -4416,25 +4415,74 @@ section#hero {
 }
 
 /* Stagger delay helpers for grid children */
-.stagger-1 { transition-delay: 60ms !important; }
-.stagger-2 { transition-delay: 120ms !important; }
-.stagger-3 { transition-delay: 180ms !important; }
-.stagger-4 { transition-delay: 240ms !important; }
-.stagger-5 { transition-delay: 300ms !important; }
-.stagger-6 { transition-delay: 360ms !important; }
-.stagger-7 { transition-delay: 420ms !important; }
-.stagger-8 { transition-delay: 480ms !important; }
+.stagger-1 {
+   transition-delay: 60ms !important;
+}
+
+.stagger-2 {
+   transition-delay: 120ms !important;
+}
+
+.stagger-3 {
+   transition-delay: 180ms !important;
+}
+
+.stagger-4 {
+   transition-delay: 240ms !important;
+}
+
+.stagger-5 {
+   transition-delay: 300ms !important;
+}
+
+.stagger-6 {
+   transition-delay: 360ms !important;
+}
+
+.stagger-7 {
+   transition-delay: 420ms !important;
+}
+
+.stagger-8 {
+   transition-delay: 480ms !important;
+}
 
 /* Automatic child cascading when .rv-stagger is applied */
-.rv-stagger > *:nth-child(1) { transition-delay: 60ms !important; }
-.rv-stagger > *:nth-child(2) { transition-delay: 140ms !important; }
-.rv-stagger > *:nth-child(3) { transition-delay: 220ms !important; }
-.rv-stagger > *:nth-child(4) { transition-delay: 300ms !important; }
-.rv-stagger > *:nth-child(5) { transition-delay: 380ms !important; }
-.rv-stagger > *:nth-child(6) { transition-delay: 460ms !important; }
-.rv-stagger > *:nth-child(7) { transition-delay: 540ms !important; }
-.rv-stagger > *:nth-child(8) { transition-delay: 620ms !important; }
-.rv-stagger > *:nth-child(9) { transition-delay: 700ms !important; }
+.rv-stagger>*:nth-child(1) {
+   transition-delay: 60ms !important;
+}
+
+.rv-stagger>*:nth-child(2) {
+   transition-delay: 140ms !important;
+}
+
+.rv-stagger>*:nth-child(3) {
+   transition-delay: 220ms !important;
+}
+
+.rv-stagger>*:nth-child(4) {
+   transition-delay: 300ms !important;
+}
+
+.rv-stagger>*:nth-child(5) {
+   transition-delay: 380ms !important;
+}
+
+.rv-stagger>*:nth-child(6) {
+   transition-delay: 460ms !important;
+}
+
+.rv-stagger>*:nth-child(7) {
+   transition-delay: 540ms !important;
+}
+
+.rv-stagger>*:nth-child(8) {
+   transition-delay: 620ms !important;
+}
+
+.rv-stagger>*:nth-child(9) {
+   transition-delay: 700ms !important;
+}
 
 /* Contact Page Modern Ambient Animations */
 @keyframes floatSlow {
@@ -4499,4 +4547,57 @@ section#hero {
 
 .animate-pulse-glow {
    animation: pulseGlow 6s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Glass Shine Card Keyframes & Utilities (21st.dev / Dhileep Kumar GM)
+   ───────────────────────────────────────────────────────────────────────────── */
+@keyframes ani {
+   0% {
+      transform: translateX(0%) scale(1);
+   }
+
+   50% {
+      transform: translateX(-100%) scale(0.8);
+   }
+
+   100% {
+      transform: translateX(0%) scale(1);
+   }
+}
+
+@keyframes shine {
+   0% {
+      top: 100%;
+      left: -100%;
+   }
+
+   50%,
+   100% {
+      top: 0%;
+      left: 70%;
+   }
+}
+
+.glass-shine-beam {
+   position: absolute;
+   width: 170%;
+   height: 28px;
+   top: 100%;
+   left: -100%;
+   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+   transform: rotateZ(45deg);
+   filter: blur(10px);
+   z-index: 20;
+   pointer-events: none;
+   animation: shine 8s ease-in-out infinite;
+}
+
+.glass-shine-orb {
+   position: absolute;
+   border-radius: 50%;
+   z-index: -1;
+   filter: blur(32px);
+   pointer-events: none;
+   animation: ani 16s ease-in-out infinite;
 }

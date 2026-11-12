@@ -510,8 +510,8 @@ export default function Products() {
     });
   };
 
-  // Tall outer height: 9 cards = 350vh, 3 cards = 200vh
-  const outerHeight = totalCards > 4 ? "360vh" : "210vh";
+  // Natural scroll height: ~65vh per card for natural, comfortable browsing pace
+  const outerHeight = totalCards > 4 ? "620vh" : "320vh";
 
   return (
     <section

@@ -428,6 +428,27 @@ export default function Icon({ name, size = 20, className = "", ...props }: Icon
         </svg>
       );
 
+    case "zap":
+    case "bolt":
+      return (
+        <svg {...common}>
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </svg>
+      );
+
+    case "robot":
+    case "bot":
+      return (
+        <svg {...common}>
+          <rect width="18" height="12" x="3" y="6" rx="2" />
+          <path d="M9 10h.01" />
+          <path d="M15 10h.01" />
+          <path d="M12 2v4" />
+          <path d="M2 12h1" />
+          <path d="M21 12h1" />
+        </svg>
+      );
+
     default:
       return (
         <svg {...common}>

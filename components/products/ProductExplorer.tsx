@@ -1,41 +1,130 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Check, Layers3, Search } from "lucide-react";
-import { productDetails } from "@/lib/products";
-import { servicePalette } from "@/lib/service-palette";
-import ServiceVisual from "@/components/services/ServiceVisual";
-import { serviceButton, serviceContainer, serviceHeading } from "@/components/services/service-styles";
 
-export function ProductSpotlight() {
-  const [active, setActive] = useState(0);
-  const product = productDetails[active];
-  return <div className="overflow-hidden rounded-[28px] bg-white" style={{ border: "1px solid var(--br)" }}>
-    <div className="flex flex-wrap gap-2 border-0 border-b border-solid border-[#0072bc]/[.10] p-4 sm:gap-3 sm:px-7 sm:py-5" role="group" aria-label="Choose a product preview">
-      {productDetails.slice(0, 3).map((item, index) => <button key={item.slug} type="button" aria-pressed={active === index} onClick={() => setActive(index)} className={`min-h-11 rounded-full px-4 py-2 text-[11px] font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)] sm:text-xs ${active === index ? "bg-[var(--br)] text-white" : "text-[#17162a]/[.65] hover:bg-[#0072bc]/[.05]"}`}>{item.name}</button>)}
-    </div>
-    <div className="grid items-center lg:grid-cols-[.75fr_1.25fr]">
-      <div className="p-7 sm:p-10 lg:p-12" aria-live="polite"><span className="text-xs font-semibold text-[var(--br)]">{product.category}</span><h2 className="mt-5 text-[32px] font-semibold leading-[1.12] tracking-[-1px] md:text-[42px]">{product.name}</h2><p className="mt-5 text-sm leading-[1.85] text-[#17162a]/[.65]">{product.summary}</p><ul className="my-6 grid list-none gap-3 p-0">{product.features.map(feature => <li key={feature} className="flex items-center gap-3 text-xs"><Check size={15} className="text-[var(--br)]" />{feature}</li>)}</ul><Link href={"/products/" + product.slug} className={serviceButton}>View product details<ArrowUpRight size={17} /></Link></div>
-      <div key={product.slug} className="service-preview-enter p-4 sm:p-6 lg:pl-0"><ServiceVisual kind={product.kind} tone={product.tone} /></div>
-    </div>
-  </div>;
-}
+import * as React from "react";
+import { Layers3 } from "lucide-react";
+import { productDetails } from "@/lib/products";
+import { serviceHeading } from "@/components/services/service-styles";
+import ProductNotchedCard from "./ProductNotchedCard";
+
+// 12 Products distributed across 4 columns (3 products per column)
+const col1Products = [
+  productDetails[2], // 1. Rupantar ERP (Core Enterprise)
+  productDetails[4], // 5. Suffix E-Commerce Suite (Omnichannel Web)
+  productDetails[8], // 9. Bulk SMS & Web Meeting (Omnichannel Comms)
+];
+
+const col2Products = [
+  productDetails[0], // 2. Field Force Management (FFMS) (GPS Telemetry)
+  productDetails[6], // 6. Hotel Booking System (Hospitality PMS)
+  productDetails[9], // 10. Automated Payroll System (Salary & Tax)
+];
+
+const col3Products = [
+  productDetails[1], // 3. Rupantar HCM & Payroll (Biometric & Tax)
+  productDetails[3], // 7. Provident Fund System (Trust & Pension)
+  productDetails[10], // 11. Rupantor Multi-Warehouse (Batch & Barcode)
+];
+
+const col4Products = [
+  productDetails[5], // 4. Smart POS & Retail Billing (High-Speed Counter)
+  productDetails[7], // 8. Interconnect Telecom Billing (CDR Rating)
+  productDetails[11], // 12. Smart Transformer Monitoring (Industrial IoT)
+];
 
 export default function ProductExplorer() {
-  const [category, setCategory] = useState("All products");
-  const [query, setQuery] = useState("");
-  const filtered = productDetails.filter(product => (category === "All products" || product.category === category) && (product.name + " " + product.summary).toLowerCase().includes(query.toLowerCase()));
-  return <section id="product-library" className="!py-20 md:!py-28"><div className={serviceContainer}>
-    <div className="mb-10 grid gap-5 lg:grid-cols-2 lg:items-end" data-service-stagger><div><p className="mb-4 text-xs font-semibold text-[var(--br)]">Our product library</p><h2 className={serviceHeading}>Find the right fit<br />for your business.</h2></div><p className="max-w-[380px] text-sm leading-[1.85] text-[#17162a]/[.65] lg:ml-auto">Explore ready-made software across people, operations, retail and communication. Talk to our team about suitability and configuration.</p></div>
-    <div className="mb-8 flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter products">{["All products", "ERP & people", "Field & retail", "Communication", "Connected systems"].map(item => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)} className={`min-h-11 rounded-full border border-solid px-4 py-2 text-xs font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)] ${category === item ? "border-[var(--br)] bg-[var(--br)] text-white" : "border-[#0072bc]/[.15] bg-white text-[#17162a]/[.65] hover:border-[var(--br)]"}`}>{item}</button>)}</div>
-      <label className="flex min-h-11 items-center gap-3 rounded-full border border-solid border-[#0072bc]/[.20] px-4 py-2"><Search size={16} className="shrink-0 text-[var(--br)]" /><span className="sr-only">Search products</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search products" className="min-w-0 border-0 bg-transparent text-xs text-[var(--ink)] outline-none placeholder:text-[#17162a]/[.50]" /></label>
-    </div>
-    <p className="mb-5 text-[11px] text-[#17162a]/[.55]" aria-live="polite">{filtered.length} products</p>
-    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{filtered.map(product => <article id={product.slug} key={product.slug} className="group flex flex-col overflow-hidden rounded-[24px] border border-solid border-[#0072bc]/[.10] bg-white">
-      <div className="relative flex h-[185px] items-center justify-center overflow-hidden" style={{ backgroundColor: servicePalette[product.tone] }} aria-hidden="true"><div className="absolute -right-9 -top-10 size-40 rounded-full border-[28px] border-solid border-white/40" /><div className="relative w-[190px] -rotate-[5deg] rounded-xl border border-solid border-[#0072bc]/[.10] bg-white p-4 shadow-[0_14px_35px_-20px_rgba(0,114,188,.3)] transition-transform duration-200 motion-safe:group-hover:rotate-0"><div className="flex items-center gap-2 text-[9px] font-semibold text-[var(--br)]"><Layers3 size={13} />{product.name}</div><div className="mt-4 flex items-end gap-1.5">{[30, 48, 40, 60, 55, 72, 65].map((height, i) => <span key={i} className="flex-1 rounded-t bg-[#0072bc]/[.30]" style={{ height: height * .6 }} />)}</div><div className="mt-3 h-1.5 w-3/4 rounded bg-[#0072bc]/[.10]" /></div></div>
-      <div className="flex flex-1 flex-col p-6 md:p-7"><span className="text-[10px] font-semibold text-[var(--br)]">{product.category}</span><h3 className="mt-3 text-[23px] font-semibold leading-tight tracking-[-.7px]">{product.name}</h3><p className="mt-4 text-[13px] leading-[1.85] text-[#17162a]/[.65]">{product.summary}</p><ul className="my-6 grid list-none gap-3 p-0">{product.features.map(feature => <li key={feature} className="flex items-center gap-2 text-[11px]"><Check size={13} className="text-[var(--br)]" />{feature}</li>)}</ul><Link href={"/products/" + product.slug} className="mt-auto flex min-h-11 items-center justify-between border-0 border-t border-solid border-[#0072bc]/[.10] pt-4 text-xs font-semibold text-[var(--br)]">View product details<ArrowUpRight size={17} /></Link></div>
-    </article>)}</div>
-    {filtered.length === 0 && <div className="rounded-2xl p-10 text-center" style={{ backgroundColor: servicePalette.blue }}><p className="text-xl font-semibold">No products match that search.</p><p className="mt-3 text-sm text-[#17162a]/[.65]">Try another term or browse all products.</p><button type="button" aria-label="Reset product filters" onClick={() => { setCategory("All products"); setQuery(""); }} className="mt-5 min-h-11 text-sm font-semibold text-[var(--br)]">Reset filters</button></div>}
-  </div></section>;
+  return (
+    <section
+      id="product-library"
+      className="relative overflow-hidden border-y border-[#0072bc]/10 !py-20 md:!py-28"
+      style={{
+        backgroundColor: "#f5f9fe",
+        backgroundImage:
+          "linear-gradient(180deg, #f7fafd 0%, #edf5fc 22%, #e5f1fa 50%, #eef6fd 78%, #edf7f5 100%)",
+      }}
+    >
+      {/* Ambient Atmospheric Brand Glows */}
+      <div
+        className="pointer-events-none absolute -top-44 left-1/2 -translate-x-1/2 size-[920px] rounded-full bg-gradient-to-b from-[#0072bc]/12 via-[#00c2ff]/8 to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -left-36 top-1/4 size-[620px] rounded-full bg-gradient-to-tr from-[#0072bc]/10 via-[#00c2ff]/10 to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -right-36 bottom-1/4 size-[650px] rounded-full bg-gradient-to-bl from-[#00c2ff]/10 via-[#0072bc]/8 to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      {/* Subtle Technical Dot Matrix Mesh */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(0, 114, 188, 0.15) 1px, transparent 0)",
+          backgroundSize: "32px 32px",
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 mx-auto w-[calc(100%-32px)] max-w-[1380px] md:w-[calc(100%-64px)]">
+        {/* Section Title & Narrative */}
+        <div className="mb-14 grid gap-6 lg:grid-cols-2 lg:items-end">
+          <div>
+            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-[#0072bc]/20 bg-white/90 px-3.5 py-1 text-xs font-semibold text-[var(--br)] shadow-xs backdrop-blur-md">
+              <Layers3 size={14} />
+              <span>Complete Product Portfolio</span>
+            </div>
+            <h2 className={serviceHeading}>
+              Browse all 12 ready-made
+              <br />
+              <span className="text-[var(--br)]">software platforms.</span>
+            </h2>
+          </div>
+
+          <div className="flex flex-col gap-4 lg:ml-auto lg:items-end">
+            <p className="max-w-[480px] text-sm leading-[1.85] text-[#17162a]/75 lg:text-right">
+              Every platform in the Suffix IT suite features production-grade web, mobile, and API
+              foundations. Explore our 12 turnkey enterprise platforms arranged across operations, human capital, retail, and communications.
+            </p>
+          </div>
+        </div>
+
+        {/* Signature 4-Column Zigzag Staggered Wall: All 12 Products Permanently Displayed */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Column 1: Baseline high */}
+          <div className="flex flex-col gap-6">
+            {col1Products.map((product) => (
+              <ProductNotchedCard key={product.slug} product={product} />
+            ))}
+          </div>
+
+          {/* Column 2: Staggered low (+96px on desktop for distinct zigzag wave) */}
+          <div className="flex flex-col gap-6 pt-0 sm:pt-12 lg:pt-24">
+            {col2Products.map((product) => (
+              <ProductNotchedCard key={product.slug} product={product} />
+            ))}
+          </div>
+
+          {/* Column 3: Elevated high (+20px on desktop) */}
+          <div className="flex flex-col gap-6 pt-0 lg:pt-5">
+            {col3Products.map((product) => (
+              <ProductNotchedCard key={product.slug} product={product} />
+            ))}
+          </div>
+
+          {/* Column 4: Staggered low (+112px on desktop for zigzag wave completion) */}
+          <div className="flex flex-col gap-6 pt-0 sm:pt-12 lg:pt-28">
+            {col4Products.map((product) => (
+              <ProductNotchedCard key={product.slug} product={product} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
