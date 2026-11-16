@@ -989,7 +989,7 @@ function startEngine(
         canvas.width = w
         canvas.height = h
       }
-      const tile = Math.min(P.tileSize, Math.min(cw, ch) / 1.75)
+      const tile = Math.min(P.tileSize, Math.min(cw, ch) * 0.85)
       renderer.render(frameAt(Math.min(time, end), P, outro), w, h, tile * dpr)
       dirty = false
     }

@@ -280,7 +280,10 @@ export default function ProductStickyShowcase() {
                 <button
                   key={prod.id}
                   type="button"
-                  onClick={() => scrollToProduct(index)}
+                  onClick={() => {
+                    setActiveStep(index);
+                    scrollToProduct(index);
+                  }}
                   className={cn(
                     "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-300",
                     isActive
@@ -441,10 +444,9 @@ export default function ProductStickyShowcase() {
           </div>
 
           {/* Right Column: Sticky Pinned Showcase Card spanning full height of the section */}
-          <div className="hidden lg:block relative h-full">
+          <div className="hidden lg:block relative">
             <div
-              className="sticky top-28 lg:top-36 z-10 w-full"
-              style={{ position: "sticky", top: "8.5rem" }}
+              className="sticky top-28 lg:top-32 z-10 w-full"
             >
               {/* Dynamic Aura Glow behind card matching product tone */}
               <div

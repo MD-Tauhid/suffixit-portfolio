@@ -7,3 +7,16 @@
   from { height: var(--radix-accordion-content-height); }
   to { height: 0; }
 }
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 5s ease-in-out infinite;
+}

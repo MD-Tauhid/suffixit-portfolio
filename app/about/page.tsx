@@ -47,29 +47,29 @@ export default function AboutPage() {
             </div>
 
             {/* Split Row: Monumental Headline Left, 3D Liquid Glass S-Logo Stage Right */}
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-10 py-2 md:py-4">
-              <div className="w-full lg:max-w-[62%]">
-                <h1 id="about-title" className="m-0 text-[clamp(42px,7.5vw,84px)] xl:text-[88px] font-[650] leading-[1.04] tracking-[-2.5px] md:tracking-[-4px]">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 py-3 md:py-6">
+              <div className="w-full lg:max-w-[58%] xl:max-w-[60%]">
+                <h1 id="about-title" className="m-0 text-[clamp(48px,8.2vw,96px)] xl:text-[102px] font-[650] leading-[1.02] tracking-[-3px] md:tracking-[-4.5px]">
                   <span className={styles.line}><span data-about-title>People. Purpose.</span></span>
                   <span className={styles.line}><em data-about-title className="font-normal italic text-[var(--br)] [font-family:var(--font-serif),Georgia,serif]">Practical technology.</em></span>
                 </h1>
               </div>
 
-              {/* Clean, Elegant 3D Liquid Glass S-Logo Visual Stage */}
+              {/* Clean, Elegant 3D Liquid Glass S-Logo Visual Stage (Enlarged with Gentle Floating Motion) */}
               <div
-                className="relative w-full sm:w-[320px] md:w-[360px] lg:w-[370px] h-[270px] sm:h-[300px] md:h-[330px] flex items-center justify-center mx-auto lg:mx-0 shrink-0 select-none"
+                className="relative w-full sm:w-[380px] md:w-[420px] lg:w-[450px] xl:w-[480px] h-[310px] sm:h-[350px] md:h-[390px] xl:h-[420px] flex items-center justify-center mx-auto lg:mx-0 shrink-0 select-none animate-float-gentle"
                 data-about-intro
               >
                 {/* Luminous Ambient Glow Aura */}
                 <div
-                  className="pointer-events-none absolute size-[260px] sm:size-[290px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.28)_0%,rgba(0,114,188,0.18)_45%,transparent_70%)] blur-2xl opacity-85"
+                  className="pointer-events-none absolute size-[340px] sm:size-[380px] md:size-[410px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.36)_0%,rgba(0,114,188,0.24)_45%,transparent_70%)] blur-3xl opacity-90 transition-all duration-700"
                   aria-hidden="true"
                 />
 
                 {/* Subtle Orbital Tech Ring */}
                 <div
                   data-about-orbit
-                  className="pointer-events-none absolute size-[260px] sm:size-[290px] rounded-full border border-[#0072bc]/20 border-dashed animate-[spin_100s_linear_infinite]"
+                  className="pointer-events-none absolute size-[340px] sm:size-[380px] md:size-[410px] rounded-full border border-[#0072bc]/25 border-dashed animate-[spin_100s_linear_infinite]"
                   aria-hidden="true"
                 />
 
@@ -80,7 +80,7 @@ export default function AboutPage() {
                   logo="/assets/about/s-logo.png"
                   logoColor="#0072bc"
                   originalColors={false}
-                  tileSize={280}
+                  tileSize={360}
                   tuning={{
                     startZoom: 2.3,
                     dispersion: 1.85,

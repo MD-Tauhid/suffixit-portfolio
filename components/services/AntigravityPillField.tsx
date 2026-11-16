@@ -376,7 +376,7 @@ export default function AntigravityPillField({
 
       // Hide elastic cord immediately
       if (elasticSvgRef.current) {
-        elasticSvgRef.current.style.display = "none";
+        elasticSvgRef.current.style.opacity = "0";
       }
     });
 
@@ -429,7 +429,7 @@ export default function AntigravityPillField({
           const anchorX = 15;
           const anchorY = currentH * 0.65;
 
-          elasticSvgRef.current.style.display = "block";
+          elasticSvgRef.current.style.opacity = "1";
           elasticLineRef.current.setAttribute("x1", anchorX.toFixed(1));
           elasticLineRef.current.setAttribute("y1", anchorY.toFixed(1));
           elasticLineRef.current.setAttribute("x2", dragged.position.x.toFixed(1));
@@ -449,10 +449,10 @@ export default function AntigravityPillField({
             elasticPillRef.current.setAttribute("cy", dragged.position.y.toFixed(1));
           }
         } else {
-          elasticSvgRef.current.style.display = "none";
+          elasticSvgRef.current.style.opacity = "0";
         }
       } else if (elasticSvgRef.current) {
-        elasticSvgRef.current.style.display = "none";
+        elasticSvgRef.current.style.opacity = "0";
       }
     });
 
@@ -551,8 +551,24 @@ export default function AntigravityPillField({
   return (
     <div
       ref={bannerRef}
-      className="relative w-full overflow-hidden rounded-[24px] lg:rounded-[32px] p-6 sm:p-8 lg:p-12 shadow-[0_24px_50px_-12px_rgba(0,114,188,0.45)] border border-white/25 select-none bg-gradient-to-r from-[#006cb7] via-[#0080d8] to-[#005e9e]"
-      style={{ touchAction: "none" }}
+      onMouseDown={(e) => {
+        // Prevent default on non-interactive regions to stop browser focus box / native drag outlines
+        const target = e.target as HTMLElement;
+        if (!target.closest("button") && !target.closest("a")) {
+          e.preventDefault();
+        }
+      }}
+      className="relative w-full overflow-hidden rounded-[24px] lg:rounded-[32px] p-6 sm:p-8 lg:p-12 shadow-[0_24px_50px_-12px_rgba(0,114,188,0.45),inset_0_0_0_1px_rgba(255,255,255,0.25)] select-none bg-gradient-to-r from-[#006cb7] via-[#0080d8] to-[#005e9e] outline-none focus:outline-none focus-visible:outline-none ring-0 border-0"
+      style={{
+        touchAction: "none",
+        outline: "none",
+        WebkitTapHighlightColor: "transparent",
+        userSelect: "none",
+        WebkitUserSelect: "none",
+        MozUserSelect: "none",
+        isolation: "isolate",
+        transform: "translateZ(0)",
+      }}
     >
       {/* ─────────────────────────────────────────────────────────────────────────────
           1. ELEGANT SILKY CURVED SVG WAVES BACKGROUND (Matching User's Reference Image)
@@ -691,13 +707,22 @@ export default function AntigravityPillField({
         {/* Notice: overflow-visible allows dragging out to the left; NO separate box/border! */}
         <div
           ref={arenaRef}
-          className="relative size-full min-h-[350px] sm:min-h-[390px] lg:min-h-[400px] overflow-visible bg-transparent select-none"
+          tabIndex={-1}
+          className="relative size-full min-h-[350px] sm:min-h-[390px] lg:min-h-[400px] overflow-visible bg-transparent select-none outline-none focus:outline-none focus-visible:outline-none ring-0 border-0"
+          style={{
+            outline: "none",
+            border: "none",
+            WebkitTapHighlightColor: "transparent",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            MozUserSelect: "none",
+          }}
         >
           {/* Elastic Rubber Band SVG (Renders when pill is dragged to the left) */}
           <svg
             ref={elasticSvgRef}
-            className="pointer-events-none absolute inset-0 size-full z-30 overflow-visible"
-            style={{ display: "none" }}
+            className="pointer-events-none absolute inset-0 size-full z-30 overflow-visible transition-opacity duration-150 outline-none border-0"
+            style={{ opacity: 0 }}
             aria-hidden="true"
           >
             <line
@@ -724,7 +749,19 @@ export default function AntigravityPillField({
           )}
 
           {/* ALL 14 Physics Rigid Body Pills (Slightly more compact size, perfectly proportioned) */}
-          <ul aria-label="14 Practice Capabilities" className="relative size-full list-none m-0 p-0 overflow-visible">
+          <ul
+            aria-label="14 Practice Capabilities"
+            tabIndex={-1}
+            className="relative size-full list-none m-0 p-0 overflow-visible outline-none focus:outline-none focus-visible:outline-none ring-0 border-0 select-none"
+            style={{
+              outline: "none",
+              border: "none",
+              WebkitTapHighlightColor: "transparent",
+              userSelect: "none",
+              WebkitUserSelect: "none",
+              MozUserSelect: "none",
+            }}
+          >
             {all14Practices.map((practice, i) => {
               const IconComponent = practice.icon;
               const isHeld = draggedIdx === i;
@@ -735,15 +772,25 @@ export default function AntigravityPillField({
                   ref={(el) => {
                     pillsRef.current[i] = el;
                   }}
+                  draggable={false}
+                  onDragStart={(e) => e.preventDefault()}
+                  tabIndex={-1}
                   data-held={isHeld ? "true" : undefined}
-                  className={`pointer-events-auto absolute top-0 left-0 flex w-fit cursor-grab touch-none items-center whitespace-nowrap will-change-transform active:cursor-grabbing transition-shadow gap-2 rounded-full bg-white/95 backdrop-blur-md py-1.5 pr-3 pl-2 border border-white/85 select-none ${
+                  className={`pointer-events-auto absolute top-0 left-0 flex w-fit cursor-grab touch-none items-center whitespace-nowrap will-change-transform active:cursor-grabbing gap-2 rounded-full bg-white py-1.5 pr-3 pl-2 border border-white/90 select-none outline-none focus:outline-none focus-visible:outline-none ring-0 ${
                     isHeld
-                      ? "z-50 scale-110 shadow-[0_16px_30px_rgba(0,114,188,0.38),0_0_0_2px_#38bdf8]"
-                      : "shadow-[0_4px_14px_rgba(0,35,80,0.13),0_1px_2px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] hover:shadow-md hover:scale-105"
+                      ? "z-50 scale-105 shadow-[0_16px_30px_rgba(0,114,188,0.38)]"
+                      : "shadow-[0_4px_14px_rgba(0,35,80,0.13),0_1px_2px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,1)] hover:shadow-md hover:scale-[1.03]"
                   }`}
                   style={{
                     transformOrigin: "center center",
                     opacity: hasDropped ? 1 : 0,
+                    outline: "none",
+                    WebkitTapHighlightColor: "transparent",
+                    userSelect: "none",
+                    WebkitUserSelect: "none",
+                    MozUserSelect: "none",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                   }}
                 >
                   {/* Colored Circular Icon Badge */}

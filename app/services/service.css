@@ -4,6 +4,16 @@
 .service-page details > summary::-webkit-details-marker { display: none; }
 .service-page details[open] > summary svg { transform: rotate(45deg); }
 .service-page a:focus-visible, .service-page summary:focus-visible { outline: 2px solid var(--br); outline-offset: 5px; }
+
+/* Prevent any browser outline, focus ring, or ghost border on Antigravity Pill sandbox */
+#pill-field,
+#pill-field *,
+#pill-field *:focus,
+#pill-field *:focus-visible,
+#pill-field *:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
 .service-accordion[data-state="open"] { animation: service-expand 240ms cubic-bezier(.23,1,.32,1); }
 .service-accordion[data-state="closed"] { animation: service-collapse 200ms cubic-bezier(.23,1,.32,1); }
 @keyframes service-expand { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
