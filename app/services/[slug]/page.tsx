@@ -11,8 +11,7 @@ import ServiceDetailTalentMatrixNagorik from "@/components/services/detail/Servi
 import ServiceDetailWhyChooseNagorik from "@/components/services/detail/ServiceDetailWhyChooseNagorik";
 import ServiceDetailTestimonialsNagorik from "@/components/services/detail/ServiceDetailTestimonialsNagorik";
 import ServiceDetailValueBentoNagorik from "@/components/services/detail/ServiceDetailValueBentoNagorik";
-import ServiceDetailTechStackNagorik from "@/components/services/detail/ServiceDetailTechStackNagorik";
-import ServiceDetailIndustryAccordionNagorik from "@/components/services/detail/ServiceDetailIndustryAccordionNagorik";
+import Tech from "@/components/sections/Tech";
 import ServiceDetailEngagementNagorik from "@/components/services/detail/ServiceDetailEngagementNagorik";
 import ServiceDetailFAQNagorik from "@/components/services/detail/ServiceDetailFAQNagorik";
 import ServiceDetailLeadFormNagorik from "@/components/services/detail/ServiceDetailLeadFormNagorik";
@@ -60,7 +59,7 @@ export default async function ServiceDetailPage({
 
   return (
     <ServiceShell>
-      {/* 1. HERO SECTION: Category tag, monolithic bold title, dual buttons, editorial photo with floating badge */}
+      {/* 1. HERO SECTION: Category tag, clear service title, dual buttons, signature notched card */}
       <ServiceDetailHeroNagorik service={service} mediaConfig={mediaConfig} />
 
       {/* 2. ABOUT SECTION: Watermark icon + photo + soft yellow accent value card */}
@@ -78,25 +77,22 @@ export default async function ServiceDetailPage({
       {/* 6. VALUE BENTO GRID: 5-block layout with collaboration photo, code reviews, direct architect access, 2-week sprints */}
       <ServiceDetailValueBentoNagorik />
 
-      {/* 7. DIVERSE TECHNOLOGIES: 3-row interactive tech stack badges */}
-      <ServiceDetailTechStackNagorik />
+      {/* 7. TECH WE USE: Modern stack dual marquee with colored tech logos (from Homepage) */}
+      <Tech />
 
-      {/* 8. INDUSTRIES WE SCALE: Horizontal interactive expanding accordion */}
-      <ServiceDetailIndustryAccordionNagorik />
-
-      {/* 9. 4 FLEXIBLE ENGAGEMENT MODELS: Dedicated Pod, Staff Augmentation, Turnkey, SLA Retainer */}
+      {/* 8. 4 FLEXIBLE ENGAGEMENT MODELS: Dedicated Pod, Staff Augmentation, Turnkey, SLA Retainer */}
       <ServiceDetailEngagementNagorik />
 
-      {/* 10. FREQUENTLY ASKED QUESTIONS: Advisor profile on left + expandable FAQ accordion on right */}
+      {/* 9. FREQUENTLY ASKED QUESTIONS: Advisor profile on left + expandable FAQ accordion on right */}
       <ServiceDetailFAQNagorik service={service} />
 
-      {/* 11. STRATEGIC CONSULTATION LEAD FORM: Suffix IT brand gradient + clean white form card */}
+      {/* 10. STRATEGIC CONSULTATION LEAD FORM: Suffix IT brand gradient + clean white form card */}
       <ServiceDetailLeadFormNagorik serviceName={service.name} />
 
-      {/* 12. EXPERTISE THAT CONNECTS: Related service practices */}
+      {/* 11. EXPERTISE THAT CONNECTS: Related service practices */}
       <ServiceDetailRelatedNagorik services={related} />
 
-      {/* 13. FINAL CTA BANNER: Clean light card with team photo collage, checklist points, and dual action buttons */}
+      {/* 12. FINAL CTA BANNER: Clean light card with team photo collage, checklist points, and dual action buttons */}
       <ServiceDetailFinalCTANagorik service={service} />
     </ServiceShell>
   );

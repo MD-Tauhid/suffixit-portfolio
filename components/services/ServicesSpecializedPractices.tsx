@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Sparkles,
 } from "lucide-react";
+import { motion } from "motion/react";
 import { extendedServicesList, ServiceItem } from "./servicesData";
 
 if (typeof window !== "undefined") {
@@ -332,19 +333,37 @@ export default function ServicesSpecializedPractices() {
             })}
           </div>
 
-          {/* 3-Column Luxury Glass Cards Grid - Standard document flow, no inner scroll */}
+          {/* 3-Column Luxury Glass Cards Grid - Center-Outwards Spread Motion */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-            {filteredServices.map((service) => {
+            {filteredServices.map((service, idx) => {
               const { sphere1, sphere2 } = getSpheresConfig(service.index);
+              const colIndex = idx % 3;
+              const spreadInitial =
+                colIndex === 1
+                  ? { opacity: 0, y: 32, scale: 0.88 }
+                  : colIndex === 0
+                  ? { opacity: 0, x: 75, scale: 0.92 }
+                  : { opacity: 0, x: -75, scale: 0.92 };
 
               return (
-                <TiltGlassCard
+                <motion.div
                   key={service.id}
-                  maxTilt={9}
-                  scale={1.025}
-                  glare={0.28}
-                  className="group relative isolate flex flex-col"
+                  initial={spreadInitial}
+                  whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.12 }}
+                  transition={{
+                    duration: 0.85,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: colIndex === 1 ? 0 : 0.08,
+                  }}
+                  className="flex flex-col"
                 >
+                  <TiltGlassCard
+                    maxTilt={9}
+                    scale={1.025}
+                    glare={0.28}
+                    className="group relative isolate flex flex-col h-full"
+                  >
                   {/* ─── 3D Sphere 1: Top-Right Vibrant Gradient Orb ─── */}
                   <div
                     className="pointer-events-none absolute size-[150px] sm:size-[170px] rounded-full z-0 transition-transform duration-700 group-hover:scale-105"
@@ -444,9 +463,10 @@ export default function ServicesSpecializedPractices() {
                     </div>
                   </div>
                 </TiltGlassCard>
-              );
-            })}
-          </div>
+              </motion.div>
+            );
+          })}
+        </div>
 
           {/* Bottom Trust Banner inside Portal */}
           <div className="mt-10 lg:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-white/80 bg-white/60 backdrop-blur-md px-6 py-4 shadow-[inset_2px_1px_6px_rgba(255,255,255,0.7),0_10px_25px_rgba(0,0,0,0.05)]">

@@ -40,7 +40,7 @@ export default function ProductHero() {
 
   return (
     <section
-      className="relative overflow-hidden border-b border-[#0072bc]/[.08] !pt-20 !pb-14 md:!pt-24 md:!pb-18"
+      className="relative overflow-hidden border-b border-[#0072bc]/[.08] !pt-6 !pb-8 sm:!pt-8 sm:!pb-10 md:!pt-10 md:!pb-12"
       style={{ backgroundColor: servicePalette.blue }}
     >
       {/* Background Ambient Accents */}

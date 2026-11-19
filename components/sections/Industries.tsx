@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 import Icon from "@/components/ui/Icon";
 
@@ -76,9 +79,12 @@ const industries = [
   },
 ];
 
-export default function Industries() {
+/* ─────────────────────────────────────────────────────────────
+   SHARED CONTENT COMPONENT: Renders Header + 8 Luxury Skewed Cards
+   ───────────────────────────────────────────────────────────── */
+function IndustriesContent() {
   return (
-    <section id="industries" className="py-16 md:py-24 lg:py-28 relative bg-[#f8fbfe] overflow-hidden scroll-mt-20">
+    <>
       {/* Ambient soft background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-gradient-to-tr from-[#0072bc]/5 to-[#7c3aed]/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -95,12 +101,6 @@ export default function Industries() {
 
         {/* ========================================================
             SKEWED GRADIENT GLASS CARD SHOWCASE GRID (LIGHT LUXURY)
-            Features:
-            - 15-degree skewed vibrant gradient backdrops
-            - Soft 28px glowing colorful aura
-            - Floating glossy glass blob animation on hover
-            - Backdrop-blur white frosted card with soft border lighting
-            - Tailored gradient palettes for each industry
            ======================================================== */}
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-6 md:py-8 rv-stagger"
@@ -186,6 +186,258 @@ export default function Industries() {
           ))}
         </div>
       </div>
-    </section>
+    </>
+  );
+}
+
+export default function Industries() {
+  const [expandRatio, setExpandRatio] = useState<number>(0);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [windowH, setWindowH] = useState<number>(900);
+
+  const isAutoSnappingDownRef = useRef<boolean>(false);
+  const isAutoSnappingUpRef = useRef<boolean>(false);
+  const lastScrollYRef = useRef<number>(0);
+
+  // Click-to-complete handler: if user clicks the expanding card during transition,
+  // immediately smoothly zoom to 100% full screen (or collapse back if small)
+  const handleCompleteZoom = () => {
+    const productsEl = document.getElementById("products");
+    if (!productsEl) return;
+    const currentWinH = window.innerHeight || 800;
+    const scrollableDistance = productsEl.offsetHeight - currentWinH;
+    const pRect = productsEl.getBoundingClientRect();
+    const containerTop = pRect.top + window.scrollY;
+
+    const targetY =
+      expandRatio >= 0.40
+        ? containerTop + scrollableDistance
+        : containerTop + scrollableDistance * (0.70 - 0.002);
+
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth",
+    });
+  };
+
+
+
+  useEffect(() => {
+    let rafId: number | null = null;
+
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        const productsEl = document.getElementById("products");
+        if (!productsEl) {
+          rafId = null;
+          return;
+        }
+
+        const pRect = productsEl.getBoundingClientRect();
+        const currentWinH = window.innerHeight || 800;
+        setWindowH(currentWinH);
+
+        const scrollableDistance = productsEl.offsetHeight - currentWinH;
+        if (scrollableDistance <= 0) {
+          rafId = null;
+          return;
+        }
+
+        const currentScroll = -pRect.top;
+        const currentScrollY = window.scrollY;
+        const isScrollingDown = currentScrollY > lastScrollYRef.current;
+        const isScrollingUp = currentScrollY < lastScrollYRef.current;
+        lastScrollYRef.current = currentScrollY;
+
+        // Reset the opposing auto-snap trigger if user reverses direction
+        if (isScrollingUp) {
+          isAutoSnappingDownRef.current = false;
+        }
+        if (isScrollingDown) {
+          isAutoSnappingUpRef.current = false;
+        }
+
+        // Unclamped raw scroll progress through Products section
+        const rawProgress = currentScroll / scrollableDistance;
+
+        // Start right-side card expansion once Products horizontal scroll finishes (at ~0.70)
+        // Expands smoothly until 0.985 where it reaches 100% full screen
+        const START_EXPAND = 0.70;
+        const END_EXPAND = 0.985;
+
+        if (rawProgress >= START_EXPAND && rawProgress <= END_EXPAND) {
+          const ratio = (rawProgress - START_EXPAND) / (END_EXPAND - START_EXPAND);
+          const clamped = Math.max(0, Math.min(1, ratio));
+          setExpandRatio(clamped);
+          setIsTransitioning(true);
+
+          const containerTop = pRect.top + currentScrollY;
+
+          // SMART AUTO-COMPLETION - FORWARD / DOWNWARD (60% Threshold):
+          // When zoom reaches >= 60% (clamped >= 0.60) while scrolling down,
+          // smoothly auto-glide the remaining distance to 100% full screen so the user doesn't have to keep scrolling!
+          if (isScrollingDown && clamped >= 0.60 && clamped < 0.96 && !isAutoSnappingDownRef.current) {
+            isAutoSnappingDownRef.current = true;
+            isAutoSnappingUpRef.current = false;
+            const targetY = containerTop + scrollableDistance;
+
+            window.scrollTo({
+              top: targetY,
+              behavior: "smooth",
+            });
+          }
+
+          // SMART AUTO-COMPLETION - REVERSE / UPWARD (60% Shrink / <= 0.58 Threshold):
+          // When scrolling up and card shrinks down to <= 60% (clamped <= 0.58),
+          // smoothly auto-glide the remaining distance back to Products Card 9!
+          if (isScrollingUp && clamped <= 0.58 && clamped > 0.05 && !isAutoSnappingUpRef.current) {
+            isAutoSnappingUpRef.current = true;
+            isAutoSnappingDownRef.current = false;
+            const targetY = containerTop + scrollableDistance * (START_EXPAND - 0.002);
+
+            window.scrollTo({
+              top: targetY,
+              behavior: "smooth",
+            });
+          }
+        } else if (rawProgress < START_EXPAND) {
+          setExpandRatio(0);
+          setIsTransitioning(false);
+          isAutoSnappingDownRef.current = false;
+          isAutoSnappingUpRef.current = false;
+        } else {
+          // rawProgress > END_EXPAND: expansion completed!
+          // Seamlessly hide transition overlay and activate the real, scrollable #industries section
+          setExpandRatio(1);
+          setIsTransitioning(false);
+          isAutoSnappingDownRef.current = false;
+          isAutoSnappingUpRef.current = false;
+        }
+
+        rafId = null;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  // Smooth cubic easing curve for organic right-side zoom expansion
+  const t = Math.pow(expandRatio, 0.92);
+
+  // Fade-in when appearing (0.0 -> 0.18) and fade-out when shrinking (0.18 -> 0.0)
+  // Ensures soft organic emergence from Products Card 9 without any abrupt appearance or disappearance
+  const fadeRatio = Math.min(1, Math.max(0, expandRatio / 0.18));
+  const cardOpacity = Math.pow(fadeRatio, 1.25);
+
+  // Exact vertical centering matching Our Products track:
+  const baseCardH = Math.min(500, Math.max(440, windowH * 0.58));
+  const initialTop = Math.max(120, Math.round((windowH - baseCardH) / 2));
+  const initialBottom = Math.max(80, windowH - initialTop - baseCardH);
+
+  // Right-side card geometry:
+  // Starts docked on the right side at Card 10's position (width ~ 410px, height ~ 480px, rounded-3xl)
+  // Sweeps leftward and expands top/bottom to take over the entire display
+  const topPx = Math.round((1 - t) * initialTop);
+  const bottomPx = Math.round((1 - t) * initialBottom);
+  const rightPx = Math.round((1 - t) * 48); // 48px -> 0px
+  const leftPct = (1 - t) * 68; // 68% -> 0% (starts width ~ 410px on desktop)
+  const radius = Math.round((1 - t) * 24); // 24px (rounded-3xl) down to 0px
+
+  // Multi-layered luxury drop shadow during expansion
+  const shadowAlpha = 0.35 * (1 - t);
+  const boxShadow =
+    t < 0.99
+      ? `0 25px 70px -10px rgba(0, 114, 188, ${shadowAlpha}), -15px 0 35px -8px rgba(0, 114, 188, ${0.3 * (1 - t)}), 0 0 0 1.5px rgba(0, 114, 188, ${0.35 * (1 - t)})`
+      : "none";
+
+  // Content scale: scales smoothly from card-scale (0.42) to full screen (1.00) together with the card
+  const contentScale = 0.42 + 0.58 * t;
+
+  return (
+    <>
+      {/* ─────────────────────────────────────────────────────────────
+          1. RIGHT-SIDE CARD-TO-VIEWPORT ZOOM EXPANSION PORTAL
+          Starts at Card position on the right side
+          Grows from the right across the display
+          Everything inside (header, cards, images) scales from small to big together
+          ───────────────────────────────────────────────────────────── */}
+      {isTransitioning && (
+        <div
+          className="fixed inset-0 z-40 overflow-hidden pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          {/* Zooming Card: Starts on right side, expands to full display */}
+          <div
+            onClick={handleCompleteZoom}
+            title="Click to expand to full screen"
+            className="absolute bg-[#f8fbfe] overflow-hidden will-change-[left,top,bottom,right,opacity] pointer-events-auto cursor-pointer transition-opacity duration-150 ease-out"
+            style={{
+              left: `${leftPct}%`,
+              right: `${rightPx}px`,
+              top: `${topPx}px`,
+              bottom: `${bottomPx}px`,
+              borderRadius: `${radius}px`,
+              opacity: cardOpacity,
+              boxShadow,
+            }}
+          >
+            {/* Ambient luxury indicator badge when in card form on right */}
+            {expandRatio < 0.60 && (
+              <div
+                className="absolute top-5 left-5 z-50 transition-opacity duration-200 pointer-events-none"
+                style={{ opacity: Math.max(0, 1 - expandRatio * 1.7) }}
+              >
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-[#0072bc]/40 shadow-lg backdrop-blur-md">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#0072bc] opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-[#0072bc]" />
+                  </span>
+                  <span className="text-[11px] font-black uppercase tracking-wider text-[#0072bc]">
+                    {expandRatio >= 0.35 ? "Auto-expanding to full screen ➔" : "Click or scroll to expand ➔"}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Inner Content: Anchored at right with synchronized zoom expansion from small to big */}
+            <div
+              className="w-screen h-screen absolute right-0 flex flex-col justify-start"
+              style={{
+                top: `-${topPx}px`,
+                transform: `scale(${contentScale})`,
+                transformOrigin: "right 48%",
+                willChange: "transform",
+              }}
+            >
+              <div className="py-10 sm:py-12 md:py-14 lg:py-16 relative w-full h-full [&_.rv]:!opacity-100 [&_.rv]:!transform-none [&_.rv-up]:!opacity-100 [&_.rv-up]:!transform-none">
+                <IndustriesContent />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          2. NORMAL IN-FLOW INDUSTRIES SECTION
+          Takes over seamlessly once expansion finishes (rawProgress > 0.985)
+          Permits natural downward vertical scrolling through all 8 cards
+          ───────────────────────────────────────────────────────────── */}
+      <section
+        id="industries"
+        className={`py-10 sm:py-12 md:py-14 lg:py-16 relative z-20 -mt-[100vh] bg-[#f8fbfe] overflow-hidden scroll-mt-20 ${isTransitioning ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+      >
+        <IndustriesContent />
+      </section>
+    </>
   );
 }

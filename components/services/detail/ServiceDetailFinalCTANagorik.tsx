@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import { motion } from "motion/react";
 import type { Service } from "@/lib/services";
 
 export default function ServiceDetailFinalCTANagorik({
@@ -12,7 +13,7 @@ export default function ServiceDetailFinalCTANagorik({
   service: Service;
 }) {
   return (
-    <section className="relative !py-20 md:!py-28 bg-[#f8fafc] border-b border-slate-200/70 overflow-hidden">
+    <section className="sec-trans-section relative !py-20 md:!py-28 bg-[#f8fafc] border-b border-slate-200/70 overflow-hidden">
       {/* Background ambient accents */}
       <div
         className="pointer-events-none absolute -bottom-24 right-1/4 size-[400px] rounded-full bg-sky-200/20 blur-3xl -z-10"
@@ -24,10 +25,22 @@ export default function ServiceDetailFinalCTANagorik({
       />
 
       <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-[32px] border border-slate-200 bg-white p-8 sm:p-12 lg:p-16 shadow-xl shadow-slate-200/40 overflow-hidden">
+        {/* Outer Banner Card - Center Outwards Bloom */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.88, y: 35 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="trans-final-cta relative rounded-[32px] border border-slate-200 bg-white p-8 sm:p-12 lg:p-16 shadow-xl shadow-slate-200/40 overflow-hidden"
+        >
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-            {/* Left Content */}
-            <div>
+            {/* Left Content - Spreads Left */}
+            <motion.div
+              initial={{ opacity: 0, x: -45 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            >
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200/70 px-3.5 py-1 text-xs font-bold text-amber-800 mb-5">
                 <Sparkles size={14} className="text-amber-600" />
                 <span>Next-Generation Digital Flagships</span>
@@ -70,16 +83,22 @@ export default function ServiceDetailFinalCTANagorik({
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#facc15] px-7 py-4 text-sm font-bold text-slate-950 transition hover:bg-[#eab308] shadow-md shadow-amber-300/20"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-800 hover:text-[#0072bc] px-7 py-4 text-sm font-bold transition hover:bg-slate-50 border border-slate-200/90 shadow-sm"
                 >
-                  <Zap size={16} className="text-slate-900" />
+                  <Zap size={16} className="text-[#0072bc]" />
                   <span>Talk to Solutions Team</span>
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Media Collage */}
-            <div className="relative">
+            {/* Right Media Collage - Spreads Right */}
+            <motion.div
+              initial={{ opacity: 0, x: 45 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+              className="relative"
+            >
               <div className="relative mx-auto aspect-[4/3] w-full max-w-[500px] overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100 shadow-xl">
                 <Image
                   src="/assets/services/service-dedicated-teams-collaboration.jpg"
@@ -117,9 +136,9 @@ export default function ServiceDetailFinalCTANagorik({
                   <div className="text-xs font-bold text-slate-900">50+ Enterprise Platforms</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

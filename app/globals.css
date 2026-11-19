@@ -3867,7 +3867,8 @@ h1 em {
    ========================================================================== */
 .ft-exact {
    position: relative;
-   background: linear-gradient(180deg, #092c43 0%, #062338 100%);
+   background: radial-gradient(circle at 50% 0%, #154974 0%, #0e3759 50%, #092a46 100%);
+   border-top: 1px solid rgba(56, 189, 248, 0.22);
    padding: 80px 0 35px;
    overflow: hidden;
    color: #fff

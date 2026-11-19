@@ -24,4 +24,47 @@
   .service-preview-enter { animation: none; }
   .service-accordion { animation: none !important; }
   .service-page [data-service-process] { position: relative; top: auto !important; }
+  .trans-hero-content, .trans-hero-card,
+  .trans-about-header, .trans-about-left, .trans-about-right,
+  .trans-talent-header, .trans-talent-pills > *, .trans-talent-console,
+  .trans-why-header, .trans-why-grid > *,
+  .trans-test-header, .trans-test-left, .trans-test-center, .trans-test-right,
+  .trans-value-header, .trans-value-hero, .trans-value-cards > *,
+  .trans-tech-header, .trans-tech-marquee-1, .trans-tech-marquee-2,
+  .trans-engage-header, .trans-engage-grid > *,
+  .trans-faq-header, .trans-faq-left, .trans-faq-accordion > *,
+  .trans-lead-left, .trans-lead-form,
+  .trans-related-header, .trans-related-grid > *,
+  .trans-final-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
+
+/* ──────────────────────────────────────────────────────────
+   SERVICE & PRODUCT DETAIL SECTION TRANSITIONS
+   All kinetic entry motion is orchestrated exclusively via
+   Framer Motion (motion/react) for zero CSS collisions,
+   preventing double triggers, blinking, and visual flicker.
+   ────────────────────────────────────────────────────────── */
+.trans-hero-content, .trans-hero-card,
+.trans-about-header, .trans-about-left, .trans-about-right,
+.trans-talent-header, .trans-talent-pills > *, .trans-talent-console,
+.trans-why-header, .trans-why-grid > *,
+.trans-test-header, .trans-test-left, .trans-test-center, .trans-test-right,
+.trans-value-header, .trans-value-hero, .trans-value-cards > *,
+.trans-tech-header, .trans-tech-marquee-1, .trans-tech-marquee-2,
+.trans-engage-header, .trans-engage-grid > *,
+.trans-faq-header, .trans-faq-left, .trans-faq-accordion > *,
+.trans-lead-left, .trans-lead-form,
+.trans-related-header, .trans-related-grid > *,
+.trans-final-cta {
+  opacity: 1;
+  transform: none;
+}
+
+
+
+
+

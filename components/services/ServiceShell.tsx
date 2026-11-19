@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import PageEffects from "@/components/animations/PageEffects";
 import ServiceMotion from "./ServiceMotion";
 import "@/app/services/service.css";
 import { serviceContainer, serviceHeading } from "./service-styles";
@@ -44,5 +45,19 @@ export function ServiceCTA({ title = "Let's build your next chapter.", text = "T
   );
 }
 export default function ServiceShell({ children }: { children: ReactNode }) {
-  return <><a href="#main" className="skip">Skip to content</a><Header /><ServiceMotion><main id="main" className="service-page bg-white text-[var(--ink)]">{children}</main></ServiceMotion><Footer /></>;
+  return (
+    <>
+      <a href="#main" className="skip">
+        Skip to content
+      </a>
+      <Header />
+      <ServiceMotion>
+        <main id="main" className="service-page bg-white text-[var(--ink)]">
+          {children}
+        </main>
+      </ServiceMotion>
+      <Footer />
+      <PageEffects />
+    </>
+  );
 }

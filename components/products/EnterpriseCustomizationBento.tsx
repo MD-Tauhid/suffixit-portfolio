@@ -7,11 +7,9 @@ import {
   CheckCircle2,
   Cpu,
   Database,
-  Lock,
   Server,
   Terminal,
   Workflow,
-  Zap,
 } from "lucide-react";
 
 export default function EnterpriseCustomizationBento() {
@@ -43,33 +41,33 @@ export default function EnterpriseCustomizationBento() {
   ];
 
   return (
-    <section className="relative overflow-hidden !py-24 md:!py-32 bg-[#061424] text-white">
+    <section className="relative overflow-hidden !py-20 md:!py-28 bg-[#f8fbff] border-t border-b border-sky-100/80 text-[#0f172a]">
       {/* Ambient background glows */}
       <div
-        className="pointer-events-none absolute -top-40 right-10 size-[600px] rounded-full bg-gradient-to-br from-[#0072bc]/25 via-[#38bdf8]/15 to-transparent blur-[120px]"
+        className="pointer-events-none absolute -top-40 right-10 size-[600px] rounded-full bg-gradient-to-br from-sky-200/40 via-blue-100/25 to-transparent blur-[120px] -z-10"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-40 left-10 size-[500px] rounded-full bg-emerald-500/10 blur-[100px]"
+        className="pointer-events-none absolute -bottom-40 left-10 size-[500px] rounded-full bg-blue-100/30 blur-[100px] -z-10"
         aria-hidden="true"
       />
 
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="mb-16 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-950/60 px-3.5 py-1 text-xs font-bold text-sky-300 shadow-sm backdrop-blur-md mb-4">
-            <Terminal size={13} className="text-sky-400" />
+        <div className="mb-14 max-w-3xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#0072bc]/20 bg-[#eef7ff] px-3.5 py-1 text-xs font-bold text-[#0072bc] shadow-xs mb-4">
+            <Terminal size={13} className="text-[#0072bc]" />
             <span>Enterprise Customization Framework</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0f172a] leading-[1.12]">
             Turnkey software platforms.
             <br />
-            <span className="bg-gradient-to-r from-sky-400 via-[#38bdf8] to-emerald-400 bg-clip-text text-transparent">
+            <span className="text-[#0072bc]">
               Tailored to your exact business rules.
             </span>
           </h2>
 
-          <p className="mt-5 text-base sm:text-[17px] text-slate-300/80 leading-relaxed max-w-2xl">
+          <p className="mt-5 text-base sm:text-[17px] text-[#475569] leading-relaxed max-w-2xl">
             No two enterprise organizations operate identically. We adapt our software platforms to integrate with your existing ERP, biometric hardware, and statutory accounting workflows.
           </p>
         </div>
@@ -80,30 +78,33 @@ export default function EnterpriseCustomizationBento() {
             return (
               <div
                 key={p.title}
-                className="rounded-[22px] border border-white/10 bg-white/[0.04] p-7 backdrop-blur-md hover:bg-white/[0.07] hover:border-sky-400/30 transition-all flex flex-col justify-between"
+                className="rounded-[24px] border border-slate-200/90 bg-white p-7 shadow-[0_4px_20px_-4px_rgba(0,35,75,0.05)] hover:shadow-[0_16px_35px_-8px_rgba(0,114,188,0.14)] hover:border-[#0072bc]/35 transition-all flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="flex size-11 items-center justify-center rounded-2xl bg-sky-500/20 text-sky-300 border border-sky-400/30">
+                    <div className="flex size-11 items-center justify-center rounded-2xl bg-[#eef7ff] text-[#0072bc] border border-sky-200/70 group-hover:bg-[#0072bc] group-hover:text-white transition-colors">
                       <Icon size={20} />
                     </div>
-                    <span className="text-[10px] font-mono text-sky-400 bg-sky-950/80 px-2 py-0.5 rounded-full border border-sky-400/20">
+                    <span className="text-[10px] font-mono text-[#0072bc] bg-[#f0f7ff] px-2.5 py-0.5 rounded-full border border-sky-200/60 font-semibold">
                       {p.tech}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white tracking-tight">
+                  <h3 className="text-lg font-bold text-[#0f172a] tracking-tight group-hover:text-[#0072bc] transition-colors">
                     {p.title}
                   </h3>
 
-                  <p className="mt-3 text-xs sm:text-[13px] text-slate-300/75 leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-[13px] text-[#475569] leading-relaxed">
                     {p.lead}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
-                  <CheckCircle2 size={13} />
-                  <span>Production Ready</span>
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    <span>Production Ready</span>
+                  </div>
+                  <ArrowUpRight size={14} className="text-slate-400 group-hover:text-[#0072bc] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
               </div>
             );
@@ -111,21 +112,24 @@ export default function EnterpriseCustomizationBento() {
         </div>
 
         {/* Bottom Consultation Strip */}
-        <div className="mt-14 rounded-[24px] border border-white/10 bg-white/[0.03] p-7 sm:p-9 backdrop-blur-md flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="mt-14 rounded-[24px] border border-sky-200/80 bg-gradient-to-r from-[#f0f7ff] via-white to-sky-50/50 p-7 sm:p-9 shadow-[0_12px_35px_-8px_rgba(0,114,188,0.08)] flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-sky-400">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#0072bc]">
               Need custom ERP or API adaptation?
             </div>
-            <div className="text-xl font-bold text-white mt-1">
+            <div className="text-xl font-bold text-[#0f172a] mt-1">
               Discuss your company&apos;s workflows with our principal architects.
             </div>
+            <p className="text-xs sm:text-sm text-[#475569] mt-1">
+              Fast technical scoping, direct engineering alignment, and transparent feasibility review within 24 hours.
+            </p>
           </div>
 
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#0072bc] hover:bg-sky-50 px-6 py-3 text-xs sm:text-sm font-bold shadow-lg transition-all"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0072bc] text-white hover:bg-[#005a96] px-7 py-3.5 text-xs sm:text-sm font-bold shadow-md shadow-[#0072bc]/25 transition-all whitespace-nowrap cursor-pointer"
           >
-            <span>Request System Architecture Consultation</span>
+            <span>Request Architecture Consultation</span>
             <ArrowUpRight size={15} />
           </Link>
         </div>

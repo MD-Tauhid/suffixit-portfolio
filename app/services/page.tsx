@@ -3,6 +3,7 @@ import ServiceShell, { ServiceCTA } from "@/components/services/ServiceShell";
 import ServicesHero from "@/components/services/ServicesHero";
 import ServicesShowcase from "@/components/services/ServicesShowcase";
 import ServicesSpecializedPractices from "@/components/services/ServicesSpecializedPractices";
+import Tech from "@/components/sections/Tech";
 
 export const metadata: Metadata = {
   title: "Enterprise IT & Software Engineering Services | Suffix IT Limited",
@@ -23,7 +24,10 @@ export default function ServicesPage() {
       {/* 3. Circular Reveal Portal: 9 Specialized Disciplines & Enterprise Infrastructure (06 – 14) */}
       <ServicesSpecializedPractices />
 
-      {/* 4. Final Conversion CTA Card */}
+      {/* 4. Tech We Use: Modern Stack Dual Marquee */}
+      <Tech />
+
+      {/* 5. Final Conversion CTA Card */}
       <ServiceCTA />
     </ServiceShell>
   );

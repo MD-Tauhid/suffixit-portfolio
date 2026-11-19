@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { TrendingUp, ShoppingBag, Zap, CheckCircle2 } from "lucide-react";
 import type { Service } from "@/lib/services";
 import type { ServiceMediaConfig } from "../serviceDataMap";
@@ -14,18 +15,24 @@ export default function ServiceDetailAboutNagorik({
   mediaConfig: ServiceMediaConfig;
 }) {
   return (
-    <section className="relative !py-20 md:!py-28 bg-white border-b border-slate-100 overflow-hidden">
+    <section className="sec-trans-section relative !py-20 md:!py-28 bg-white border-b border-slate-100 overflow-hidden">
       <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* Top Header */}
-        <div className="relative mb-14 flex items-end justify-between">
-          <div className="max-w-2xl">
+        <div className="trans-about-header relative mb-14 flex items-end justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl"
+          >
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0f172a] tracking-tight">
               What is {service.name}?
             </h2>
             <p className="mt-3 text-base text-[#475569] leading-relaxed">
               Transforming conventional online stores into high-conversion digital flagships engineered for speed, reliability, and enterprise scale.
             </p>
-          </div>
+          </motion.div>
 
           {/* Watermark Icon */}
           <div className="hidden lg:block opacity-10 text-slate-800 pointer-events-none -mr-4">
@@ -33,10 +40,16 @@ export default function ServiceDetailAboutNagorik({
           </div>
         </div>
 
-        {/* Split 2-Column: Left Photo, Right Soft Yellow Accent Card */}
+        {/* Split 2-Column: 2 Sides Entry (Left Photo, Right Soft Yellow Card) */}
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          {/* Left: Studio/Engineering Stage Photo */}
-          <div className="relative aspect-[16/11] w-full overflow-hidden rounded-[26px] border border-slate-200/90 bg-sky-50 shadow-xl">
+          {/* Left: Studio/Engineering Stage Photo (Enters from Left Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: -85 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-about-left relative aspect-[16/11] w-full overflow-hidden rounded-[26px] border border-slate-200/90 bg-sky-50 shadow-xl"
+          >
             <Image
               src={mediaConfig.spotlightImage || "/assets/services/service-ecommerce-conversion-architecture.jpg"}
               alt={`${service.name} engineering stage`}
@@ -49,10 +62,16 @@ export default function ServiceDetailAboutNagorik({
               <Zap size={14} className="text-[#0072bc]" />
               <span>Headless Architecture &amp; PWA Ready</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: Soft Yellow Pastel Card matching screenshot */}
-          <div className="rounded-[26px] border border-[#fef08a] bg-[#fef9c3] p-8 sm:p-12 shadow-sm flex flex-col justify-between h-full">
+          {/* Right: Soft Yellow Pastel Card (Enters from Right Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: 85 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-about-right rounded-[26px] border border-[#fef08a] bg-[#fef9c3] p-8 sm:p-12 shadow-sm flex flex-col justify-between h-full"
+          >
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/30 px-3 py-1 text-xs font-bold text-amber-900 mb-4">
                 <span>Tailored Architecture</span>
@@ -81,7 +100,7 @@ export default function ServiceDetailAboutNagorik({
                 <span>Real-time inventory synchronization across physical stores and warehouses</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

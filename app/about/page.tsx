@@ -46,12 +46,12 @@ export default function AboutPage() {
               <span className={styles.location}><Globe2 size={14} /> Dhaka, Bangladesh / Since 2017</span>
             </div>
 
-            {/* Split Row: Monumental Headline Left, 3D Liquid Glass S-Logo Stage Right */}
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 py-3 md:py-6">
-              <div className="w-full lg:max-w-[58%] xl:max-w-[60%]">
-                <h1 id="about-title" className="m-0 text-[clamp(48px,8.2vw,96px)] xl:text-[102px] font-[650] leading-[1.02] tracking-[-3px] md:tracking-[-4.5px]">
-                  <span className={styles.line}><span data-about-title>People. Purpose.</span></span>
-                  <span className={styles.line}><em data-about-title className="font-normal italic text-[var(--br)] [font-family:var(--font-serif),Georgia,serif]">Practical technology.</em></span>
+            {/* Split Row: Headline Left (2 clean lines), 3D Liquid Glass S-Logo Stage Right */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-10 py-3 md:py-6">
+              <div className="w-full lg:max-w-[62%] xl:max-w-[64%]">
+                <h1 id="about-title" className="m-0 text-[clamp(34px,5.2vw,66px)] lg:text-[58px] xl:text-[70px] 2xl:text-[76px] font-[650] leading-[1.06] tracking-[-1.8px] md:tracking-[-2.8px]">
+                  <span className={styles.line}><span data-about-title className="whitespace-nowrap">People. Purpose.</span></span>
+                  <span className={styles.line}><em data-about-title className="font-normal italic text-[var(--br)] [font-family:var(--font-serif),Georgia,serif] whitespace-nowrap">Practical technology.</em></span>
                 </h1>
               </div>
 

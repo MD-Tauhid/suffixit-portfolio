@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion } from "motion/react";
 import { ArrowUpRight, CheckCircle2, Sparkles, Layers, Cpu } from "lucide-react";
 import type { Service } from "@/lib/services";
 
@@ -67,10 +68,16 @@ export default function ServiceDetailTalentMatrixNagorik({
   const activeRole = roles[activeIndex];
 
   return (
-    <section id="talent-matrix" className="relative !py-20 md:!py-28 bg-[#f8fbff] border-b border-sky-100 scroll-mt-12">
+    <section id="talent-matrix" className="sec-trans-section relative !py-20 md:!py-28 bg-[#f8fbff] border-b border-sky-100 scroll-mt-12">
       <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14 max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="trans-talent-header mb-14 max-w-2xl"
+        >
           <div className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-white px-3.5 py-1 text-xs font-bold text-[#0072bc] mb-3 shadow-xs">
             <Sparkles size={12} className="text-[#0072bc]" />
             <span>Specialized Engineering Talent</span>
@@ -81,12 +88,18 @@ export default function ServiceDetailTalentMatrixNagorik({
           <p className="mt-3 text-sm sm:text-base text-[#475569]">
             Pre-vetted senior domain specialists ready to accelerate your e-commerce roadmap or embed seamlessly into your existing product sprint.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 2-Column Layout */}
+        {/* 2-Column Layout (2 Sides Entry) */}
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 items-start">
-          {/* Left Column: Interactive Role List */}
-          <div className="space-y-3">
+          {/* Left Column: Interactive Role List (Enters from Left Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: -85 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-talent-pills space-y-3"
+          >
             {roles.map((role, idx) => {
               const isActive = activeIndex === idx;
               return (
@@ -128,10 +141,16 @@ export default function ServiceDetailTalentMatrixNagorik({
                 </button>
               );
             })}
-          </div>
+          </motion.div>
 
-          {/* Right Column: Dynamic Role Preview Card matching screenshot */}
-          <div className="sticky top-28 rounded-[28px] border border-slate-200/90 bg-white p-8 sm:p-10 shadow-xl shadow-sky-100/50">
+          {/* Right Column: Dynamic Role Preview Card (Enters from Right Side) */}
+          <motion.div
+            initial={{ opacity: 0, x: 85 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-talent-console sticky top-28 rounded-[28px] border border-slate-200/90 bg-white p-8 sm:p-10 shadow-xl shadow-sky-100/50"
+          >
             <div className="inline-flex items-center gap-2 rounded-md bg-sky-50 border border-sky-100 px-3 py-1 text-xs font-bold text-[#0072bc] mb-4">
               <Cpu size={14} />
               <span>Domain Capability Profile</span>
@@ -183,7 +202,7 @@ export default function ServiceDetailTalentMatrixNagorik({
                 <ArrowUpRight size={16} />
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

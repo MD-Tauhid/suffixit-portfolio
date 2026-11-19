@@ -82,8 +82,8 @@ function Navigation({ pathname }: { pathname: string }) {
         if (!event.currentTarget.contains(event.relatedTarget)) setDesktopMenu(null);
       }}
     >
-      <div className="mx-auto flex h-[76px] w-[calc(100%-32px)] max-w-[1240px] items-center justify-between gap-5 lg:h-20 lg:w-[calc(100%-48px)]">
-        <div className="w-[145px] shrink-0 [&_img]:h-auto [&_img]:w-full lg:w-[160px]">
+      <div className="mx-auto flex h-[58px] w-[calc(100%-32px)] max-w-[1240px] items-center justify-between gap-5 lg:h-[64px] lg:w-[calc(100%-48px)]">
+        <div className="w-[136px] shrink-0 [&_img]:h-auto [&_img]:w-full lg:w-[150px]">
           <Logo priority />
         </div>
         <nav className="hidden lg:block" aria-label="Primary">
@@ -116,8 +116,8 @@ function Navigation({ pathname }: { pathname: string }) {
                         focusPanel(item);
                       }
                     }}
-                    className={`relative flex min-h-11 items-center rounded-full py-2.5 pl-4 text-[13px] font-semibold outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)] ${
-                      item.children ? "pr-1.5" : "pr-4"
+                    className={`relative flex min-h-[38px] items-center rounded-full py-1.5 pl-3.5 text-[13px] font-semibold outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)] ${
+                      item.children ? "pr-1" : "pr-3.5"
                     }`}
                   >
                     {current(item) && (
@@ -139,10 +139,10 @@ function Navigation({ pathname }: { pathname: string }) {
                           focusPanel(item);
                         }
                       }}
-                      className="mr-2 flex size-7 items-center justify-center rounded-full transition-colors duration-200 hover:bg-[#0072bc]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)]"
+                      className="mr-1.5 flex size-6 items-center justify-center rounded-full transition-colors duration-200 hover:bg-[#0072bc]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)]"
                     >
                       <ChevronDown
-                        size={13}
+                        size={12}
                         className={`transition-transform duration-200 motion-reduce:transition-none ${
                           desktopMenu === item.id ? "rotate-180" : ""
                         }`}
@@ -157,10 +157,10 @@ function Navigation({ pathname }: { pathname: string }) {
         <Link
           href="/contact"
           onClick={navigate}
-          className="hidden min-h-11 shrink-0 items-center gap-2 rounded-full bg-[var(--br)] px-6 py-2.5 text-xs font-bold text-white transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--br)] lg:inline-flex"
+          className="hidden min-h-[38px] shrink-0 items-center gap-2 rounded-full bg-[var(--br)] px-5 py-2 text-xs font-bold text-white transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--br)] lg:inline-flex"
         >
           <span>Contact</span>
-          <ArrowUpRight size={15} />
+          <ArrowUpRight size={14} />
         </Link>
         <button
           type="button"
@@ -172,11 +172,11 @@ function Navigation({ pathname }: { pathname: string }) {
             setMobileOpen(!mobileOpen);
             setDesktopMenu(null);
           }}
-          className={`flex size-11 shrink-0 items-center justify-center rounded-[14px] border border-solid border-[#0072bc]/15 text-[var(--br)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)] lg:hidden ${
+          className={`flex size-9 shrink-0 items-center justify-center rounded-[12px] border border-solid border-[#0072bc]/15 text-[var(--br)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)] lg:hidden ${
             mobileOpen ? "bg-[#e8f3fc]" : "bg-white"
           }`}
         >
-          {mobileOpen ? <X size={21} /> : <Menu size={21} />}
+          {mobileOpen ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
 

@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/animations/ScrollProgress";
 import PageEffects from "@/components/animations/PageEffects";
 import JsonLd from "@/components/layout/JsonLd";
-import Hero, { VideoHero } from "@/components/sections/Hero";
+import Hero, { VideoHero, SpatialHero, EditorialHero } from "@/components/sections/Hero";
 import Stats from "@/components/sections/Stats";
 import Clients from "@/components/sections/Clients";
 import Products from "@/components/sections/Products";
@@ -16,6 +16,7 @@ import Models from "@/components/sections/Models";
 import Tech from "@/components/sections/Tech";
 // import Testimonials3DSection from "@/components/ui/3d-testimonials";
 import { StaggerTestimonialsSection } from "@/components/ui/stagger-testimonials";
+// import ConnectedStoriesSection from "@/components/sections/ConnectedStories";
 import Contact from "@/components/sections/Contact";
 
 export default function HomePage() {
@@ -25,12 +26,18 @@ export default function HomePage() {
       <ScrollProgress />
       <Header />
       <main id="main">
-        {/* 1. Hero Section:
-            - Classic 4th-commit Hero active rakhle: <Hero />
-            - Video Hero active korte chaile: <Hero /> comment kore <VideoHero /> un-comment korun
+        {/* ═════════════════════════════════════════════════════════════════
+            HERO SECTION VARIANTS (যেকোনো একটির কমেন্ট উঠিয়ে রানিং করুন)
+            ═════════════════════════════════════════════════════════════════
+            Variant 1 (New 3D Spatial Orbital Cards): <SpatialHero />  <-- Active
+            Variant 2 (Flagship Liquid Glass S-Logo & Cockpit): <Hero />
+            Variant 3 (60fps Scroll-Locked Video Hero): <VideoHero />
+            Variant 4 (Modern Editorial Grid Hero): <EditorialHero />
         */}
-        {/* <Hero /> */}
-        <VideoHero />
+        {/* <SpatialHero /> */}
+        <Hero />
+        {/* <VideoHero /> */}
+        {/* <EditorialHero /> */}
         <Stats />
 
         {/* 2. Client Logos Section */}

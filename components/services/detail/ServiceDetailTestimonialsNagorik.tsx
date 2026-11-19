@@ -2,14 +2,21 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { Star, Quote, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function ServiceDetailTestimonialsNagorik() {
   return (
-    <section className="relative !py-20 md:!py-28 bg-white border-b border-slate-100 overflow-hidden">
+    <section className="sec-trans-section relative !py-20 md:!py-28 bg-white border-b border-slate-100 overflow-hidden">
       <div className="mx-auto max-w-[1240px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14 max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="trans-test-header mb-14 max-w-2xl"
+        >
           <div className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1 text-xs font-bold text-[#0072bc] mb-3">
             <Star size={12} className="fill-amber-400 text-amber-400" />
             <span>Proven Enterprise Impact</span>
@@ -20,12 +27,18 @@ export default function ServiceDetailTestimonialsNagorik() {
           <p className="mt-3 text-sm sm:text-base text-[#475569]">
             Real feedback from enterprise founders, retail directors, and technology officers who scale their digital revenue with Suffix IT.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 4-Card Bento Grid matching screenshot */}
+        {/* 4-Card Bento Grid: Center Outwards Spread ("makhkhan theke 2 dike choriye jabe") */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-          {/* Card 1: Large Testimonial Card Left */}
-          <div className="rounded-[28px] border border-slate-200/90 bg-[#f8fbff] p-8 sm:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          {/* Card 1: Large Testimonial Card Left (Spreads to Left) */}
+          <motion.div
+            initial={{ opacity: 0, x: 80, scale: 0.94 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-test-left rounded-[28px] border border-slate-200/90 bg-[#f8fbff] p-8 sm:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
+          >
             <Quote size={80} className="absolute -top-4 -right-4 text-sky-100 pointer-events-none" />
 
             <div>
@@ -55,10 +68,16 @@ export default function ServiceDetailTestimonialsNagorik() {
                 <div className="text-[11px] text-slate-500">Apex Brands • Dhaka</div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Middle Column: 2 Pastel Metric Cards */}
-          <div className="flex flex-col gap-6 justify-between">
+          {/* Middle Column: 2 Pastel Metric Cards (Center Bloom first) */}
+          <motion.div
+            initial={{ opacity: 0, y: 25, scale: 0.88 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-test-center flex flex-col gap-6 justify-between"
+          >
             {/* Card 2: Soft Purple Pastel Metric Card */}
             <div className="rounded-[28px] border border-[#ddd6fe] bg-[#ede9fe] p-8 sm:p-9 shadow-sm flex flex-col justify-between h-full">
               <div>
@@ -88,10 +107,16 @@ export default function ServiceDetailTestimonialsNagorik() {
                 Annual digital merchandise volume securely routed, reconciled, and deposited through our payment architectures.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Card 4: Second Testimonial Card Right */}
-          <div className="rounded-[28px] border border-slate-200/90 bg-[#f8fbff] p-8 sm:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          {/* Card 4: Second Testimonial Card Right (Spreads to Right) */}
+          <motion.div
+            initial={{ opacity: 0, x: -80, scale: 0.94 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="trans-test-right rounded-[28px] border border-slate-200/90 bg-[#f8fbff] p-8 sm:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
+          >
             <Quote size={80} className="absolute -top-4 -right-4 text-sky-100 pointer-events-none" />
 
             <div>
@@ -121,7 +146,7 @@ export default function ServiceDetailTestimonialsNagorik() {
                 <div className="text-[11px] text-slate-500">Crossworld Retail Group</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -135,7 +135,7 @@ export const productDetails: Product[] = [
   },
   {
     slug: "payroll-system",
-    name: "Automated Payroll System",
+    name: "Payroll System",
     category: "ERP & people",
     kind: "software",
     tone: "lavender",

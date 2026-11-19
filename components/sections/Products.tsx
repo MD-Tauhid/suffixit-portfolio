@@ -460,11 +460,10 @@ export default function Products() {
     const currentScroll = -rect.top;
     const progress = Math.max(0, Math.min(1, currentScroll / scrollableDistance));
 
-    // Dedicate 0.0 to 0.82 for horizontal sliding of cards,
-    // and 0.82 to 1.0 as a generous resting/braking zone for Card 9.
-    // This allows the user to absorb Card 9 peacefully and naturally
-    // decelerate their scroll before transitioning to Industries.
-    const HORIZONTAL_LIMIT = 0.82;
+    // Dedicate 0.0 to 0.70 for horizontal sliding of cards,
+    // and 0.70 to 1.0 as the smooth transition zone where the Industries section
+    // emerges and expands from the bottom-right corner to cover Products.
+    const HORIZONTAL_LIMIT = 0.70;
     const horizontalProgress = Math.min(1, progress / HORIZONTAL_LIMIT);
 
     setScrollProgress(progress);
@@ -494,7 +493,7 @@ export default function Products() {
   }, [updateScroll, displayedProducts]);
 
   // Active Card Index (0 to totalCards - 1, calibrated to horizontal limit)
-  const HORIZONTAL_LIMIT = 0.82;
+  const HORIZONTAL_LIMIT = 0.70;
   const horizontalRatio = Math.min(1, scrollProgress / HORIZONTAL_LIMIT);
   const activeCardIndex = Math.min(
     totalCards - 1,
@@ -749,10 +748,10 @@ export default function Products() {
 
             {/* Scroll Direction / Status Hint */}
             <div className="flex items-center gap-2 text-xs font-bold text-[#515978]">
-              {scrollProgress >= 0.80 ? (
-                <span className="inline-flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 animate-pulse font-semibold">
-                  <span>Completed</span>
-                  <span>↓ Scroll down to continue</span>
+              {scrollProgress >= 0.70 ? (
+                <span className="inline-flex items-center gap-1.5 text-[#0072bc] bg-[#eef7ff] px-3.5 py-1 rounded-full border border-[#0072bc]/30 shadow-2xs font-extrabold animate-pulse">
+                  <span>✨ Scroll down to expand Industries</span>
+                  <span className="text-sm">➔</span>
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1.5 text-[#0072bc] bg-[#f0f7fe] px-3 py-1 rounded-full border border-[#d2e4f7]">

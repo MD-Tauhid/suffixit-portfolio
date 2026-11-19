@@ -438,7 +438,7 @@ export default function Contact() {
                             Dhaka Campus
                           </span>
                           <a
-                            href="https://maps.google.com/?q=Rupayan+Millennium+Square+Progoti+Sharoni+Dhaka"
+                            href="https://maps.google.com/?q=Rupayan+Millennium+Square,+North+Badda,+Dhaka"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-xs font-semibold text-[#0068B5] hover:underline"
