@@ -190,7 +190,7 @@ export default function Models() {
   }, []);
 
   return (
-    <section id="models" ref={trackRef} className="relative w-full md:h-[175vh] p-0 bg-[#03152E]">
+    <section id="models" ref={trackRef} className="relative w-full md:h-[240vh] p-0 bg-[#03152E]">
       {/* Sticky Viewport Stage (Native CSS sticky - No GSAP pin) */}
       <div
         className="relative md:sticky md:top-0 h-auto md:h-dvh w-full overflow-hidden flex items-center justify-center py-2 md:py-0"

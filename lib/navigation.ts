@@ -3,10 +3,37 @@ export type NavigationItem = {
   id: string; label: string; href: string; sectionHash?: string;
   children?: NavigationChild[]; description?: string;
 };
-/** One menu source for desktop and mobile. Replace this data source when CMS pages are connected. */
+
+/** One menu source for desktop and mobile. */
 export const navigation: NavigationItem[] = [
   { id: "home", label: "Home", href: "/" },
-  { id: "about", label: "About Us", href: "/about" },
+  { id: "about", label: "About", href: "/about" },
+  {
+    id: "products", label: "Products", href: "/products", sectionHash: "#products",
+    description: "Ready-made software for your people, customers and everyday operations.",
+    children: [
+      { label: "Payroll System", href: "/products/payroll-system", icon: "receipt", description: "Earnings, deductions and pay runs" },
+      { label: "Provident Fund", href: "/products/provident-fund", icon: "landmark", description: "Employee fund records and reporting" },
+      { label: "Suffix E-commerce", href: "/products/ecommerce", icon: "shopping-cart", description: "Products, customers and orders" },
+      { label: "Rupantar ERP", href: "/products/rupantar-erp", icon: "layers", description: "Connected business operations" },
+      { label: "Hotel Booking", href: "/products/hotel-booking", icon: "hotel", description: "Rooms, reservations and guests" },
+      { label: "Field Force Management", href: "/products/field-force", icon: "compass", description: "Visits, tasks and field operations" },
+      { label: "Interconnect Billing", href: "/products/interconnect-billing", icon: "radio-tower", description: "Telecom rating and billing workflows" },
+      { label: "Rupantor Inventory", href: "/products/rupantor-inventory", icon: "store", description: "Warehouses, stock and inventory" },
+      { label: "Rupantar HCM", href: "/products/rupantar-hcm", icon: "users", description: "People, attendance and payroll" },
+      { label: "Smart POS & Billing", href: "/products/smart-pos", icon: "receipt", description: "Retail checkout and stock visibility" },
+      { label: "Bulk SMS & Meeting", href: "/products/bulk-sms-meeting", icon: "message-square", description: "Business messaging and collaboration" },
+    ],
+  },
+  {
+    id: "iot", label: "IoT", href: "/services/iot-solutions", sectionHash: "#iot",
+    description: "Connected industrial devices, remote telemetry and automated monitoring.",
+    children: [
+      { label: "Smart Transformer Monitoring", href: "/products/transformer-monitoring", icon: "monitor", description: "Real-time transformer telemetry & protection" },
+      { label: "Industrial Energy Monitoring", href: "/services/industrial-energy-monitoring", icon: "bolt", description: "Power quality, load telemetry & billing" },
+      { label: "Automation & IoT", href: "/services/iot-solutions", icon: "bot", description: "Smart hardware, sensors & telematics" },
+    ],
+  },
   {
     id: "services", label: "Services", href: "/services", sectionHash: "#services",
     description: "Software, systems and support. Find the expertise your business needs.",
@@ -14,7 +41,6 @@ export const navigation: NavigationItem[] = [
       { label: "Custom Software", href: "/services/custom-software", icon: "code", description: "Applications around your workflows" },
       { label: "Web & E-commerce", href: "/services/web-ecommerce", icon: "globe", description: "Websites, portals and online stores" },
       { label: "Mobile Apps", href: "/services/mobile-apps", icon: "smartphone", description: "Tools for customers and field teams" },
-      { label: "IoT Solutions", href: "/services/iot-solutions", icon: "cpu", description: "Connected devices and monitoring" },
       { label: "Cloud & Hosting", href: "/services/cloud-hosting", icon: "cloud", description: "A home for your applications" },
       { label: "Storage & Backup", href: "/services/storage-backup", icon: "database", description: "Data protection and recovery planning" },
       { label: "ERP Consulting", href: "/services/erp-consulting", icon: "target", description: "Connect your business processes" },
@@ -28,28 +54,9 @@ export const navigation: NavigationItem[] = [
       { label: "Bulk SMS", href: "/services/bulk-sms", icon: "message-square", description: "Business messaging requirements" },
       { label: "IT Infrastructure", href: "/services/it-infrastructure", icon: "cloud", description: "Networks, servers and support" },
       { label: "IT & OT Security", href: "/services/it-ot-security", icon: "shield-check", description: "Plan protection for your environment" },
-      { label: "Energy Monitoring", href: "/services/industrial-energy-monitoring", icon: "cpu", description: "Industrial energy information" },
     ],
   },
-  {
-    id: "products", label: "Products", href: "/products", sectionHash: "#products",
-    description: "Ready-made software for your people, customers and everyday operations.",
-    children: [
-      { label: "Payroll System", href: "/products/payroll-system", icon: "receipt", description: "Earnings, deductions and pay runs" },
-      { label: "Field Force Management", href: "/products/field-force", icon: "compass", description: "Visits, tasks and field operations" },
-      { label: "Rupantar HCM", href: "/products/rupantar-hcm", icon: "users", description: "People, attendance and payroll" },
-      { label: "Rupantar ERP", href: "/products/rupantar-erp", icon: "layers", description: "Connected business operations" },
-      { label: "Provident Fund", href: "/products/provident-fund", icon: "landmark", description: "Employee fund records and reporting" },
-      { label: "Suffix E-commerce", href: "/products/ecommerce", icon: "shopping-cart", description: "Products, customers and orders" },
-      { label: "Smart POS & Billing", href: "/products/smart-pos", icon: "receipt", description: "Retail checkout and stock visibility" },
-      { label: "Hotel Booking", href: "/products/hotel-booking", icon: "hotel", description: "Rooms, reservations and guests" },
-      { label: "Interconnect Billing", href: "/products/interconnect-billing", icon: "radio-tower", description: "Telecom rating and billing workflows" },
-      { label: "Bulk SMS & Meeting", href: "/products/bulk-sms-meeting", icon: "message-square", description: "Business messaging and collaboration" },
-      { label: "Rupantor Inventory", href: "/products/rupantor-inventory", icon: "store", description: "Warehouses, stock and inventory" },
-      { label: "Smart Transformer Monitoring", href: "/products/transformer-monitoring", icon: "cpu", description: "Status, history and remote alerts" },
-    ],
-  },
-  { id: "clients", label: "Clients", href: "/#clients", sectionHash: "#clients" },
+  { id: "career", label: "Career", href: "/career" },
   { id: "contact", label: "Contact", href: "/contact" },
 ];
 

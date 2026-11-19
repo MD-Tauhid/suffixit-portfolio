@@ -557,25 +557,25 @@ export default function MetroHero({
       const v = currentVelocityRef.current;
 
       // ─────────────────────────────────────────────────────────
-      // 3 ULTRA-RESPONSIVE FAST SPEED MODES:
-      // Optimized so user comfortably completes hero in only 3-4 natural scrolls
-      // Mode 1: Normal (2.0x) - Duration 340ms (~0.68s video advance)
-      // Mode 2: Fast (3.0x)   - Duration 420ms (~1.26s video advance)
-      // Mode 3: Turbo (4.0x)  - Duration 500ms (~2.00s video advance)
+      // BALANCED & CONTROLLED VIDEO SPEEDS:
+      // Smooth, natural glide without abrupt leaps
+      // Mode 1: Normal (1.5x) - Duration 280ms
+      // Mode 2: Fast (2.2x)   - Duration 340ms
+      // Mode 3: Turbo (2.8x)  - Duration 400ms
       // ─────────────────────────────────────────────────────────
-      let playDuration = 340;
+      let playDuration = 280;
       if (v >= 2.8 || absDelta > 100) {
-        targetSpeedRef.current = 4.0;
+        targetSpeedRef.current = 2.8;
         setSpeedMode("more-fast");
-        playDuration = 480;
-      } else if (v >= 1.0 || absDelta > 45) {
-        targetSpeedRef.current = 3.0;
-        setSpeedMode("fast");
         playDuration = 400;
-      } else {
-        targetSpeedRef.current = 2.0;
-        setSpeedMode("normal");
+      } else if (v >= 1.0 || absDelta > 45) {
+        targetSpeedRef.current = 2.2;
+        setSpeedMode("fast");
         playDuration = 340;
+      } else {
+        targetSpeedRef.current = 1.5;
+        setSpeedMode("normal");
+        playDuration = 280;
       }
 
       // 3. Playback Direction

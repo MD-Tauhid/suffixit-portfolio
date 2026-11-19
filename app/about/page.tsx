@@ -10,6 +10,7 @@ import AboutWhySuffix from "@/components/sections/AboutWhySuffix";
 import AboutRecognition from "@/components/sections/AboutRecognition";
 import AboutProjectBanner from "@/components/sections/AboutProjectBanner";
 import ScrollProgress from "@/components/animations/ScrollProgress";
+import { SuffixGlassReveal } from "@/components/ui/liquid-glass-logo-reveal";
 import { about, practices } from "@/lib/about";
 import { site } from "@/lib/site";
 import styles from "./about.styles";
@@ -39,18 +40,85 @@ export default function AboutPage() {
     <AboutMotion>
       <main id="main" className={styles.page}>
         <section className={styles.hero} aria-labelledby="about-title">
-          <div className={styles.container}>
-            <div className={styles.heroTop} data-about-intro><span className={styles.eyebrow}><i /> About Suffix IT</span><span className={styles.location}><Globe2 size={14} /> Dhaka, Bangladesh / Since 2017</span></div>
-            <div className={styles.heroHeading}>
-              <h1 id="about-title"><span className={styles.line}><span data-about-title>People. Purpose.</span></span><span className={styles.line}><em data-about-title>Practical technology.</em></span></h1>
-              <div className={styles.heroAside} data-about-intro><span className={styles.heroAsterisk} data-about-orbit aria-hidden="true">✳</span><p>Software expertise.<br />Business understanding.<br />Long-term support.</p></div>
+          <div className={`${styles.container} relative z-10`}>
+            <div className={styles.heroTop} data-about-intro>
+              <span className={styles.eyebrow}><i /> About Suffix IT</span>
+              <span className={styles.location}><Globe2 size={14} /> Dhaka, Bangladesh / Since 2017</span>
             </div>
-            <div className={styles.heroBottom} data-about-intro><p>{about.summary}</p><a href="#our-story" className={styles.roundLink}><span>Discover our story</span><span className={styles.roundIcon}><ArrowDown size={20} /></span></a></div>
+
+            {/* Split Row: Headline Left (2 clean lines), 3D Liquid Glass S-Logo Stage Right */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-10 py-3 md:py-6">
+              <div className="w-full lg:max-w-[62%] xl:max-w-[64%]">
+                <h1 id="about-title" className="m-0 text-[clamp(34px,5.2vw,66px)] lg:text-[58px] xl:text-[70px] 2xl:text-[76px] font-[650] leading-[1.06] tracking-[-1.8px] md:tracking-[-2.8px]">
+                  <span className={styles.line}><span data-about-title className="whitespace-nowrap">People. Purpose.</span></span>
+                  <span className={styles.line}><em data-about-title className="font-normal italic text-[var(--br)] [font-family:var(--font-serif),Georgia,serif] whitespace-nowrap">Practical technology.</em></span>
+                </h1>
+              </div>
+
+              {/* Clean, Elegant 3D Liquid Glass S-Logo Visual Stage (Enlarged with Gentle Floating Motion) */}
+              <div
+                className="relative w-full sm:w-[380px] md:w-[420px] lg:w-[450px] xl:w-[480px] h-[310px] sm:h-[350px] md:h-[390px] xl:h-[420px] flex items-center justify-center mx-auto lg:mx-0 shrink-0 select-none animate-float-gentle"
+                data-about-intro
+              >
+                {/* Luminous Ambient Glow Aura */}
+                <div
+                  className="pointer-events-none absolute size-[340px] sm:size-[380px] md:size-[410px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.36)_0%,rgba(0,114,188,0.24)_45%,transparent_70%)] blur-3xl opacity-90 transition-all duration-700"
+                  aria-hidden="true"
+                />
+
+                {/* Subtle Orbital Tech Ring */}
+                <div
+                  data-about-orbit
+                  className="pointer-events-none absolute size-[340px] sm:size-[380px] md:size-[410px] rounded-full border border-[#0072bc]/25 border-dashed animate-[spin_100s_linear_infinite]"
+                  aria-hidden="true"
+                />
+
+                <SuffixGlassReveal
+                  className="size-full rounded-3xl cursor-pointer"
+                  background="#e8f3fc"
+                  look="light"
+                  logo="/assets/about/s-logo.png"
+                  logoColor="#0072bc"
+                  originalColors={false}
+                  tileSize={360}
+                  tuning={{
+                    startZoom: 2.3,
+                    dispersion: 1.85,
+                    colorBleed: 1.35,
+                    corner: 4.8,
+                    specular: 1.25,
+                    sheen: 1.1,
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className={styles.heroBottom} data-about-intro>
+              <p>{about.summary}</p>
+              <a href="#our-story" className={styles.roundLink}>
+                <span>Discover our story</span>
+                <span className={styles.roundIcon}><ArrowDown size={20} /></span>
+              </a>
+            </div>
           </div>
           <div className={styles.heroStage} data-about-stage>
             <div className={styles.heroImageWrap}>
-              <Image src={about.images.hero} alt="An illustrative photograph of people collaborating in a creative workspace" fill priority sizes="100vw" data-about-hero-image />
-              <span className={styles.imageIndex}>People make it possible.</span><div className={styles.heroImageTitle}>People who understand.<br /><em>Technology that works.</em></div><a href="#culture" className={styles.posterLink}>Life at Suffix IT <ArrowUpRight size={20} /></a>
+              <Image
+                src={about.images.hero}
+                alt="People collaborating in a creative workspace at Suffix IT"
+                fill
+                priority
+                sizes="100vw"
+                data-about-hero-image
+              />
+              <span className={styles.imageIndex}>People make it possible.</span>
+              <div className={styles.heroImageTitle}>
+                People who understand.<br />
+                <em>Technology that works.</em>
+              </div>
+              <a href="#culture" className={styles.posterLink}>
+                Life at Suffix IT <ArrowUpRight size={20} />
+              </a>
             </div>
             <div className={styles.originPanel}><span>Our beginning</span><strong>2017</strong><div className={styles.originLines} aria-hidden="true"><i /><i /><i /></div><p>Built in Bangladesh.<br />Looking beyond borders.</p><MoveUpRight size={24} /></div>
           </div>

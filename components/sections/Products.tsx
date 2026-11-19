@@ -460,8 +460,14 @@ export default function Products() {
     const currentScroll = -rect.top;
     const progress = Math.max(0, Math.min(1, currentScroll / scrollableDistance));
 
+    // Dedicate 0.0 to 0.70 for horizontal sliding of cards,
+    // and 0.70 to 1.0 as the smooth transition zone where the Industries section
+    // emerges and expands from the bottom-right corner to cover Products.
+    const HORIZONTAL_LIMIT = 0.70;
+    const horizontalProgress = Math.min(1, progress / HORIZONTAL_LIMIT);
+
     setScrollProgress(progress);
-    setTranslateX(progress * maxTranslate);
+    setTranslateX(horizontalProgress * maxTranslate);
   }, []);
 
   useEffect(() => {
@@ -486,10 +492,12 @@ export default function Products() {
     };
   }, [updateScroll, displayedProducts]);
 
-  // Active Card Index (0 to totalCards - 1)
+  // Active Card Index (0 to totalCards - 1, calibrated to horizontal limit)
+  const HORIZONTAL_LIMIT = 0.70;
+  const horizontalRatio = Math.min(1, scrollProgress / HORIZONTAL_LIMIT);
   const activeCardIndex = Math.min(
     totalCards - 1,
-    Math.max(0, Math.round(scrollProgress * (totalCards - 1)))
+    Math.max(0, Math.round(horizontalRatio * (totalCards - 1)))
   );
 
   // Programmatic Jump to Card
@@ -501,7 +509,8 @@ export default function Products() {
     const currentScrollY = window.scrollY;
     const containerTop = currentScrollY + rect.top;
     const scrollableDistance = container.offsetHeight - window.innerHeight;
-    const targetProgress = totalCards > 1 ? index / (totalCards - 1) : 0;
+    const targetProgress =
+      (totalCards > 1 ? index / (totalCards - 1) : 0) * HORIZONTAL_LIMIT;
     const targetY = containerTop + targetProgress * scrollableDistance;
 
     window.scrollTo({
@@ -510,8 +519,8 @@ export default function Products() {
     });
   };
 
-  // Tall outer height: 9 cards = 350vh, 3 cards = 200vh
-  const outerHeight = totalCards > 4 ? "360vh" : "210vh";
+  // Natural scroll height: ~65vh per card for natural, comfortable browsing pace
+  const outerHeight = totalCards > 4 ? "620vh" : "320vh";
 
   return (
     <section
@@ -728,7 +737,7 @@ export default function Products() {
               <div className="w-48 sm:w-64 h-1.5 bg-[#e1edf9] rounded-full overflow-hidden shadow-inner">
                 <div
                   className="h-full bg-gradient-to-r from-[#0072bc] via-[#7c3aed] to-[#059669] transition-[width] duration-75 rounded-full"
-                  style={{ width: `${Math.max(8, scrollProgress * 100)}%` }}
+                  style={{ width: `${Math.max(8, horizontalRatio * 100)}%` }}
                 />
               </div>
 
@@ -739,10 +748,10 @@ export default function Products() {
 
             {/* Scroll Direction / Status Hint */}
             <div className="flex items-center gap-2 text-xs font-bold text-[#515978]">
-              {scrollProgress >= 0.98 ? (
-                <span className="inline-flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 animate-pulse">
-                  <span>Completed</span>
-                  <span>↓ Scroll down to continue</span>
+              {scrollProgress >= 0.70 ? (
+                <span className="inline-flex items-center gap-1.5 text-[#0072bc] bg-[#eef7ff] px-3.5 py-1 rounded-full border border-[#0072bc]/30 shadow-2xs font-extrabold animate-pulse">
+                  <span>✨ Scroll down to expand Industries</span>
+                  <span className="text-sm">➔</span>
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1.5 text-[#0072bc] bg-[#f0f7fe] px-3 py-1 rounded-full border border-[#d2e4f7]">

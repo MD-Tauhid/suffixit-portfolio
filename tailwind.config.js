@@ -51,6 +51,8 @@ module.exports = {
         "marquee-reverse": "marquee-reverse var(--duration, 30s) linear infinite",
         "marquee-vertical": "marquee-vertical var(--duration, 30s) linear infinite",
         "marquee-vertical-reverse": "marquee-vertical-reverse var(--duration, 30s) linear infinite",
+        ani: "ani 14s ease-in-out infinite",
+        shine: "shine 8s ease-in-out infinite",
       },
       keyframes: {
         marquee: {
@@ -68,6 +70,15 @@ module.exports = {
         "marquee-vertical-reverse": {
           from: { transform: "translateY(calc(-100% - 1rem))" },
           to: { transform: "translateY(0)" },
+        },
+        ani: {
+          "0%": { transform: "translateX(0%) scale(1)" },
+          "50%": { transform: "translateX(-100%) scale(0.8)" },
+          "100%": { transform: "translateX(0%) scale(1)" },
+        },
+        shine: {
+          "0%": { top: "100%", left: "-100%" },
+          "50%, 100%": { top: "0%", left: "70%" },
         },
       },
     },

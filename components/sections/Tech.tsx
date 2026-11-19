@@ -217,27 +217,34 @@ function TechCard({ item }: { item: TechItem }) {
 
 export default function Tech() {
   return (
-    <section className="tech-section" id="tech">
+    <section className="tech-section sec-trans-section" id="tech">
       <div className="w">
-        <SectionHeader eyebrow="Tech we use">
-          Modern stack, <em>reliable</em> delivery
-        </SectionHeader>
+        <div className="sh !mb-8 trans-tech-header">
+          <span className="ey">Tech we use</span>
+          <h2>
+            Modern stack, <em>reliable</em> delivery
+          </h2>
+        </div>
       </div>
 
-      <div className="tech-marquee-wrapper rv-zoom">
+      <div className="tech-marquee-wrapper">
         {/* Row 1: Frontend, Mobile & Cloud */}
-        <Marquee speed={36} pauseOnHover direction="left" className="tech-marquee-lane">
-          {row1.map((item, idx) => (
-            <TechCard key={`tech-row1-${item.name}-${idx}`} item={item} />
-          ))}
-        </Marquee>
+        <div className="trans-tech-marquee-1">
+          <Marquee speed={36} pauseOnHover direction="left" className="tech-marquee-lane">
+            {row1.map((item, idx) => (
+              <TechCard key={`tech-row1-${item.name}-${idx}`} item={item} />
+            ))}
+          </Marquee>
+        </div>
 
         {/* Row 2: Backend, DBs & Platform */}
-        <Marquee speed={40} pauseOnHover direction="right" className="tech-marquee-lane">
-          {row2.map((item, idx) => (
-            <TechCard key={`tech-row2-${item.name}-${idx}`} item={item} />
-          ))}
-        </Marquee>
+        <div className="trans-tech-marquee-2">
+          <Marquee speed={40} pauseOnHover direction="right" className="tech-marquee-lane">
+            {row2.map((item, idx) => (
+              <TechCard key={`tech-row2-${item.name}-${idx}`} item={item} />
+            ))}
+          </Marquee>
+        </div>
       </div>
     </section>
   );
