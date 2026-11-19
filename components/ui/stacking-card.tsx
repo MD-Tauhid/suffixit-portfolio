@@ -1,7 +1,6 @@
 'use client';
-import { ReactLenis } from 'lenis/react';
-import { useTransform, motion, useScroll, MotionValue } from 'motion/react';
-import { useRef, forwardRef } from 'react';
+import { useTransform, motion, useScroll, useInView, MotionValue } from 'motion/react';
+import { useRef, useEffect, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface ProjectItem {
@@ -14,6 +13,9 @@ export interface ProjectData {
   subtitle?: string;
   description: string;
   link: string;
+  video?: string;
+  videoWebm?: string;
+  poster?: string;
   color: string;
   accentColor?: string;
   items?: (string | ProjectItem)[];
@@ -27,6 +29,9 @@ interface CardProps {
   subtitle?: string;
   description: string;
   url: string;
+  video?: string;
+  videoWebm?: string;
+  poster?: string;
   color: string;
   accentColor?: string;
   items?: (string | ProjectItem)[];
@@ -44,6 +49,9 @@ export const Card = ({
   subtitle,
   description,
   url,
+  video,
+  videoWebm,
+  poster,
   color,
   accentColor,
   items,
@@ -54,7 +62,26 @@ export const Card = ({
   targetScale,
   isLast = false,
 }: CardProps) => {
-  const container = useRef(null);
+  const container = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(container, { amount: 0.35 });
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    if (isInView) {
+      videoEl.currentTime = 0;
+      const playPromise = videoEl.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      videoEl.pause();
+      videoEl.currentTime = 0;
+    }
+  }, [isInView]);
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start end', 'start start'],
@@ -201,22 +228,37 @@ export const Card = ({
             className='relative w-full md:w-[54%] h-[300px] sm:h-[380px] md:h-full rounded-2xl md:rounded-3xl overflow-hidden'
             style={{ backgroundColor: color }}
           >
-            {/* 1. Zooming Image Layer (Clean, no internal overlays or hover scales) */}
+            {/* 1. Zooming Video / Image Layer (Plays strictly when card is in view) */}
             <motion.div className='w-full h-full' style={{ scale: imageScale }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={url}
-                alt={title}
-                className='absolute inset-0 w-full h-full object-cover'
-              />
+              {video ? (
+                <video
+                  ref={videoRef}
+                  loop
+                  muted
+                  playsInline
+                  preload='metadata'
+                  poster={poster || url}
+                  className='absolute inset-0 w-full h-full object-cover'
+                >
+                  {videoWebm && <source src={videoWebm} type='video/webm' />}
+                  <source src={video} type='video/mp4' />
+                </video>
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={url}
+                  alt={title}
+                  className='absolute inset-0 w-full h-full object-cover'
+                />
+              )}
             </motion.div>
 
-            {/* 2. Fixed Stationary Overlay - Stays fixed regardless of image zoom */}
+            {/* 2. Fixed Stationary Overlay - Feathered edge seamlessly blends with card background */}
             <div
               className='absolute inset-0 pointer-events-none rounded-2xl md:rounded-3xl z-20'
               style={{
                 border: `3px solid ${color}`,
-                boxShadow: `inset 0 0 30px 18px ${color}`,
+                boxShadow: `inset 0 0 35px 20px ${color}`,
               }}
             />
           </div>
@@ -238,32 +280,33 @@ const Component = forwardRef<HTMLElement, ComponentRootProps>(({ projects }, _re
   });
 
   return (
-    <ReactLenis root>
-      <div ref={container} className='relative w-full'>
-        {projects.map((project, i) => {
-          const targetScale = 1 - (projects.length - i) * 0.05;
-          return (
-            <Card
-              key={`p_${i}`}
-              i={i}
-              isLast={i === projects.length - 1}
-              url={project.link}
-              title={project.title}
-              subtitle={project.subtitle}
-              color={project.color}
-              accentColor={project.accentColor}
-              description={project.description}
-              items={project.items}
-              deliverable={project.deliverable}
-              stepNumber={project.stepNumber}
-              progress={scrollYProgress}
-              range={[i * (1 / projects.length), 1]}
-              targetScale={targetScale}
-            />
-          );
-        })}
-      </div>
-    </ReactLenis>
+    <div ref={container} className='relative w-full'>
+      {projects.map((project, i) => {
+        const targetScale = 1 - (projects.length - i) * 0.05;
+        return (
+          <Card
+            key={`p_${i}`}
+            i={i}
+            isLast={i === projects.length - 1}
+            url={project.link}
+            video={project.video}
+            videoWebm={project.videoWebm}
+            poster={project.poster}
+            title={project.title}
+            subtitle={project.subtitle}
+            color={project.color}
+            accentColor={project.accentColor}
+            description={project.description}
+            items={project.items}
+            deliverable={project.deliverable}
+            stepNumber={project.stepNumber}
+            progress={scrollYProgress}
+            range={[i * (1 / projects.length), 1]}
+            targetScale={targetScale}
+          />
+        );
+      })}
+    </div>
   );
 });
 

@@ -1,158 +1,403 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import Logo from "./Logo";
-import Chevron from "./Chevron";
 import Icon from "@/components/ui/Icon";
-import { ArrowRight } from "lucide-react";
-import { mobileMenu } from "@/lib/content";
+import { navigation, isNavigationActive, isChildActive, type NavigationItem } from "@/lib/navigation";
+import "./navigation.css";
 
-export interface MegaMenuItem {
-  icon: string;
-  title: string;
-  subtitle: string;
-  href: string;
+const hashEvent = "suffix:navigation";
+function subscribeHash(callback: () => void) {
+  window.addEventListener("hashchange", callback);
+  window.addEventListener("popstate", callback);
+  window.addEventListener(hashEvent, callback);
+  return () => {
+    window.removeEventListener("hashchange", callback);
+    window.removeEventListener("popstate", callback);
+    window.removeEventListener(hashEvent, callback);
+  };
 }
+const readHash = () => window.location.hash;
+const serverHash = () => "";
 
-const servicesMegaColumns: MegaMenuItem[][] = [
-  [
-    { icon: "code", title: "Custom Software", subtitle: "Tailored architecture & delivery", href: "#services" },
-    { icon: "globe", title: "Web & E-commerce", subtitle: "Conversion-focused web stores", href: "#services" },
-    { icon: "smartphone", title: "Mobile Apps", subtitle: "Native iOS & Android experiences", href: "#services" },
-  ],
-  [
-    { icon: "cpu", title: "IoT Solutions", subtitle: "Smart telemetry & hardware sync", href: "#services" },
-    { icon: "cloud", title: "Cloud & Hosting", subtitle: "Enterprise SLA cloud infrastructure", href: "#services" },
-    { icon: "database", title: "Storage & Backup", subtitle: "Disaster recovery & data safety", href: "#services" },
-  ],
-  [
-    { icon: "target", title: "ERP Consulting", subtitle: "Migration & system audit strategy", href: "#services" },
-    { icon: "megaphone", title: "SEO & Growth", subtitle: "Organic discovery & rankings", href: "#services" },
-    { icon: "handshake", title: "Dedicated Teams", subtitle: "Skilled engineers & 24/7 operations", href: "#models" },
-  ],
-];
-
-const productsMegaColumns: MegaMenuItem[][] = [
-  [
-    { icon: "compass", title: "Field Force (FFMS)", subtitle: "Live GPS & order tracking", href: "#fieldforce" },
-    { icon: "users", title: "Rupantar HCM", subtitle: "Payroll, attendance & portal", href: "#products" },
-    { icon: "layers", title: "Rupantar ERP", subtitle: "Multi-branch resource planning", href: "#products" },
-  ],
-  [
-    { icon: "landmark", title: "Provident Fund", subtitle: "Transparent PF audit & payouts", href: "#products" },
-    { icon: "shopping-cart", title: "Suffix E-commerce", subtitle: "Headless store with payments", href: "#products" },
-    { icon: "receipt", title: "Smart POS & Billing", subtitle: "Rapid barcode checkout & stock", href: "#products" },
-  ],
-  [
-    { icon: "hotel", title: "Hotel Booking", subtitle: "Guest reservations & room status", href: "#products" },
-    { icon: "radio-tower", title: "Interconnect Billing", subtitle: "High-volume telecom CDR rating", href: "#products" },
-    { icon: "message-square", title: "Bulk SMS & Meeting", subtitle: "Omnichannel customer messaging", href: "#products" },
-  ],
-];
-
-function MegaMenu({ label, columns }: { label: string; columns: MegaMenuItem[][] }) {
-  return (
-    <div className="dd mega-menu pointer-events-none group-hover/nav:pointer-events-auto">
-      <div className="w-[860px] max-w-4xl rounded-2xl bg-white/95 backdrop-blur-xl p-6 lg:p-8 shadow-[0_20px_60px_-15px_rgba(0,104,181,0.15)] border border-slate-200/80">
-        {/* Header Label */}
-        <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-6 flex items-center justify-between">
-          <span>{label}</span>
-          <span className="text-[11px] font-normal text-[#0068B5] tracking-normal normal-case">
-            Suffix IT Enterprise Suite
-          </span>
-        </div>
-
-        {/* 3-Column Grid with Vertical Dividers */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:divide-x md:divide-slate-200/70 text-left">
-          {columns.map((col, colIdx) => (
-            <div key={colIdx} className={colIdx > 0 ? "md:pl-6 space-y-1" : "space-y-1"}>
-              {col.map((item) => (
-                <a
-                  key={item.title}
-                  href={`/${item.href}`}
-                  className="group flex items-start gap-3.5 py-3 rounded-xl transition-colors hover:bg-slate-50/80 px-2.5 border-b border-slate-100 last:border-b-0 cursor-pointer"
-                >
-                  {/* Left Icon */}
-                  <div className="size-9 rounded-lg bg-slate-100 text-slate-500 group-hover:bg-[#0068B5]/10 group-hover:text-[#0068B5] flex items-center justify-center shrink-0 transition-colors mt-0.5">
-                    <Icon name={item.icon} size={17} />
-                  </div>
-
-                  {/* Right Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5 text-[15px] font-semibold text-slate-900 group-hover:text-[#0068B5] transition-colors">
-                      <span className="truncate">{item.title}</span>
-                      <ArrowRight className="size-3.5 text-slate-400 group-hover:text-[#0068B5] transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
-                    </div>
-                    <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Client component for the top navigation bar & mobile menu toggle. */
-export default function Header() {
-  const [open, setOpen] = useState(false);
+function Navigation({ pathname }: { pathname: string }) {
+  const hash = useSyncExternalStore(subscribeHash, readHash, serverHash);
+  const [desktopMenu, setDesktopMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileGroup, setMobileGroup] = useState<string | null>(() => navigation.find(item => item.children && isNavigationActive(item, pathname, ""))?.id ?? null);
+  const root = useRef<HTMLElement>(null);
+  const navigate = () => {
+    setDesktopMenu(null);
+    setMobileOpen(false);
+    // Next's same-page hash navigation uses history rather than a native hashchange.
+    requestAnimationFrame(() => requestAnimationFrame(() => window.dispatchEvent(new Event(hashEvent))));
+  };
 
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    addEventListener("keydown", onKey);
-    return () => removeEventListener("keydown", onKey);
-  }, [open]);
+    if (!desktopMenu && !mobileOpen) return;
+    const dismiss = (event: PointerEvent) => {
+      if (event.target instanceof Node && !root.current?.contains(event.target)) {
+        setDesktopMenu(null);
+        setMobileOpen(false);
+      }
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      const trigger = mobileOpen ? "#hb" : `[data-menu-toggle="${desktopMenu}"]`;
+      setDesktopMenu(null);
+      setMobileOpen(false);
+      root.current?.querySelector<HTMLButtonElement>(trigger)?.focus();
+    };
+    const resize = () => { setDesktopMenu(null); setMobileOpen(false); };
+    document.addEventListener("pointerdown", dismiss);
+    document.addEventListener("keydown", escape);
+    window.addEventListener("resize", resize);
+    return () => {
+      document.removeEventListener("pointerdown", dismiss);
+      document.removeEventListener("keydown", escape);
+      window.removeEventListener("resize", resize);
+    };
+  }, [desktopMenu, mobileOpen]);
+
+  const focusPanel = (item: NavigationItem) => {
+    setDesktopMenu(item.id);
+    requestAnimationFrame(() => root.current?.querySelector<HTMLAnchorElement>("#desktop-" + item.id + " [data-menu-link]")?.focus());
+  };
+  const current = (item: NavigationItem) => isNavigationActive(item, pathname, hash);
+  const currentAttribute = (item: NavigationItem) => current(item) ? (item.href === pathname && !hash ? "page" as const : "location" as const) : undefined;
 
   return (
-    <>
-      <header>
-        <div className="w nav">
+    <header
+      ref={root}
+      className="site-header !z-50 !border-[#0072bc]/10 !bg-white/95 shadow-[0_4px_24px_-16px_rgba(0,114,188,.25)]"
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") setDesktopMenu(null);
+      }}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setDesktopMenu(null);
+      }}
+    >
+      <div className="mx-auto flex h-[58px] w-[calc(100%-32px)] max-w-[1240px] items-center justify-between gap-5 lg:h-[64px] lg:w-[calc(100%-48px)]">
+        <div className="w-[136px] shrink-0 [&_img]:h-auto [&_img]:w-full lg:w-[150px]">
           <Logo priority />
-          <nav aria-label="Primary">
-            <ul className="nv">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About Us</Link></li>
-              <li className="group/nav relative">
-                <Link href="/#services">Services <Chevron /></Link>
-                <MegaMenu label="SERVICES & SOLUTIONS" columns={servicesMegaColumns} />
-              </li>
-              <li className="group/nav relative">
-                <Link href="/#products">Products <Chevron /></Link>
-                <MegaMenu label="READY-MADE SOFTWARE PRODUCTS" columns={productsMegaColumns} />
-              </li>
-              <li><Link href="/#clients">Clients</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </nav>
-          <div style={{ display: "flex", gap: 10 }}>
-            <Link className="btn p hd-cta" href="/contact">Contact Us</Link>
-            <button
-              type="button"
-              className="hb"
-              id="hb"
-              aria-expanded={open}
-              aria-controls="mn"
-              onClick={() => setOpen((v) => !v)}
-            >
-              <span aria-hidden="true">
-                <Icon name={open ? "x" : "menu"} size={22} />
-              </span>
-              <span className="sr-only">Menu</span>
-            </button>
-          </div>
         </div>
-      </header>
-      <div className={`mnav${open ? " open" : ""}`} id="mn" role="navigation" aria-label="Mobile">
-        {mobileMenu.map((l) => (
-          <Link key={l.label} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
-        ))}
+        <nav className="hidden lg:block" aria-label="Primary">
+          <ul className="flex list-none items-center gap-1 p-0">
+            {navigation
+              .filter((item) => item.id !== "contact")
+              .map((item) => (
+                <li
+                  key={item.id}
+                  onPointerEnter={(event) => {
+                    if (event.pointerType === "mouse") setDesktopMenu(item.children ? item.id : null);
+                  }}
+                >
+                <div
+                  className={`flex items-center rounded-full transition-colors duration-200 ${
+                    current(item)
+                      ? "bg-[#e8f3fc] text-[var(--br)]"
+                      : desktopMenu === item.id
+                      ? "bg-[#e8f3fc]/60 text-[var(--br)]"
+                      : "text-[#17162a]/70 hover:bg-[#e8f3fc]/60 hover:text-[var(--br)]"
+                  }`}
+                >
+                  <Link
+                    href={item.href}
+                    onClick={navigate}
+                    aria-current={currentAttribute(item)}
+                    onKeyDown={(event) => {
+                      if (item.children && event.key === "ArrowDown") {
+                        event.preventDefault();
+                        focusPanel(item);
+                      }
+                    }}
+                    className={`relative flex min-h-[38px] items-center rounded-full py-1.5 pl-3.5 text-[13px] font-semibold outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)] ${
+                      item.children ? "pr-1" : "pr-3.5"
+                    }`}
+                  >
+                    {current(item) && (
+                      <span className="mr-2 size-[5px] shrink-0 rounded-full bg-[var(--br)]" aria-hidden="true" />
+                    )}
+                    {item.label}
+                  </Link>
+                  {item.children && (
+                    <button
+                      type="button"
+                      data-menu-toggle={item.id}
+                      aria-label={"Show " + item.label.toLowerCase()}
+                      aria-expanded={desktopMenu === item.id}
+                      aria-controls={"desktop-" + item.id}
+                      onClick={() => setDesktopMenu(desktopMenu === item.id ? null : item.id)}
+                      onKeyDown={(event) => {
+                        if (event.key === "ArrowDown") {
+                          event.preventDefault();
+                          focusPanel(item);
+                        }
+                      }}
+                      className="mr-1.5 flex size-6 items-center justify-center rounded-full transition-colors duration-200 hover:bg-[#0072bc]/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)]"
+                    >
+                      <ChevronDown
+                        size={12}
+                        className={`transition-transform duration-200 motion-reduce:transition-none ${
+                          desktopMenu === item.id ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Link
+          href="/contact"
+          onClick={navigate}
+          className="hidden min-h-[38px] shrink-0 items-center gap-2 rounded-full bg-[var(--br)] px-5 py-2 text-xs font-bold text-white transition-opacity duration-200 hover:opacity-85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--br)] lg:inline-flex"
+        >
+          <span>Contact</span>
+          <ArrowUpRight size={14} />
+        </Link>
+        <button
+          type="button"
+          id="hb"
+          aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileOpen}
+          aria-controls="mn"
+          onClick={() => {
+            setMobileOpen(!mobileOpen);
+            setDesktopMenu(null);
+          }}
+          className={`flex size-9 shrink-0 items-center justify-center rounded-[12px] border border-solid border-[#0072bc]/15 text-[var(--br)] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--br)] lg:hidden ${
+            mobileOpen ? "bg-[#e8f3fc]" : "bg-white"
+          }`}
+        >
+          {mobileOpen ? <X size={19} /> : <Menu size={19} />}
+        </button>
       </div>
-    </>
+
+      {/* Desktop Dropdown Panels */}
+      {navigation
+        .filter((item) => item.children)
+        .map((item) => (
+          <div
+            key={item.id}
+            id={"desktop-" + item.id}
+            hidden={desktopMenu !== item.id}
+            className="absolute inset-x-0 top-full hidden px-6 pb-4 lg:block"
+            style={desktopMenu !== item.id ? { display: "none" } : undefined}
+          >
+            <div
+              className={`site-nav-panel mx-auto grid max-h-[calc(100dvh-104px)] ${
+                item.id === "iot"
+                  ? "max-w-[880px] grid-cols-[290px_1fr]"
+                  : "max-w-[1180px] grid-cols-[230px_1fr]"
+              } overflow-y-auto overscroll-contain rounded-[24px] border border-solid border-[#0072bc]/10 bg-white shadow-[0_22px_55px_-20px_rgba(0,114,188,.28)]`}
+            >
+              {/* Left Column Preview Card */}
+              {item.id === "iot" ? (
+                <div className="relative flex flex-col justify-between overflow-hidden bg-[#0c1a26] p-7 text-white">
+                  <Image
+                    src="/assets/colapsing-card/IoT_solutions_tech_illustration_28c0c8cd_2K.jpg"
+                    alt="IoT and Automation"
+                    fill
+                    sizes="290px"
+                    className="object-cover opacity-45 transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#061826] via-[#061826]/70 to-[#061826]/40" />
+                  <div className="relative z-10">
+                    <span className="inline-flex rounded-full bg-[#0072bc] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white shadow-sm">
+                      Smart Hardware &amp; IoT
+                    </span>
+                    <p className="mt-4 text-[22px] font-bold leading-tight tracking-tight text-white">
+                      Industrial Telemetry &amp; Connected Devices
+                    </p>
+                    <p className="mt-2.5 text-[11px] leading-[1.7] text-slate-300">
+                      Real-time power monitoring, transformer telemetry &amp; automated industrial sensors.
+                    </p>
+                  </div>
+                  <div className="relative z-10 mt-6 border-t border-white/15 pt-3">
+                    <Link
+                      href={item.href}
+                      onClick={navigate}
+                      className="flex min-h-10 items-center justify-between text-xs font-bold text-sky-400 hover:text-white transition-colors"
+                    >
+                      <span>Explore All IoT Solutions</span>
+                      <ArrowUpRight size={15} />
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col bg-[#e8f3fc] p-7">
+                  <span className="text-[10px] font-semibold text-[var(--br)]">
+                    Explore {item.label.toLowerCase()}
+                  </span>
+                  <p className="mt-5 text-[27px] font-semibold leading-[1.15] tracking-[-.8px]">
+                    {item.id === "services"
+                      ? "Expertise that works together."
+                      : "Software for the way you work."}
+                  </p>
+                  <p className="mb-8 mt-4 text-[11px] leading-[1.85] text-[#17162a]/[.65]">
+                    {item.description}
+                  </p>
+                  <Link
+                    href={item.href}
+                    onClick={navigate}
+                    className="mt-auto flex min-h-11 items-center justify-between gap-4 text-xs font-semibold text-[var(--br)]"
+                  >
+                    View all {item.label.toLowerCase()}
+                    <ArrowUpRight size={17} />
+                  </Link>
+                </div>
+              )}
+
+              {/* Right Column Links */}
+              <nav
+                aria-label={item.label + " submenu"}
+                className={`p-5 ${
+                  item.id === "iot"
+                    ? "grid grid-cols-1 sm:grid-cols-2 gap-3 self-center p-6"
+                    : "grid grid-cols-3 gap-x-2 gap-y-1"
+                }`}
+              >
+                {item.children?.map((child) => {
+                  const selected = isChildActive(child, pathname, hash);
+                  return (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={navigate}
+                      data-menu-link
+                      aria-current={selected ? (child.href.includes("#") ? "location" : "page") : undefined}
+                      className={`group flex items-start gap-3 rounded-[14px] px-3.5 py-4 transition-colors duration-200 outline-offset-2 hover:bg-[#e8f3fc] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)] ${
+                        selected ? "bg-[#e8f3fc] text-[var(--br)]" : "text-[var(--ink)]"
+                      }`}
+                    >
+                      <span
+                        className={`flex size-10 shrink-0 items-center justify-center rounded-[12px] transition-colors duration-200 ${
+                          selected
+                            ? "bg-[var(--br)] text-white"
+                            : "bg-[#e8f3fc] text-[var(--br)] group-hover:bg-white shadow-sm"
+                        }`}
+                      >
+                        <Icon name={child.icon} size={18} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-[13px] font-bold leading-[1.4] text-[#062b43] group-hover:text-[var(--br)] transition-colors">
+                          {child.label}
+                        </span>
+                        <span className="mt-1 block text-[11px] leading-[1.6] text-[#17162a]/60">
+                          {child.description}
+                        </span>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        ))}
+
+      {/* Mobile Navigation Drawer */}
+      <nav
+        id="mn"
+        hidden={!mobileOpen}
+        aria-label="Mobile"
+        className="absolute inset-x-0 top-full max-h-[calc(100dvh-92px)] overflow-y-auto overscroll-contain border-0 border-b border-solid border-[#0072bc]/10 bg-white p-4 pb-6 shadow-[0_22px_45px_-24px_rgba(0,114,188,.3)] lg:!hidden"
+      >
+        {mobileOpen && (
+          <div className="site-nav-panel mx-auto max-w-xl">
+            <div className="mb-3 flex items-center justify-between px-3 py-2 text-[10px] text-[#17162a]/[.55]">
+              <span>Explore Suffix IT</span>
+              <span>Software &amp; ICT solutions</span>
+            </div>
+            <ul className="grid list-none gap-1 p-0">
+              {navigation.map((item) => (
+                <li key={item.id}>
+                  <div
+                    className={`flex items-center rounded-[14px] ${
+                      current(item) ? "bg-[#e8f3fc] text-[var(--br)]" : "text-[var(--ink)]"
+                    }`}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={navigate}
+                      aria-current={currentAttribute(item)}
+                      className="flex min-h-[52px] flex-1 items-center gap-3 rounded-[14px] px-4 py-3 text-[15px] font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)]"
+                    >
+                      {current(item) && (
+                        <span className="size-1.5 rounded-full bg-[var(--br)]" aria-hidden="true" />
+                      )}
+                      {item.label}
+                    </Link>
+                    {item.children && (
+                      <button
+                        type="button"
+                        aria-label={"Show " + item.label.toLowerCase()}
+                        aria-expanded={mobileGroup === item.id}
+                        aria-controls={"mobile-" + item.id}
+                        onClick={() => setMobileGroup(mobileGroup === item.id ? null : item.id)}
+                        className="mr-2 flex size-10 items-center justify-center rounded-full text-[var(--br)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)]"
+                      >
+                        <ChevronDown
+                          size={17}
+                          className={`transition-transform duration-200 motion-reduce:transition-none ${
+                            mobileGroup === item.id ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
+                  {item.children && (
+                    <ul
+                      id={"mobile-" + item.id}
+                      hidden={mobileGroup !== item.id}
+                      style={mobileGroup !== item.id ? { display: "none" } : undefined}
+                      className="my-2 ml-5 grid list-none gap-1 border-0 border-l border-solid border-[#0072bc]/15 pl-3"
+                    >
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={navigate}
+                            aria-current={isChildActive(child, pathname, hash) ? "location" : undefined}
+                            className={`flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-xs leading-[1.5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--br)] ${
+                              isChildActive(child, pathname, hash)
+                                ? "bg-[#e8f3fc] font-semibold text-[var(--br)]"
+                                : "text-[#17162a]/70"
+                            }`}
+                          >
+                            <Icon name={child.icon} size={15} className="shrink-0 text-[var(--br)]" />
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/contact"
+              onClick={navigate}
+              className="mt-5 flex min-h-12 items-center justify-between rounded-full bg-[var(--br)] px-5 py-3 text-sm font-semibold text-white hover:!text-white"
+            >
+              Let’s talk about your project
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        )}
+      </nav>
+    </header>
   );
+}
+
+/** Route-keyed navigation closes disclosures when the current page changes. */
+export default function Header() {
+  const pathname = usePathname();
+  return <Navigation key={pathname} pathname={pathname} />;
 }

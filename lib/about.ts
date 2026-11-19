@@ -1,40 +1,42 @@
 /** Content adapted from the public Suffix IT site. Provenance: docs/about-content-sources.md. */
 export const about = {
-  story: "Suffix IT develops software and ICT solutions for businesses in Bangladesh and beyond. Our work brings together web development, custom applications, ERP, CRM, e-commerce, managed hosting and connected technology.",
-  vision: "To become a globally recognised ICT solution provider, meeting society’s needs and contributing positively to humanity.",
-  mission: "To turn our enthusiasm for technology into success for clients and colleagues, creating rewarding opportunities to learn, grow and contribute.",
+  summary: "We’re Suffix IT Limited, a software and ICT solutions company in Dhaka. Since 2017, we’ve helped businesses turn their technology needs into practical solutions.",
+  story: "We develop custom applications, websites and e-commerce platforms alongside ready-made products for HR, payroll, ERP and field operations. Our expertise also covers cloud hosting, IT infrastructure and industrial IoT. From understanding a business requirement to maintaining the systems behind it, we bring software and technical services together for organisations in Bangladesh and beyond.",
+  vision: "To become a globally recognised ICT solutions provider that responds to society’s needs and contributes positively to people’s lives.",
+  mission: "To use our passion for technology to help clients succeed, create rewarding opportunities for our people and contribute to the wider community.",
   images: {
     hero: "/assets/about/workspace-placeholder.jpg",
     collaboration: "/assets/about/collaboration-placeholder.jpg",
     culture: "/assets/about/culture-placeholder.jpg",
     detail: "/assets/about/design-placeholder.jpg",
+    team: "/assets/about/suffix-it-corporate-day.webp",
   },
 };
 
 export const values = [
-  { title: "Start with people", text: "Our clients’ needs shape the solutions we build. We listen, understand the business and keep people at the centre of the work.", tag: "Client focused" },
-  { title: "Make quality a habit", text: "Technical knowledge, careful development and rigorous quality testing help us create software that businesses can rely on.", tag: "Quality in the details" },
-  { title: "Keep exploring", text: "We bring curiosity and enthusiasm to technology, developing creative products and services as the possibilities evolve.", tag: "Ideas into action" },
-  { title: "Grow together", text: "Success should create opportunities for our clients and our colleagues. We believe in rewarding employment, shared progress and long-term relationships.", tag: "A shared ambition" },
+  { title: "Understand the business", text: "We begin with the people, workflows and challenges behind a requirement. Understanding how a business operates helps us shape a solution that fits.", tag: "Start with understanding" },
+  { title: "Build with care", text: "Thoughtful design, careful development and quality testing belong together. We focus on software that is dependable, straightforward to use and suited to its purpose.", tag: "Quality in every detail" },
+  { title: "Keep learning", text: "Technology moves forward, and so do we. We develop our skills and explore practical ways for new tools and connected systems to support our clients.", tag: "Curiosity with a purpose" },
+  { title: "Grow through partnership", text: "Our work continues beyond delivery through maintenance, upgrades and technical support. We value lasting client relationships and opportunities for our colleagues to grow.", tag: "Progress, together" },
 ];
 
 export const strengths = [
-  { title: "People who understand technology", text: "Experienced engineers bring practical technical knowledge to the challenges your organisation faces.", icon: "people" },
-  { title: "Your business comes first", text: "Client-focused solutions shaped around specific requirements, rather than a one-size-fits-all approach.", icon: "focus" },
-  { title: "Clarity on time and budget", text: "On-time delivery and working within budget are commitments at the heart of our approach.", icon: "clock" },
-  { title: "Support beyond delivery", text: "Our services include ongoing technical maintenance, upgrades and round-the-clock support.", icon: "support" },
-  { title: "Products and services, connected", text: "Custom applications, ready software, hosting and infrastructure expertise brought together.", icon: "layers" },
-  { title: "Local understanding. Global outlook.", text: "Based in Dhaka, building information and communication solutions for clients at home and abroad.", icon: "globe" },
+  { title: "Practical engineering expertise", text: "Our engineers work across business software, web and mobile applications, infrastructure and connected systems.", icon: "people" },
+  { title: "A solution that fits your operations", text: "Choose from ready-made products or develop a custom application around your organisation’s requirements.", icon: "focus" },
+  { title: "A clear scope from the start", text: "Discovery and software consulting help turn business requirements into a defined scope, with time and budget in view.", icon: "clock" },
+  { title: "Support after launch", text: "Application maintenance, system upgrades and technical support help keep your technology working as your needs change.", icon: "support" },
+  { title: "Expertise beyond software", text: "Cloud services, networks, servers, storage, backup and industrial IoT support the wider systems your business depends on.", icon: "layers" },
+  { title: "Based in Dhaka. Built for more.", text: "We work with organisations in Bangladesh and beyond, bringing a local team and an international outlook to every engagement.", icon: "globe" },
 ];
 
-// The source does not publish an individual staff directory. These are practice areas, not invented employees.
+// Preview-only employee names and portraits. Replace name, image, title and description with supplied team details.
 export const practices = [
-  { title: "Software engineering", description: "Custom applications, ERP & CRM", initials: "SE", tone: "blue" },
-  { title: "Web & e-commerce", description: "Digital experiences & online business", initials: "WE", tone: "cyan" },
-  { title: "Mobile applications", description: "Connected experiences on the move", initials: "MA", tone: "violet" },
-  { title: "Cloud & infrastructure", description: "Hosting, storage & system integration", initials: "CI", tone: "teal" },
-  { title: "IoT & connected solutions", description: "Bringing devices and information together", initials: "IoT", tone: "blue" },
-  { title: "Client services", description: "Communication & ongoing support", initials: "CS", tone: "cyan" },
+  { title: "Software engineering", name: "Arif Rahman", image: "/assets/about/portrait-engineering.jpg", description: "Custom applications, ERP and business systems", initials: "SE", tone: "blue" },
+  { title: "Web & e-commerce", name: "Nusrat Jahan", image: "/assets/about/portrait-web.jpg", description: "Websites, business portals and online stores", initials: "WE", tone: "cyan" },
+  { title: "Mobile applications", name: "Tanvir Ahmed", image: "/assets/about/portrait-mobile.jpg", description: "Mobile solutions for customers and field teams", initials: "MA", tone: "violet" },
+  { title: "Cloud & infrastructure", name: "Mahmud Hasan", image: "/assets/about/portrait-cloud.jpg", description: "Hosting, networks, servers and data protection", initials: "CI", tone: "teal" },
+  { title: "Industrial IoT", name: "Farhana Islam", image: "/assets/about/portrait-iot.jpg", description: "Connected devices, monitoring and automation", initials: "IoT", tone: "blue" },
+  { title: "Client support", name: "Rafiul Islam", image: "/assets/about/portrait-support.jpg", description: "Technical assistance, maintenance and upgrades", initials: "CS", tone: "cyan" },
 ];
 
 export const recognition = [

@@ -1,5 +1,6 @@
 'use client';
 
+import { servicePalette } from "@/lib/service-palette";
 import SectionHeader from "./SectionHeader";
 import StackingCard, { ProjectData } from "@/components/ui/stacking-card";
 
@@ -26,7 +27,10 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "SRS Specification · Tech Architecture · Sprint Roadmap",
     link: "/assets/process/understand.jpg",
-    color: "#e8f3fc",
+    video: "/assets/process/understand.mp4",
+    videoWebm: "/assets/process/understand.webm",
+    poster: "/assets/process/understand-poster.webp",
+    color: servicePalette.blue,
     accentColor: "#0072bc",
   },
   {
@@ -51,7 +55,10 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Figma Prototype · Component Library · UX Validation Report",
     link: "/assets/process/design.jpg",
-    color: "#ede8fa",
+    video: "/assets/process/design.mp4",
+    videoWebm: "/assets/process/design.webm",
+    poster: "/assets/process/design-poster.webp",
+    color: servicePalette.lavender,
     accentColor: "#7c3aed",
   },
   {
@@ -76,7 +83,10 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Production Codebase · Test Coverage Reports · Staging Environment",
     link: "/assets/process/build.jpg",
-    color: "#def2eb",
+    video: "/assets/process/build.mp4",
+    videoWebm: "/assets/process/build.webm",
+    poster: "/assets/process/build-poster.webp",
+    color: servicePalette.mint,
     accentColor: "#0d9488",
   },
   {
@@ -101,7 +111,10 @@ const processCards: ProjectData[] = [
     ],
     deliverable: "Live Production Release · User & Admin Manuals · Ongoing SLA Support",
     link: "/assets/process/launch.jpg",
-    color: "#def0fb",
+    video: "/assets/process/launch.mp4",
+    videoWebm: "/assets/process/launch.webm",
+    poster: "/assets/process/launch-poster.webp",
+    color: servicePalette.sky,
     accentColor: "#0284c7",
   },
 ];

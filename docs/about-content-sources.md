@@ -1,10 +1,14 @@
 # About page content sources
 
+## User-supplied team photography
+
+The Life at Suffix IT section uses `public/assets/about/suffix-it-corporate-day.webp`, converted from the user-provided `IMG-4808.png`. The photograph's banner identifies Suffix IT Corporate Day, 15 October 2022, Sarah Resort, Gazipur. The image is capped at 1080px wide; desktop uses a bottom-aligned 2.1:1 crop to reduce empty foliage above the team, while phones retain the original proportions. Other stock portraits remain illustrative placeholders.
+
 Collected 9 November 2026 with the connected REA browser scenario provider. The public site was rendered in a temporary headless Chrome session; no forms were submitted. REA was already connected and operational; no MCP configuration or engine installation was needed.
 
 ## Editorial policy
 
-Copy is adapted from the company’s published information. Creative headings are editorial copy, not additional factual claims. Images under `public/assets/about/` are local Unsplash stock photography, explicitly marked as illustrative previews, not Suffix IT office/team photographs. Replace the `about.images` entries in `lib/about.ts` with supplied photographs later. Team illustrations are anonymous placeholders, not employee portraits.
+Copy is adapted from the company’s published information. Creative headings are editorial copy, not additional factual claims. Images under `public/assets/about/` are local Unsplash stock photography, explicitly marked as illustrative previews, not Suffix IT office/team photographs. Replace the `about.images` entries in `lib/about.ts` with supplied photographs later. Team portraits are stock placeholders, not employee photographs; their sources are documented in `docs/about-design-direction.md`.
 
 Temporary photography sources (downloaded locally, not runtime dependencies):
 - workspace: https://images.unsplash.com/photo-1521737711867-e3b97375f902

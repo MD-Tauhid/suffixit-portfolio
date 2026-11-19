@@ -70,8 +70,7 @@ export default function PageEffects() {
       "section, #hero, .st, main > div, footer, [id='why'], [id='contact']"
     );
 
-    // rootMargin: "0px 0px -50% 0px" defines the bottom of the intersection root at exactly 50% of the display.
-    // threshold: 0 triggers immediately when the top border of the section container crosses into the center line.
+    // rootMargin: "0px 0px -15% 0px" defines early, cinematic intersection triggering as soon as the section approaches the viewport.
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -83,15 +82,15 @@ export default function PageEffects() {
       },
       {
         threshold: 0,
-        rootMargin: "0px 0px -50% 0px",
+        rootMargin: "0px 0px -15% 0px",
       }
     );
 
     // Observe each section container
     allSections.forEach((sec) => {
-      // Check if top border is already at or above center on initial load
+      // Check if top border is already within visible threshold on initial load
       const rect = sec.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.5) {
+      if (rect.top <= window.innerHeight * 0.85) {
         triggerSection(sec);
       } else {
         io.observe(sec);
@@ -105,7 +104,7 @@ export default function PageEffects() {
       );
       if (!parentSec) {
         const rect = el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.5) {
+        if (rect.top <= window.innerHeight * 0.85) {
           el.classList.add("in");
         } else {
           io.observe(el);

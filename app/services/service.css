@@ -1,0 +1,70 @@
+/* Surface colours come exclusively from Home's How we work palette. */
+.service-page h1, .service-page h2, .service-page h3 { margin-bottom: 0; }
+.service-page details > summary { list-style: none; }
+.service-page details > summary::-webkit-details-marker { display: none; }
+.service-page details[open] > summary svg { transform: rotate(45deg); }
+.service-page a:focus-visible, .service-page summary:focus-visible { outline: 2px solid var(--br); outline-offset: 5px; }
+
+/* Prevent any browser outline, focus ring, or ghost border on Antigravity Pill sandbox */
+#pill-field,
+#pill-field *,
+#pill-field *:focus,
+#pill-field *:focus-visible,
+#pill-field *:active {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+.service-accordion[data-state="open"] { animation: service-expand 240ms cubic-bezier(.23,1,.32,1); }
+.service-accordion[data-state="closed"] { animation: service-collapse 200ms cubic-bezier(.23,1,.32,1); }
+@keyframes service-expand { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes service-collapse { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+.service-preview-enter { animation: service-preview-in 350ms cubic-bezier(.23,1,.32,1); }
+@keyframes service-preview-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .service-preview-enter { animation: none; }
+  .service-accordion { animation: none !important; }
+  .service-page [data-service-process] { position: relative; top: auto !important; }
+  .trans-hero-content, .trans-hero-card,
+  .trans-about-header, .trans-about-left, .trans-about-right,
+  .trans-talent-header, .trans-talent-pills > *, .trans-talent-console,
+  .trans-why-header, .trans-why-grid > *,
+  .trans-test-header, .trans-test-left, .trans-test-center, .trans-test-right,
+  .trans-value-header, .trans-value-hero, .trans-value-cards > *,
+  .trans-tech-header, .trans-tech-marquee-1, .trans-tech-marquee-2,
+  .trans-engage-header, .trans-engage-grid > *,
+  .trans-faq-header, .trans-faq-left, .trans-faq-accordion > *,
+  .trans-lead-left, .trans-lead-form,
+  .trans-related-header, .trans-related-grid > *,
+  .trans-final-cta {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────
+   SERVICE & PRODUCT DETAIL SECTION TRANSITIONS
+   All kinetic entry motion is orchestrated exclusively via
+   Framer Motion (motion/react) for zero CSS collisions,
+   preventing double triggers, blinking, and visual flicker.
+   ────────────────────────────────────────────────────────── */
+.trans-hero-content, .trans-hero-card,
+.trans-about-header, .trans-about-left, .trans-about-right,
+.trans-talent-header, .trans-talent-pills > *, .trans-talent-console,
+.trans-why-header, .trans-why-grid > *,
+.trans-test-header, .trans-test-left, .trans-test-center, .trans-test-right,
+.trans-value-header, .trans-value-hero, .trans-value-cards > *,
+.trans-tech-header, .trans-tech-marquee-1, .trans-tech-marquee-2,
+.trans-engage-header, .trans-engage-grid > *,
+.trans-faq-header, .trans-faq-left, .trans-faq-accordion > *,
+.trans-lead-left, .trans-lead-form,
+.trans-related-header, .trans-related-grid > *,
+.trans-final-cta {
+  opacity: 1;
+  transform: none;
+}
+
+
+
+
+

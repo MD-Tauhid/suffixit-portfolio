@@ -605,7 +605,7 @@ export default function ContactPage() {
             <div className="relative w-full h-[360px] sm:h-[420px] bg-slate-100">
               <iframe
                 title="Suffix IT Limited Headquarters"
-                src="https://maps.google.com/maps?q=Rupayan+Millennium+Square+Progoti+Sharoni+Dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=Rupayan+Millennium+Square,+North+Badda,+Dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

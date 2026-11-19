@@ -28,8 +28,8 @@ const allServices: CardItem[] = [
       "Bespoke business platforms, web applications, and scalable core engines engineered around your organization's precise operating workflows.",
     imgSrc: "/assets/services/custom-software.jpg",
     icon: <Code2 size={22} />,
-    linkHref: "#contact",
-    ctaText: "Request Architecture Demo",
+    linkHref: "/services/custom-software",
+    ctaText: "Explore service",
   },
   {
     id: "mobile-apps",
@@ -39,8 +39,8 @@ const allServices: CardItem[] = [
       "High-performance native and Flutter mobile apps with offline-first local SQLite sync, push notifications, and biometric authentication.",
     imgSrc: "/assets/services/mobile-apps.jpg",
     icon: <Smartphone size={22} />,
-    linkHref: "#contact",
-    ctaText: "Build Mobile App",
+    linkHref: "/services/mobile-apps",
+    ctaText: "Explore service",
   },
   {
     id: "web-ecommerce",
@@ -50,8 +50,8 @@ const allServices: CardItem[] = [
       "Blazing-fast digital storefronts, member portals, and headless commerce platforms with automated checkout and real-time inventory.",
     imgSrc: "/assets/services/web-ecommerce.jpg",
     icon: <Globe size={22} />,
-    linkHref: "#contact",
-    ctaText: "Launch Digital Portal",
+    linkHref: "/services/web-ecommerce",
+    ctaText: "Explore service",
   },
   {
     id: "iot-solutions",
@@ -61,8 +61,8 @@ const allServices: CardItem[] = [
       "Connected hardware sensors, GPS vehicle tracking telematics, and real-time operational telemetry streams directly into live dashboards.",
     imgSrc: "/assets/services/iot-solutions.jpg",
     icon: <Cpu size={22} />,
-    linkHref: "#contact",
-    ctaText: "Connect Hardware",
+    linkHref: "/services/iot-solutions",
+    ctaText: "Explore service",
   },
   {
     id: "cloud-hosting",
@@ -72,8 +72,8 @@ const allServices: CardItem[] = [
       "Reliable enterprise domain registration, high-speed managed cloud hosting, automated SSL, AWS cloud infrastructure, and 24/7 server monitoring.",
     imgSrc: "/assets/services/cloud-hosting.jpg",
     icon: <CloudCog size={22} />,
-    linkHref: "#contact",
-    ctaText: "Deploy Cloud Hosting",
+    linkHref: "/services/cloud-hosting",
+    ctaText: "Explore service",
   },
   {
     id: "storage-backup",
@@ -83,8 +83,8 @@ const allServices: CardItem[] = [
       "Keep enterprise databases safe, encrypted, and backed up with automated daily snapshots and rapid point-in-time recovery protocols.",
     imgSrc: "/assets/services/storage-backup.jpg",
     icon: <Database size={22} />,
-    linkHref: "#contact",
-    ctaText: "Secure Enterprise Data",
+    linkHref: "/services/storage-backup",
+    ctaText: "Explore service",
   },
   {
     id: "erp-consulting",
@@ -94,8 +94,8 @@ const allServices: CardItem[] = [
       "Expert guidance to select, configure, and scale ERP and HCM suites across your entire supply chain, accounting, and multi-branch operations.",
     imgSrc: "/assets/services/erp-consulting.jpg",
     icon: <Layers size={22} />,
-    linkHref: "#contact",
-    ctaText: "Consult Our Experts",
+    linkHref: "/services/erp-consulting",
+    ctaText: "Explore service",
   },
   {
     id: "seo",
@@ -105,8 +105,8 @@ const allServices: CardItem[] = [
       "Data-driven technical SEO, search engine ranking, and conversion rate optimization that elevate your digital visibility.",
     imgSrc: "/assets/services/seo.jpg",
     icon: <Megaphone size={22} />,
-    linkHref: "#contact",
-    ctaText: "Boost Search Ranking",
+    linkHref: "/services/seo",
+    ctaText: "Explore service",
   },
   {
     id: "bpo-freelancing",
@@ -116,8 +116,8 @@ const allServices: CardItem[] = [
       "Extend your workforce with dedicated Suffix developers, QA specialists, and support engineers working seamlessly as part of your team.",
     imgSrc: "/assets/services/bpo-staffing.jpg",
     icon: <Handshake size={22} />,
-    linkHref: "#contact",
-    ctaText: "Hire Dedicated Talent",
+    linkHref: "/services/dedicated-teams",
+    ctaText: "Explore service",
   },
 ];
 
