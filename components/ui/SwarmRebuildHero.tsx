@@ -13,17 +13,37 @@ import { SuffixGlassReveal } from "@/components/ui/liquid-glass-logo-reveal";
 import ProductBreathBloom from "@/components/ui/ProductBreathBloom";
 import HeroTypewriter from "@/components/ui/HeroTypewriter";
 
+// Global in-memory session flag (preserves state during client-side Next.js route transitions)
+let hasSeenHeroIntroSession = false;
+
 export default function SwarmRebuildHero() {
   // Choreographed Reveal Lifecycle:
-  // 1. "loading": Pristine background ShapeGrid immediately visible + Center 3D Liquid Glass Rounded Hexagon Logo.
-  //               (HeroCurves, BentCircuit, and Hero Content strictly hidden with opacity: 0).
-  // 2. "cascading": At 1250ms, logo glow peaks -> ShapeGrid triggers radial cascade shockwave.
-  // 3. "active": Full interactive hero is unlocked. Transparent layers fade in, typography cascades in, ProductBloom blossoms.
-  const [stage, setStage] = useState<"loading" | "cascading" | "active">("loading");
+  // - On initial site landing (new session/tab): plays the cinematic 3D Liquid Glass logo reveal once.
+  // - On internal page navigation (e.g. from About/Services back to Home): skips immediately to "active" (0ms delay)!
+  const [stage, setStage] = useState<"loading" | "cascading" | "active">(() => {
+    if (hasSeenHeroIntroSession) return "active";
+    return "loading";
+  });
   const [triggerWave, setTriggerWave] = useState(0);
 
   const startRevealSequence = useCallback(() => {
+    // Check both memory cache and browser sessionStorage
+    if (
+      hasSeenHeroIntroSession ||
+      (typeof window !== "undefined" && sessionStorage.getItem("suffix_hero_intro_seen") === "true")
+    ) {
+      hasSeenHeroIntroSession = true;
+      setStage("active");
+      return () => {};
+    }
+
     setStage("loading");
+    hasSeenHeroIntroSession = true;
+    try {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("suffix_hero_intro_seen", "true");
+      }
+    } catch {}
 
     // Fast, cinematic timing:
     // At 850ms: logo glow peaks -> trigger grid radial shockwave cascade
@@ -47,6 +67,10 @@ export default function SwarmRebuildHero() {
     if (stage === "loading") {
       setTriggerWave((prev) => prev + 1);
       setStage("cascading");
+      hasSeenHeroIntroSession = true;
+      try {
+        sessionStorage.setItem("suffix_hero_intro_seen", "true");
+      } catch {}
       setTimeout(() => setStage("active"), 300);
     }
   };

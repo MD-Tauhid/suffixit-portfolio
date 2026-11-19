@@ -34,8 +34,8 @@ export default function HomePage() {
             Variant 3 (60fps Scroll-Locked Video Hero): <VideoHero />
             Variant 4 (Modern Editorial Grid Hero): <EditorialHero />
         */}
-        {/* <SpatialHero /> */}
-        <Hero />
+        <SpatialHero />
+        {/* <Hero /> */}
         {/* <VideoHero /> */}
         {/* <EditorialHero /> */}
         <Stats />
